@@ -3,6 +3,10 @@ plugins {
     id 'maven-publish'
 }
 
+wrapper {
+    gradleVersion = '8.10.1'
+}
+
 repositories {
     mavenCentral()
 }
