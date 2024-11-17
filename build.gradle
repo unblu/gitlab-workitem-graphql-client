@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'org.kordamp.gradle.jandex' version '2.1.0'
     id 'maven-publish'
 }
 
@@ -40,6 +41,10 @@ java {
 tasks.named('test') {
     jvmArgs '-Djava.util.logging.manager=org.jboss.logmanager.LogManager'
     useJUnitPlatform()
+}
+
+tasks.named("javadoc") {
+    inputs.files(tasks.getByPath("jandex").outputs.files)
 }
 
 publishing {
