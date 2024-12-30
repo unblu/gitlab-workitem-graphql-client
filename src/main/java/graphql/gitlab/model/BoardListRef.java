@@ -13,13 +13,13 @@ public class BoardListRef {
     /**
      * ID (global ID) of the list.
      */
-    private String id;
+    private ListID id;
 
-    public String getId() {
+    public ListID getId() {
         return id;
     }
 
-    public BoardListRef setId(String id) {
+    public BoardListRef setId(ListID id) {
         this.id = id;
         return this;
     }

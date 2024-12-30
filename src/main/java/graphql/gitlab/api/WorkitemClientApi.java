@@ -11,12 +11,14 @@ import org.eclipse.microprofile.graphql.Source;
 
 import graphql.gitlab.model.AwardEmojiAddInput;
 import graphql.gitlab.model.AwardEmojiAddPayload;
+import graphql.gitlab.model.BoardList;
 import graphql.gitlab.model.CreateNoteInput;
 import graphql.gitlab.model.CreateNotePayload;
 import graphql.gitlab.model.DestroyNoteInput;
 import graphql.gitlab.model.DestroyNotePayload;
 import graphql.gitlab.model.Group;
 import graphql.gitlab.model.GroupContainingIssueBoard;
+import graphql.gitlab.model.ListID;
 import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
@@ -39,6 +41,12 @@ import io.smallrye.graphql.client.typesafe.api.NestedParameter;
 
 @GraphQLClientApi(configKey = "gitlab")
 public interface WorkitemClientApi {
+
+    /**
+     * Find an issue board list.
+     */
+    @Query("boardList")
+    BoardList boardList(@Name("id") @NonNull ListID id);
 
     /**
      * Find a group.
