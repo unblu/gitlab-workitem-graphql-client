@@ -16,6 +16,7 @@ import graphql.gitlab.model.CreateNotePayload;
 import graphql.gitlab.model.DestroyNoteInput;
 import graphql.gitlab.model.DestroyNotePayload;
 import graphql.gitlab.model.Group;
+import graphql.gitlab.model.GroupContainingIssueBoard;
 import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
@@ -44,6 +45,12 @@ public interface WorkitemClientApi {
      */
     @Query("group")
     Group group(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
+    
+    /**
+     * Find a group.
+     */
+    @Query("group")
+    GroupContainingIssueBoard groupContainingIssueBoard(@Name("fullPath") @NonNull @Id String fullPath);
 
     /**
      * Find a namespace.
