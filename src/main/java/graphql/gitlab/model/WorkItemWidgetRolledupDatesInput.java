@@ -14,15 +14,18 @@ public class WorkItemWidgetRolledupDatesInput {
      */
     @JsonbProperty(value = "startDateFixed", nillable = true)
     private Date startDateFixed;
+
     /**
      * When start_date_fixed is not provided it defaults to `false`.
      */
     private Boolean startDateIsFixed;
+
     /**
      * Fixed due date for the work item.
      */
     @JsonbProperty(value = "dueDateFixed", nillable = true)
     private Date dueDateFixed;
+
     /**
      * When due_date_fixed is not provided it defaults to `false`.
      */

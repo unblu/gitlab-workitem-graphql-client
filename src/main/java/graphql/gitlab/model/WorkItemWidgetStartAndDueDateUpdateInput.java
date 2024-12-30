@@ -14,11 +14,13 @@ public class WorkItemWidgetStartAndDueDateUpdateInput {
      */
     @JsonbProperty(value = "dueDate", nillable = true)
     private Date dueDate;
+
     /**
      * Start date for the work item.
      */
     @JsonbProperty(value = "startDate", nillable = true)
     private Date startDate;
+
     /**
      * Indicates if the work item is using fixed dates.
      */
