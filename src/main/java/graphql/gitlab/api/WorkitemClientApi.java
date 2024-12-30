@@ -19,6 +19,7 @@ import graphql.gitlab.model.Group;
 import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
+import graphql.gitlab.model.ProjectContainingIssueBoard;
 import graphql.gitlab.model.UpdateNoteInput;
 import graphql.gitlab.model.UpdateNotePayload;
 import graphql.gitlab.model.WorkItem;
@@ -55,6 +56,12 @@ public interface WorkitemClientApi {
      */
     @Query("project")
     Project project(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
+
+    /**
+     * Find a project.
+     */
+    @Query("project")
+    ProjectContainingIssueBoard projectContainingIssueBoard(@Name("fullPath") @NonNull @Id String fullPath);
 
     /**
      * Find a work item. Introduced in GitLab 15.1: **Status**: Experiment.
