@@ -127,10 +127,6 @@ class GenerateGitlabClient {
                 .getOfType()
                 .setName("UserID");
 
-        Type mutationType = SchemaUtil.getMutationType(schema);
-        mutationType.getFields()
-                .add(createCreateEpicBoard());
-
         Config config = new Config()
                 .setSchema(schema)
                 .setDefaultCustomScalarMapping(CustomScalarMappingStrategy.CREATE_CUSTOM_SCALAR_CLASS)
@@ -226,6 +222,13 @@ class GenerateGitlabClient {
                                         .getName())
                                 .setFieldName("createBoard")
                                 .setJavaMethodName("createIssueBoard") //
+                        )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getMutationType(schema)
+                                        .getName())
+                                .setFieldName("epicBoardCreate")
+                                .setJavaMethodName("createEpicBoard") //
                         )
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1139,7 +1142,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("destroyNote") //
                                 .addIncludeName("awardEmojiAdd") //
                                 .addIncludeName("createBoard") //
-                                .addIncludeName("createEpicBoard") //
+                                .addIncludeName("epicBoardCreate") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1208,7 +1211,7 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName(schema.getMutationType()
                                         .getName())
-                                .setFieldName("createEpicBoard") //
+                                .setFieldName("epicBoardCreate") //
                                 .addIncludeName("input") //
                         ) //
                         .addFilter(new TypesFilter()
@@ -1805,29 +1808,6 @@ class GenerateGitlabClient {
                 fields004));
         type.setInterfaces(Arrays.asList());
         return type;
-    }
-
-    private static Field createCreateEpicBoard() {
-        TypeRef ofType001 = new TypeRef();
-        ofType001.setKind(Kind.INPUT_OBJECT);
-        ofType001.setName("EpicBoardCreateInput");
-        TypeRef type001 = new TypeRef();
-        type001.setKind(Kind.NON_NULL);
-        type001.setOfType(ofType001);
-        InputValue args001 = new InputValue();
-        args001.setName("input");
-        args001.setDescription("Parameters for CreateBoard");
-        args001.setIsDeprecated(false);
-        args001.setType(type001);
-        TypeRef type002 = new TypeRef();
-        type002.setKind(Kind.OBJECT);
-        type002.setName("EpicBoardCreatePayload");
-        Field result = new Field();
-        result.setName("createEpicBoard");
-        result.setArgs(Arrays.asList(args001));
-        result.setType(type002);
-        result.setIsDeprecated(false);
-        return result;
     }
 
     public static Schema getSchema(ObjectMapper mapper, Path file) {

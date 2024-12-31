@@ -103,9 +103,6 @@ public interface WorkitemClientApi {
     @Mutation("createBoard")
     CreateBoardPayload createIssueBoard(@Name("input") @NonNull @Source CreateBoardInput input);
 
-    @Mutation("createEpicBoard")
-    EpicBoardCreatePayload createEpicBoard(@Name("input") @NonNull @Source EpicBoardCreateInput input);
-
     /**
      * Creates a Note.
      * If the body of the Note contains only quick actions,
@@ -117,6 +114,9 @@ public interface WorkitemClientApi {
 
     @Mutation("destroyNote")
     DestroyNotePayload destroyNote(@Name("input") @NonNull @Source DestroyNoteInput input);
+
+    @Mutation("epicBoardCreate")
+    EpicBoardCreatePayload createEpicBoard(@Name("input") @NonNull @Source EpicBoardCreateInput input);
 
     /**
      * Updates a Note.
