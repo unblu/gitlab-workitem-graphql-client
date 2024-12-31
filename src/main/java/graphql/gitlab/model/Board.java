@@ -33,7 +33,7 @@ public class Board {
     /**
      * ID (global ID) of the board.
      */
-    private String id;
+    private BoardID id;
 
     /**
      * Board iteration.
@@ -116,11 +116,11 @@ public class Board {
         return this;
     }
 
-    public String getId() {
+    public BoardID getId() {
         return id;
     }
 
-    public Board setId(String id) {
+    public Board setId(BoardID id) {
         this.id = id;
         return this;
     }

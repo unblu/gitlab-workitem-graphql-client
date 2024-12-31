@@ -27,6 +27,11 @@ public class UpdateBoardInput {
     private Boolean hideClosedList;
 
     /**
+     * Board global ID.
+     */
+    private BoardID id;
+
+    /**
      * ID of user to be assigned to the board.
      */
     private UserID assigneeId;
@@ -80,6 +85,15 @@ public class UpdateBoardInput {
 
     public UpdateBoardInput setHideClosedList(Boolean hideClosedList) {
         this.hideClosedList = hideClosedList;
+        return this;
+    }
+
+    public BoardID getId() {
+        return id;
+    }
+
+    public UpdateBoardInput setId(BoardID id) {
+        this.id = id;
         return this;
     }
 
@@ -139,7 +153,7 @@ public class UpdateBoardInput {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, hideBacklogList, hideClosedList, assigneeId, milestoneId, iterationId, iterationCadenceId, weight, labelIds);
+        return Objects.hash(name, hideBacklogList, hideClosedList, id, assigneeId, milestoneId, iterationId, iterationCadenceId, weight, labelIds);
     }
 
     @Override
@@ -151,12 +165,12 @@ public class UpdateBoardInput {
         if (getClass() != obj.getClass())
             return false;
         UpdateBoardInput other = (UpdateBoardInput) obj;
-        return Objects.equals(name, other.name) && Objects.equals(hideBacklogList, other.hideBacklogList) && Objects.equals(hideClosedList, other.hideClosedList) && Objects.equals(assigneeId, other.assigneeId) && Objects.equals(milestoneId, other.milestoneId) && Objects.equals(iterationId, other.iterationId) && Objects.equals(iterationCadenceId, other.iterationCadenceId) && Objects.equals(weight, other.weight) && Objects.equals(labelIds, other.labelIds);
+        return Objects.equals(name, other.name) && Objects.equals(hideBacklogList, other.hideBacklogList) && Objects.equals(hideClosedList, other.hideClosedList) && Objects.equals(id, other.id) && Objects.equals(assigneeId, other.assigneeId) && Objects.equals(milestoneId, other.milestoneId) && Objects.equals(iterationId, other.iterationId) && Objects.equals(iterationCadenceId, other.iterationCadenceId) && Objects.equals(weight, other.weight) && Objects.equals(labelIds, other.labelIds);
     }
 
     @Override
     public String toString() {
-        return "UpdateBoardInput [name=" + name + ", hideBacklogList=" + hideBacklogList + ", hideClosedList=" + hideClosedList + ", assigneeId=" + assigneeId + ", milestoneId=" + milestoneId + ", iterationId=" + iterationId + ", iterationCadenceId=" + iterationCadenceId + ", weight=" + weight + ", labelIds=" + labelIds + "]";
+        return "UpdateBoardInput [name=" + name + ", hideBacklogList=" + hideBacklogList + ", hideClosedList=" + hideClosedList + ", id=" + id + ", assigneeId=" + assigneeId + ", milestoneId=" + milestoneId + ", iterationId=" + iterationId + ", iterationCadenceId=" + iterationCadenceId + ", weight=" + weight + ", labelIds=" + labelIds + "]";
     }
 
 }

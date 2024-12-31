@@ -36,6 +36,11 @@ public class EpicBoardUpdateInput {
      */
     private List<LabelID> labelIds;
 
+    /**
+     * Epic board global ID.
+     */
+    private BoardsEpicBoardID id;
+
     public Boolean getDisplayColors() {
         return displayColors;
     }
@@ -81,9 +86,18 @@ public class EpicBoardUpdateInput {
         return this;
     }
 
+    public BoardsEpicBoardID getId() {
+        return id;
+    }
+
+    public EpicBoardUpdateInput setId(BoardsEpicBoardID id) {
+        this.id = id;
+        return this;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(displayColors, name, hideBacklogList, hideClosedList, labelIds);
+        return Objects.hash(displayColors, name, hideBacklogList, hideClosedList, labelIds, id);
     }
 
     @Override
@@ -95,12 +109,12 @@ public class EpicBoardUpdateInput {
         if (getClass() != obj.getClass())
             return false;
         EpicBoardUpdateInput other = (EpicBoardUpdateInput) obj;
-        return Objects.equals(displayColors, other.displayColors) && Objects.equals(name, other.name) && Objects.equals(hideBacklogList, other.hideBacklogList) && Objects.equals(hideClosedList, other.hideClosedList) && Objects.equals(labelIds, other.labelIds);
+        return Objects.equals(displayColors, other.displayColors) && Objects.equals(name, other.name) && Objects.equals(hideBacklogList, other.hideBacklogList) && Objects.equals(hideClosedList, other.hideClosedList) && Objects.equals(labelIds, other.labelIds) && Objects.equals(id, other.id);
     }
 
     @Override
     public String toString() {
-        return "EpicBoardUpdateInput [displayColors=" + displayColors + ", name=" + name + ", hideBacklogList=" + hideBacklogList + ", hideClosedList=" + hideClosedList + ", labelIds=" + labelIds + "]";
+        return "EpicBoardUpdateInput [displayColors=" + displayColors + ", name=" + name + ", hideBacklogList=" + hideBacklogList + ", hideClosedList=" + hideClosedList + ", labelIds=" + labelIds + ", id=" + id + "]";
     }
 
 }

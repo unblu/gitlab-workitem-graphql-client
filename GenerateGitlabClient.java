@@ -348,6 +348,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("IterationID") //
                                 .addIncludeName("LabelID") //
                                 .addIncludeName("ListID") //
+                                .addIncludeName("BoardID") //
                                 .addIncludeName("BoardsEpicBoardID") //
                                 .addIncludeName("BoardsEpicListID") //
                                 .addIncludeName("UserID") //
@@ -1471,6 +1472,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("UpdateBoardInput")
+                                .addIncludeName("id") //
                                 .addIncludeName("name") //
                                 .addIncludeName("hideBacklogList") //
                                 .addIncludeName("hideClosedList") //
@@ -1484,6 +1486,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("EpicBoardUpdateInput")
+                                .addIncludeName("id") //
                                 .addIncludeName("displayColors") //
                                 .addIncludeName("name") //
                                 .addIncludeName("hideBacklogList") //
