@@ -127,6 +127,12 @@ class GenerateGitlabClient {
                 .getOfType()
                 .setName("UserID");
 
+        Type board = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Board");
+        SchemaUtil.getFieldByName(schema, board, "id")
+                .getType()
+                .getOfType()
+                .setName("BoardID");
+
         Config config = new Config()
                 .setSchema(schema)
                 .setDefaultCustomScalarMapping(CustomScalarMappingStrategy.CREATE_CUSTOM_SCALAR_CLASS)
@@ -244,6 +250,20 @@ class GenerateGitlabClient {
                                 .setFieldName("epicBoardUpdate")
                                 .setJavaMethodName("updateEpicBoard") //
                         )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getMutationType(schema)
+                                        .getName())
+                                .setFieldName("destroyBoard")
+                                .setJavaMethodName("deleteIssueBoard") //
+                        )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getMutationType(schema)
+                                        .getName())
+                                .setFieldName("destroyEpicBoard")
+                                .setJavaMethodName("deleteEpicBoard") //
+                        )
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .addIncludeName("WorkItem")
@@ -337,7 +357,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("EpicBoardCreatePayload") //
                                 .addIncludeName("UpdateBoardPayload") //
                                 .addIncludeName("EpicBoardUpdatePayload") //
-
+                                .addIncludeName("DestroyBoardPayload") //
+                                .addIncludeName("DestroyEpicBoardPayload") //
                         )//
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.SCALAR)
@@ -1162,6 +1183,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("epicBoardCreate") //
                                 .addIncludeName("updateBoard") //
                                 .addIncludeName("epicBoardUpdate") //
+                                .addIncludeName("destroyBoard") //
+                                .addIncludeName("destroyEpicBoard") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1247,6 +1270,20 @@ class GenerateGitlabClient {
                                 .setFieldName("epicBoardUpdate") //
                                 .addIncludeName("input") //
                         ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getMutationType()
+                                        .getName())
+                                .setFieldName("destroyBoard") //
+                                .addIncludeName("input") //
+                        ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getMutationType()
+                                        .getName())
+                                .setFieldName("destroyEpicBoard") //
+                                .addIncludeName("input") //
+                        ) //
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .addIncludeName("WorkItemCreateInput") //
@@ -1269,6 +1306,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("EpicBoardCreateInput") //
                                 .addIncludeName("UpdateBoardInput") //
                                 .addIncludeName("EpicBoardUpdateInput") //
+                                .addIncludeName("DestroyBoardInput") //
+                                .addIncludeName("DestroyEpicBoardInput") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
@@ -1363,6 +1402,18 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("EpicBoardUpdatePayload")
+                                .addIncludeName("errors") //
+                                .addIncludeName("epicBoard") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("DestroyBoardPayload")
+                                .addIncludeName("errors") //
+                                .addIncludeName("board") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("DestroyEpicBoardPayload")
                                 .addIncludeName("errors") //
                                 .addIncludeName("epicBoard") //
                         ) //
@@ -1492,6 +1543,16 @@ class GenerateGitlabClient {
                                 .addIncludeName("hideBacklogList") //
                                 .addIncludeName("hideClosedList") //
                                 .addIncludeName("labelIds") //
+                        ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("DestroyBoardInput")
+                                .addIncludeName("id") //
+                        ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("DestroyEpicBoardInput")
+                                .addIncludeName("id") //
                         ) //
                 )
                 .setModelPackageName("gitlab.model")
