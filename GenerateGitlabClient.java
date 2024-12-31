@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import fr.jmini.gdeenco.util.CodeUtil;
 import fr.jmini.gdeenco.util.FileUtil;
 import fr.jmini.gql.codegen.Generator;
+import fr.jmini.gql.codegen.config.AdditionalMethod;
 import fr.jmini.gql.codegen.config.ArgsFilter;
 import fr.jmini.gql.codegen.config.Config;
 import fr.jmini.gql.codegen.config.CustomScalarMappingStrategy;
@@ -76,10 +77,15 @@ class GenerateGitlabClient {
         parentField.getType()
                 .setName("WorkItemRef");
         Type boardListConnection = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "BoardListConnection");
-        Field nodesField = SchemaUtil.getFieldByName(schema, boardListConnection, "nodes");
-        nodesField.getType()
+        Field boardListConnectionNodesField = SchemaUtil.getFieldByName(schema, boardListConnection, "nodes");
+        boardListConnectionNodesField.getType()
                 .getOfType()
                 .setName("BoardListRef");
+        Type epicListConnection = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicListConnection");
+        Field epicListConnectionNodesField = SchemaUtil.getFieldByName(schema, epicListConnection, "nodes");
+        epicListConnectionNodesField.getType()
+                .getOfType()
+                .setName("EpicListRef");
 
         Type workItemUpdateInput = SchemaUtil.getTypeByKindAndName(schema, Kind.INPUT_OBJECT, "WorkItemUpdateInput");
         Type workItemWidgetRolledupDatesInput = SchemaUtil.getTypeByKindAndName(schema, Kind.INPUT_OBJECT, "WorkItemWidgetRolledupDatesInput");
@@ -165,6 +171,14 @@ class GenerateGitlabClient {
                                         .setParameterType("String") //
                                         .setParameterName("labelsAfter") //
                                 ) //
+                                .addAdditionalMethod(new AdditionalMethod()
+                                        .setJavaMethodName("groupContainingIssueBoard")
+                                        .setReturnType("{ModelPackageName}.GroupContainingIssueBoard") //
+                                ) //
+                                .addAdditionalMethod(new AdditionalMethod()
+                                        .setJavaMethodName("groupContainingEpicBoard")
+                                        .setReturnType("{ModelPackageName}.GroupContainingEpicBoard") //
+                                ) //
                         )
                         .addHint(new FieldHint()
                                 .setTypeKind(Kind.OBJECT)
@@ -182,6 +196,10 @@ class GenerateGitlabClient {
                                         .setGraphQlName("after")
                                         .setParameterType("String") //
                                         .setParameterName("labelsAfter") //
+                                ) //
+                                .addAdditionalMethod(new AdditionalMethod()
+                                        .setJavaMethodName("projectContainingIssueBoard")
+                                        .setReturnType("{ModelPackageName}.ProjectContainingIssueBoard") //
                                 ) //
                         )
                         .addHint(new FieldHint()
@@ -858,8 +876,8 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("Group")
-                                .addIncludeName("boards") //
-                                .addIncludeName("epicBoards") //
+                                //.addIncludeName("boards") // --> in GroupContainingIssueBoard
+                                //.addIncludeName("epicBoards") // --> in GroupContainingEpicBoard
                                 .addIncludeName("fullName") //
                                 .addIncludeName("fullPath") //
                                 .addIncludeName("id") //
@@ -896,7 +914,7 @@ class GenerateGitlabClient {
                                 .setTypeName("Project")
                                 // .addIncludeName("group") //
                                 .addIncludeName("id") //
-                                .addIncludeName("boards") //
+                                // .addIncludeName("boards") // --> in ProjectContainingIssueBoard
                                 .addIncludeName("name") //
                                 .addIncludeName("nameWithNamespace") //
                                 .addIncludeName("namespace") //

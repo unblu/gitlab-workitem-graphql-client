@@ -60,15 +60,9 @@ public interface WorkitemClientApi {
     @Query("group")
     Group group(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
 
-    /**
-     * Find a group.
-     */
     @Query("group")
     GroupContainingIssueBoard groupContainingIssueBoard(@Name("fullPath") @NonNull @Id String fullPath);
 
-    /**
-     * Find a group.
-     */
     @Query("group")
     GroupContainingEpicBoard groupContainingEpicBoard(@Name("fullPath") @NonNull @Id String fullPath);
 
@@ -84,9 +78,6 @@ public interface WorkitemClientApi {
     @Query("project")
     Project project(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
 
-    /**
-     * Find a project.
-     */
     @Query("project")
     ProjectContainingIssueBoard projectContainingIssueBoard(@Name("fullPath") @NonNull @Id String fullPath);
 
