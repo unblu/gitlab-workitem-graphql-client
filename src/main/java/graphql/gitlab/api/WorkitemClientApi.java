@@ -13,10 +13,14 @@ import graphql.gitlab.model.AwardEmojiAddInput;
 import graphql.gitlab.model.AwardEmojiAddPayload;
 import graphql.gitlab.model.BoardList;
 import graphql.gitlab.model.BoardsEpicListID;
+import graphql.gitlab.model.CreateBoardInput;
+import graphql.gitlab.model.CreateBoardPayload;
 import graphql.gitlab.model.CreateNoteInput;
 import graphql.gitlab.model.CreateNotePayload;
 import graphql.gitlab.model.DestroyNoteInput;
 import graphql.gitlab.model.DestroyNotePayload;
+import graphql.gitlab.model.EpicBoardCreateInput;
+import graphql.gitlab.model.EpicBoardCreatePayload;
 import graphql.gitlab.model.EpicList;
 import graphql.gitlab.model.Group;
 import graphql.gitlab.model.GroupContainingEpicBoard;
@@ -95,6 +99,12 @@ public interface WorkitemClientApi {
 
     @Mutation("awardEmojiAdd")
     AwardEmojiAddPayload awardEmojiAdd(@Name("input") @NonNull @Source AwardEmojiAddInput input);
+
+    @Mutation("createBoard")
+    CreateBoardPayload createIssueBoard(@Name("input") @NonNull @Source CreateBoardInput input);
+
+    @Mutation("createEpicBoard")
+    EpicBoardCreatePayload createEpicBoard(@Name("input") @NonNull @Source EpicBoardCreateInput input);
 
     /**
      * Creates a Note.

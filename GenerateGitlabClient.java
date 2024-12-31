@@ -97,12 +97,14 @@ class GenerateGitlabClient {
         rolledupDatesWidget.setType(workItemWidgetRolledupDatesInputTypeRef);
         workItemUpdateInput.getInputFields()
                 .add(rolledupDatesWidget);
+
         Type boardList = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "BoardList");
+        Type epicList = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicList");
+
         SchemaUtil.getFieldByName(schema, boardList, "id")
                 .getType()
                 .getOfType()
                 .setName("ListID");
-        Type epicList = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicList");
 
         schema.getTypes()
                 .add(createWorkItemConnectionRef());
@@ -124,6 +126,10 @@ class GenerateGitlabClient {
                 .getType()
                 .getOfType()
                 .setName("UserID");
+
+        Type mutationType = SchemaUtil.getMutationType(schema);
+        mutationType.getFields()
+                .add(createCreateEpicBoard());
 
         Config config = new Config()
                 .setSchema(schema)
@@ -214,6 +220,13 @@ class GenerateGitlabClient {
                                         .setParameterName("filter") //
                                 ) //
                         )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getMutationType(schema)
+                                        .getName())
+                                .setFieldName("createBoard")
+                                .setJavaMethodName("createIssueBoard") //
+                        )
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .addIncludeName("WorkItem")
@@ -303,6 +316,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("UpdateNotePayload") //
                                 .addIncludeName("DestroyNotePayload") //
                                 .addIncludeName("AwardEmojiAddPayload") //
+                                .addIncludeName("CreateBoardPayload") //
+                                .addIncludeName("EpicBoardCreatePayload") //
 
                         )//
                         .addFilter(new TypesFilter()
@@ -311,6 +326,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("Date") //
                                 .addIncludeName("Time") //
                                 .addIncludeName("IterationsCadenceID") //
+                                .addIncludeName("IterationID") //
                                 .addIncludeName("LabelID") //
                                 .addIncludeName("ListID") //
                                 .addIncludeName("BoardsEpicBoardID") //
@@ -318,6 +334,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("UserID") //
                                 .addIncludeName("DiscussionID") //
                                 .addIncludeName("NoteableID") //
+                                .addIncludeName("MilestoneID") //
                                 .addIncludeName("NoteID") //
                                 .addIncludeName("WorkItemID") //
                                 .addIncludeName("WorkItemsTypeID") //
@@ -1121,6 +1138,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("updateNote") //
                                 .addIncludeName("destroyNote") //
                                 .addIncludeName("awardEmojiAdd") //
+                                .addIncludeName("createBoard") //
+                                .addIncludeName("createEpicBoard") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1178,6 +1197,20 @@ class GenerateGitlabClient {
                                 .setFieldName("awardEmojiAdd") //
                                 .addIncludeName("input") //
                         ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getMutationType()
+                                        .getName())
+                                .setFieldName("createBoard") //
+                                .addIncludeName("input") //
+                        ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getMutationType()
+                                        .getName())
+                                .setFieldName("createEpicBoard") //
+                                .addIncludeName("input") //
+                        ) //
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .addIncludeName("WorkItemCreateInput") //
@@ -1196,6 +1229,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("UpdateNoteInput") //
                                 .addIncludeName("DestroyNoteInput") //
                                 .addIncludeName("AwardEmojiAddInput") //
+                                .addIncludeName("CreateBoardInput") //
+                                .addIncludeName("EpicBoardCreateInput") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
@@ -1268,6 +1303,18 @@ class GenerateGitlabClient {
                                 .setTypeName("AwardEmojiAddPayload")
                                 .addIncludeName("errors") //
                                 .addIncludeName("awardEmoji") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("CreateBoardPayload")
+                                .addIncludeName("errors") //
+                                .addIncludeName("board") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("EpicBoardCreatePayload")
+                                .addIncludeName("errors") //
+                                .addIncludeName("epicBoard") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
@@ -1346,6 +1393,31 @@ class GenerateGitlabClient {
                                 .setTypeName("AwardEmojiAddInput")
                                 .addIncludeName("awardableId") //
                                 .addIncludeName("name") //
+                        ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("CreateBoardInput")
+                                .addIncludeName("projectPath") //
+                                .addIncludeName("groupPath") //
+                                .addIncludeName("name") //
+                                .addIncludeName("hideBacklogList") //
+                                .addIncludeName("hideClosedList") //
+                                .addIncludeName("assigneeId") //
+                                .addIncludeName("milestoneId") //
+                                .addIncludeName("iterationId") //
+                                .addIncludeName("iterationCadenceId") //
+                                .addIncludeName("weight") //
+                                .addIncludeName("labelIds") //
+                        ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("EpicBoardCreateInput")
+                                .addIncludeName("displayColors") //
+                                .addIncludeName("name") //
+                                .addIncludeName("hideBacklogList") //
+                                .addIncludeName("hideClosedList") //
+                                .addIncludeName("labelIds") //
+                                .addIncludeName("groupPath") //
                         ) //
                 )
                 .setModelPackageName("gitlab.model")
@@ -1733,6 +1805,29 @@ class GenerateGitlabClient {
                 fields004));
         type.setInterfaces(Arrays.asList());
         return type;
+    }
+
+    private static Field createCreateEpicBoard() {
+        TypeRef ofType001 = new TypeRef();
+        ofType001.setKind(Kind.INPUT_OBJECT);
+        ofType001.setName("EpicBoardCreateInput");
+        TypeRef type001 = new TypeRef();
+        type001.setKind(Kind.NON_NULL);
+        type001.setOfType(ofType001);
+        InputValue args001 = new InputValue();
+        args001.setName("input");
+        args001.setDescription("Parameters for CreateBoard");
+        args001.setIsDeprecated(false);
+        args001.setType(type001);
+        TypeRef type002 = new TypeRef();
+        type002.setKind(Kind.OBJECT);
+        type002.setName("EpicBoardCreatePayload");
+        Field result = new Field();
+        result.setName("createEpicBoard");
+        result.setArgs(Arrays.asList(args001));
+        result.setType(type002);
+        result.setIsDeprecated(false);
+        return result;
     }
 
     public static Schema getSchema(ObjectMapper mapper, Path file) {
