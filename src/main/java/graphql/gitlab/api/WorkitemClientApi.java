@@ -61,10 +61,10 @@ public interface WorkitemClientApi {
      * Find an issue board list.
      */
     @Query("boardList")
-    BoardList boardList(@Name("id") @NonNull ListID id);
+    BoardList getIssueBoardList(@Name("id") @NonNull ListID id);
 
     @Query("epicBoardList")
-    EpicList epicBoardList(@Name("id") @NonNull BoardsEpicListID id);
+    EpicList getEpicBoardList(@Name("id") @NonNull BoardsEpicListID id);
 
     /**
      * Find a group.
@@ -73,10 +73,10 @@ public interface WorkitemClientApi {
     Group group(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
 
     @Query("group")
-    GroupContainingIssueBoard groupContainingIssueBoard(@Name("fullPath") @NonNull @Id String fullPath);
+    GroupContainingIssueBoard getIssueBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
 
     @Query("group")
-    GroupContainingEpicBoard groupContainingEpicBoard(@Name("fullPath") @NonNull @Id String fullPath);
+    GroupContainingEpicBoard getEpicBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
 
     /**
      * Find a namespace.
@@ -91,7 +91,7 @@ public interface WorkitemClientApi {
     Project project(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
 
     @Query("project")
-    ProjectContainingIssueBoard projectContainingIssueBoard(@Name("fullPath") @NonNull @Id String fullPath);
+    ProjectContainingIssueBoard getIssueBoardsInProject(@Name("fullPath") @NonNull @Id String fullPath);
 
     /**
      * Find a work item. Introduced in GitLab 15.1: **Status**: Experiment.

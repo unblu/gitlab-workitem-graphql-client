@@ -180,11 +180,11 @@ class GenerateGitlabClient {
                                         .setParameterName("labelsAfter") //
                                 ) //
                                 .addAdditionalMethod(new AdditionalMethod()
-                                        .setJavaMethodName("groupContainingIssueBoard")
+                                        .setJavaMethodName("getIssueBoardsInGroup")
                                         .setReturnType("{ModelPackageName}.GroupContainingIssueBoard") //
                                 ) //
                                 .addAdditionalMethod(new AdditionalMethod()
-                                        .setJavaMethodName("groupContainingEpicBoard")
+                                        .setJavaMethodName("getEpicBoardsInGroup")
                                         .setReturnType("{ModelPackageName}.GroupContainingEpicBoard") //
                                 ) //
                         )
@@ -206,7 +206,7 @@ class GenerateGitlabClient {
                                         .setParameterName("labelsAfter") //
                                 ) //
                                 .addAdditionalMethod(new AdditionalMethod()
-                                        .setJavaMethodName("projectContainingIssueBoard")
+                                        .setJavaMethodName("getIssueBoardsInProject")
                                         .setReturnType("{ModelPackageName}.ProjectContainingIssueBoard") //
                                 ) //
                         )
@@ -221,6 +221,20 @@ class GenerateGitlabClient {
                                         .setParameterType("{ModelPackageName}.NotesFilterType") //
                                         .setParameterName("filter") //
                                 ) //
+                        )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getQueryType(schema)
+                                        .getName())
+                                .setFieldName("boardList")
+                                .setJavaMethodName("getIssueBoardList") //
+                        )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getQueryType(schema)
+                                        .getName())
+                                .setFieldName("epicBoardList")
+                                .setJavaMethodName("getEpicBoardList") //
                         )
                         .addHint(new FieldHint()
                                 .setTypeKind(Kind.OBJECT)
