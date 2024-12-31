@@ -230,6 +230,20 @@ class GenerateGitlabClient {
                                 .setFieldName("epicBoardCreate")
                                 .setJavaMethodName("createEpicBoard") //
                         )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getMutationType(schema)
+                                        .getName())
+                                .setFieldName("updateBoard")
+                                .setJavaMethodName("updateIssueBoard") //
+                        )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getMutationType(schema)
+                                        .getName())
+                                .setFieldName("epicBoardUpdate")
+                                .setJavaMethodName("updateEpicBoard") //
+                        )
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .addIncludeName("WorkItem")
@@ -321,6 +335,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("AwardEmojiAddPayload") //
                                 .addIncludeName("CreateBoardPayload") //
                                 .addIncludeName("EpicBoardCreatePayload") //
+                                .addIncludeName("UpdateBoardPayload") //
+                                .addIncludeName("EpicBoardUpdatePayload") //
 
                         )//
                         .addFilter(new TypesFilter()
@@ -1143,6 +1159,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("awardEmojiAdd") //
                                 .addIncludeName("createBoard") //
                                 .addIncludeName("epicBoardCreate") //
+                                .addIncludeName("updateBoard") //
+                                .addIncludeName("epicBoardUpdate") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1214,6 +1232,20 @@ class GenerateGitlabClient {
                                 .setFieldName("epicBoardCreate") //
                                 .addIncludeName("input") //
                         ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getMutationType()
+                                        .getName())
+                                .setFieldName("updateBoard") //
+                                .addIncludeName("input") //
+                        ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getMutationType()
+                                        .getName())
+                                .setFieldName("epicBoardUpdate") //
+                                .addIncludeName("input") //
+                        ) //
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .addIncludeName("WorkItemCreateInput") //
@@ -1234,6 +1266,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("AwardEmojiAddInput") //
                                 .addIncludeName("CreateBoardInput") //
                                 .addIncludeName("EpicBoardCreateInput") //
+                                .addIncludeName("UpdateBoardInput") //
+                                .addIncludeName("EpicBoardUpdateInput") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
@@ -1316,6 +1350,18 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("EpicBoardCreatePayload")
+                                .addIncludeName("errors") //
+                                .addIncludeName("epicBoard") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("UpdateBoardPayload")
+                                .addIncludeName("errors") //
+                                .addIncludeName("board") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("EpicBoardUpdatePayload")
                                 .addIncludeName("errors") //
                                 .addIncludeName("epicBoard") //
                         ) //
@@ -1421,6 +1467,28 @@ class GenerateGitlabClient {
                                 .addIncludeName("hideClosedList") //
                                 .addIncludeName("labelIds") //
                                 .addIncludeName("groupPath") //
+                        ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("UpdateBoardInput")
+                                .addIncludeName("name") //
+                                .addIncludeName("hideBacklogList") //
+                                .addIncludeName("hideClosedList") //
+                                .addIncludeName("assigneeId") //
+                                .addIncludeName("milestoneId") //
+                                .addIncludeName("iterationId") //
+                                .addIncludeName("iterationCadenceId") //
+                                .addIncludeName("weight") //
+                                .addIncludeName("labelIds") //
+                        ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("EpicBoardUpdateInput")
+                                .addIncludeName("displayColors") //
+                                .addIncludeName("name") //
+                                .addIncludeName("hideBacklogList") //
+                                .addIncludeName("hideClosedList") //
+                                .addIncludeName("labelIds") //
                         ) //
                 )
                 .setModelPackageName("gitlab.model")

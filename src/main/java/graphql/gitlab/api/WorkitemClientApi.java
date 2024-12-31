@@ -21,6 +21,8 @@ import graphql.gitlab.model.DestroyNoteInput;
 import graphql.gitlab.model.DestroyNotePayload;
 import graphql.gitlab.model.EpicBoardCreateInput;
 import graphql.gitlab.model.EpicBoardCreatePayload;
+import graphql.gitlab.model.EpicBoardUpdateInput;
+import graphql.gitlab.model.EpicBoardUpdatePayload;
 import graphql.gitlab.model.EpicList;
 import graphql.gitlab.model.Group;
 import graphql.gitlab.model.GroupContainingEpicBoard;
@@ -30,6 +32,8 @@ import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
 import graphql.gitlab.model.ProjectContainingIssueBoard;
+import graphql.gitlab.model.UpdateBoardInput;
+import graphql.gitlab.model.UpdateBoardPayload;
 import graphql.gitlab.model.UpdateNoteInput;
 import graphql.gitlab.model.UpdateNotePayload;
 import graphql.gitlab.model.WorkItem;
@@ -117,6 +121,12 @@ public interface WorkitemClientApi {
 
     @Mutation("epicBoardCreate")
     EpicBoardCreatePayload createEpicBoard(@Name("input") @NonNull @Source EpicBoardCreateInput input);
+
+    @Mutation("epicBoardUpdate")
+    EpicBoardUpdatePayload updateEpicBoard(@Name("input") @NonNull @Source EpicBoardUpdateInput input);
+
+    @Mutation("updateBoard")
+    UpdateBoardPayload updateIssueBoard(@Name("input") @NonNull @Source UpdateBoardInput input);
 
     /**
      * Updates a Note.
