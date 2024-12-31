@@ -12,11 +12,14 @@ import org.eclipse.microprofile.graphql.Source;
 import graphql.gitlab.model.AwardEmojiAddInput;
 import graphql.gitlab.model.AwardEmojiAddPayload;
 import graphql.gitlab.model.BoardList;
+import graphql.gitlab.model.BoardsEpicListID;
 import graphql.gitlab.model.CreateNoteInput;
 import graphql.gitlab.model.CreateNotePayload;
 import graphql.gitlab.model.DestroyNoteInput;
 import graphql.gitlab.model.DestroyNotePayload;
+import graphql.gitlab.model.EpicList;
 import graphql.gitlab.model.Group;
+import graphql.gitlab.model.GroupContainingEpicBoard;
 import graphql.gitlab.model.GroupContainingIssueBoard;
 import graphql.gitlab.model.ListID;
 import graphql.gitlab.model.Namespace;
@@ -48,17 +51,26 @@ public interface WorkitemClientApi {
     @Query("boardList")
     BoardList boardList(@Name("id") @NonNull ListID id);
 
+    @Query("epicBoardList")
+    EpicList epicBoardList(@Name("id") @NonNull BoardsEpicListID id);
+
     /**
      * Find a group.
      */
     @Query("group")
     Group group(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
-    
+
     /**
      * Find a group.
      */
     @Query("group")
     GroupContainingIssueBoard groupContainingIssueBoard(@Name("fullPath") @NonNull @Id String fullPath);
+
+    /**
+     * Find a group.
+     */
+    @Query("group")
+    GroupContainingEpicBoard groupContainingEpicBoard(@Name("fullPath") @NonNull @Id String fullPath);
 
     /**
      * Find a namespace.

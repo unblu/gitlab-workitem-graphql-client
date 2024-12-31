@@ -96,7 +96,7 @@ class GenerateGitlabClient {
                 .getType()
                 .getOfType()
                 .setName("ListID");
-        ;
+        Type epicList = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicList");
 
         schema.getTypes()
                 .add(createWorkItemConnectionRef());
@@ -104,6 +104,8 @@ class GenerateGitlabClient {
                 .add(createWorkItemRef());
         schema.getTypes()
                 .add(createBoardListRef(mapper, boardList));
+        schema.getTypes()
+                .add(createEpicListRef(mapper, epicList));
 
         //See: https://gitlab.com/gitlab-org/gitlab/-/issues/499834
         Type label = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Label");
@@ -266,6 +268,11 @@ class GenerateGitlabClient {
                                 .addIncludeName("BoardListConnection") //
                                 .addIncludeName("BoardListRef") //
                                 .addIncludeName("BoardList") //
+                                .addIncludeName("EpicBoardConnection") //
+                                .addIncludeName("EpicBoard") //
+                                .addIncludeName("EpicListConnection") //
+                                .addIncludeName("EpicListRef") //
+                                .addIncludeName("EpicList") //
                                 // --- ADDITIONAL TYPES ---
                                 .addIncludeName("WorkItemRef") //
                                 .addIncludeName("WorkItemConnectionRef") //
@@ -288,6 +295,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("IterationsCadenceID") //
                                 .addIncludeName("LabelID") //
                                 .addIncludeName("ListID") //
+                                .addIncludeName("BoardsEpicBoardID") //
+                                .addIncludeName("BoardsEpicListID") //
                                 .addIncludeName("UserID") //
                                 .addIncludeName("DiscussionID") //
                                 .addIncludeName("NoteableID") //
@@ -332,6 +341,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("group") //
                                 .addIncludeName("project") //
                                 .addIncludeName("boardList") //
+                                .addIncludeName("epicBoardList") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -374,6 +384,13 @@ class GenerateGitlabClient {
                                 .setTypeName(schema.getQueryType()
                                         .getName())
                                 .setFieldName("boardList") //
+                                .addIncludeName("id") //
+                        ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getQueryType()
+                                        .getName())
+                                .setFieldName("epicBoardList") //
                                 .addIncludeName("id") //
                         ) //
                         .addFilter(new FieldsFilter()
@@ -842,6 +859,7 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("Group")
                                 .addIncludeName("boards") //
+                                .addIncludeName("epicBoards") //
                                 .addIncludeName("fullName") //
                                 .addIncludeName("fullPath") //
                                 .addIncludeName("id") //
@@ -971,9 +989,19 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("Board")
                                 .addIncludeName("id") //
+                                .addIncludeName("hideBacklogList") //
+                                .addIncludeName("hideClosedList") //
                                 .addIncludeName("name") //
                                 .addIncludeName("webUrl") //
                                 .addIncludeName("lists") //
+                                .addIncludeName("assignee") //
+                                .addIncludeName("iteration") //
+                                .addIncludeName("iterationCadence") //
+                                .addIncludeName("labels") //
+                                .addIncludeName("milestone") //
+                                .addIncludeName("weight") //
+                                .addIncludeName("createdAt") //
+                                .addIncludeName("updatedAt") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1000,6 +1028,43 @@ class GenerateGitlabClient {
                                 .addIncludeName("limitMetric") //
                                 .addIncludeName("maxIssueCount") //
                                 .addIncludeName("maxIssueWeight") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("EpicBoardConnection")
+                                .addIncludeName("nodes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("EpicBoard")
+                                .addIncludeName("id") //
+                                .addIncludeName("displayColors") //
+                                .addIncludeName("hideBacklogList") //
+                                .addIncludeName("hideClosedList") //
+                                .addIncludeName("name") //
+                                .addIncludeName("webUrl") //
+                                .addIncludeName("lists") //
+                                .addIncludeName("labels") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("EpicListConnection")
+                                .addIncludeName("nodes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("EpicListRef")
+                                .addIncludeName("id") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("EpicList")
+                                .addIncludeName("id") //
+                                .addIncludeName("title") //
+                                .addIncludeName("position") //
+                                .addIncludeName("listType") //
+                                .addIncludeName("label") //
+                                .addIncludeName("collapsed") //
                         ) //
                         // --- ADDITIONAL TYPES ---
                         .addFilter(new FieldsFilter()
@@ -1277,6 +1342,10 @@ class GenerateGitlabClient {
 
     private static Type createBoardListRef(ObjectMapper mapper, Type typeBoardList) {
         return duplicateType(mapper, typeBoardList, "BoardListRef");
+    }
+
+    private static Type createEpicListRef(ObjectMapper mapper, Type typeBoardList) {
+        return duplicateType(mapper, typeBoardList, "EpicListRef");
     }
 
     private static Type duplicateType(ObjectMapper mapper, Type type, String newName) {
