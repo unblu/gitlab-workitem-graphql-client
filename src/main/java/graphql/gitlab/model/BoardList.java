@@ -11,9 +11,24 @@ import org.eclipse.microprofile.graphql.Name;
 public class BoardList {
 
     /**
+     * Assignee in the list.
+     */
+    private UserCore assignee;
+
+    /**
+     * Indicates if the list is collapsed for the user.
+     */
+    private Boolean collapsed;
+
+    /**
      * ID (global ID) of the list.
      */
     private ListID id;
+
+    /**
+     * Iteration of the list.
+     */
+    private Iteration iteration;
 
     /**
      * Label of the list.
@@ -21,9 +36,29 @@ public class BoardList {
     private Label label;
 
     /**
+     * Current limit metric for the list.
+     */
+    private ListLimitMetric limitMetric;
+
+    /**
      * Type of the list.
      */
     private String listType;
+
+    /**
+     * Maximum number of issues in the list.
+     */
+    private Integer maxIssueCount;
+
+    /**
+     * Maximum weight of issues in the list.
+     */
+    private Integer maxIssueWeight;
+
+    /**
+     * Milestone of the list.
+     */
+    private Milestone milestone;
 
     /**
      * Position of list within the board.
@@ -35,12 +70,39 @@ public class BoardList {
      */
     private String title;
 
+    public UserCore getAssignee() {
+        return assignee;
+    }
+
+    public BoardList setAssignee(UserCore assignee) {
+        this.assignee = assignee;
+        return this;
+    }
+
+    public Boolean getCollapsed() {
+        return collapsed;
+    }
+
+    public BoardList setCollapsed(Boolean collapsed) {
+        this.collapsed = collapsed;
+        return this;
+    }
+
     public ListID getId() {
         return id;
     }
 
     public BoardList setId(ListID id) {
         this.id = id;
+        return this;
+    }
+
+    public Iteration getIteration() {
+        return iteration;
+    }
+
+    public BoardList setIteration(Iteration iteration) {
+        this.iteration = iteration;
         return this;
     }
 
@@ -53,12 +115,48 @@ public class BoardList {
         return this;
     }
 
+    public ListLimitMetric getLimitMetric() {
+        return limitMetric;
+    }
+
+    public BoardList setLimitMetric(ListLimitMetric limitMetric) {
+        this.limitMetric = limitMetric;
+        return this;
+    }
+
     public String getListType() {
         return listType;
     }
 
     public BoardList setListType(String listType) {
         this.listType = listType;
+        return this;
+    }
+
+    public Integer getMaxIssueCount() {
+        return maxIssueCount;
+    }
+
+    public BoardList setMaxIssueCount(Integer maxIssueCount) {
+        this.maxIssueCount = maxIssueCount;
+        return this;
+    }
+
+    public Integer getMaxIssueWeight() {
+        return maxIssueWeight;
+    }
+
+    public BoardList setMaxIssueWeight(Integer maxIssueWeight) {
+        this.maxIssueWeight = maxIssueWeight;
+        return this;
+    }
+
+    public Milestone getMilestone() {
+        return milestone;
+    }
+
+    public BoardList setMilestone(Milestone milestone) {
+        this.milestone = milestone;
         return this;
     }
 
@@ -82,7 +180,7 @@ public class BoardList {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, label, listType, position, title);
+        return Objects.hash(assignee, collapsed, id, iteration, label, limitMetric, listType, maxIssueCount, maxIssueWeight, milestone, position, title);
     }
 
     @Override
@@ -94,12 +192,12 @@ public class BoardList {
         if (getClass() != obj.getClass())
             return false;
         BoardList other = (BoardList) obj;
-        return Objects.equals(id, other.id) && Objects.equals(label, other.label) && Objects.equals(listType, other.listType) && Objects.equals(position, other.position) && Objects.equals(title, other.title);
+        return Objects.equals(assignee, other.assignee) && Objects.equals(collapsed, other.collapsed) && Objects.equals(id, other.id) && Objects.equals(iteration, other.iteration) && Objects.equals(label, other.label) && Objects.equals(limitMetric, other.limitMetric) && Objects.equals(listType, other.listType) && Objects.equals(maxIssueCount, other.maxIssueCount) && Objects.equals(maxIssueWeight, other.maxIssueWeight) && Objects.equals(milestone, other.milestone) && Objects.equals(position, other.position) && Objects.equals(title, other.title);
     }
 
     @Override
     public String toString() {
-        return "BoardList [id=" + id + ", label=" + label + ", listType=" + listType + ", position=" + position + ", title=" + title + "]";
+        return "BoardList [assignee=" + assignee + ", collapsed=" + collapsed + ", id=" + id + ", iteration=" + iteration + ", label=" + label + ", limitMetric=" + limitMetric + ", listType=" + listType + ", maxIssueCount=" + maxIssueCount + ", maxIssueWeight=" + maxIssueWeight + ", milestone=" + milestone + ", position=" + position + ", title=" + title + "]";
     }
 
 }

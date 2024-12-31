@@ -235,9 +235,9 @@ class GenerateGitlabClient {
                                 .addIncludeName("TaskCompletionStatus") //
                                 .addIncludeName("WorkItemClosingMergeRequestConnection") //
                                 .addIncludeName("FeatureFlagConnection") //
-                                // .addIncludeName("Iteration") //
+                                .addIncludeName("Iteration") //
                                 .addIncludeName("LinkedWorkItemTypeConnection") //
-                                // .addIncludeName("Milestone") //
+                                .addIncludeName("Milestone") //
                                 .addIncludeName("DiscussionConnection") //
                                 .addIncludeName("WorkItemTimelogConnection") //
                                 .addIncludeName("WorkItemWidgetDefinitionWeight") //
@@ -285,6 +285,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("AwardableID") //
                                 .addIncludeName("Date") //
                                 .addIncludeName("Time") //
+                                .addIncludeName("IterationsCadenceID") //
                                 .addIncludeName("LabelID") //
                                 .addIncludeName("ListID") //
                                 .addIncludeName("UserID") //
@@ -314,6 +315,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("WorkItemWidgetType") //
                                 .addIncludeName("MilestoneStateEnum") //
                                 .addIncludeName("NotesFilterType") //
+                                .addIncludeName("ListLimitMetric") //
+                                .addIncludeName("IterationState") //
                                 // ---- MUTATION objects ----
                                 .addIncludeName("WorkItemStateEvent") //
                                 .addIncludeName("RelativePositionType") //
@@ -671,9 +674,9 @@ class GenerateGitlabClient {
                                 .addIncludeName("description") //
                                 .addIncludeName("dueDate") //
                                 .addIncludeName("id") //
-                                .addIncludeName("iid") //
+                                //.addIncludeName("iid") //
                                 .addIncludeName("iterationCadence") //
-                                .addIncludeName("report") //
+                                //.addIncludeName("report") //
                                 .addIncludeName("scopedPath") //
                                 .addIncludeName("scopedUrl") //
                                 .addIncludeName("sequence") //
@@ -696,15 +699,15 @@ class GenerateGitlabClient {
                                 .addIncludeName("description") //
                                 .addIncludeName("dueDate") //
                                 .addIncludeName("expired") //
-                                .addIncludeName("group") //
+                                //.addIncludeName("group") //
                                 .addIncludeName("id") //
-                                .addIncludeName("iid") //
-                                .addIncludeName("project") //
-                                .addIncludeName("releases") //
-                                .addIncludeName("report") //
+                                //.addIncludeName("iid") //
+                                //.addIncludeName("project") //
+                                //.addIncludeName("releases") //
+                                //.addIncludeName("report") //
                                 .addIncludeName("startDate") //
                                 .addIncludeName("state") //
-                                .addIncludeName("stats") //
+                                //.addIncludeName("stats") //
                                 .addIncludeName("title") //
                                 .addIncludeName("upcoming") //
                                 .addIncludeName("updatedAt") //
@@ -990,6 +993,13 @@ class GenerateGitlabClient {
                                 .addIncludeName("position") //
                                 .addIncludeName("listType") //
                                 .addIncludeName("label") //
+                                .addIncludeName("assignee") //
+                                .addIncludeName("collapsed") //
+                                .addIncludeName("iteration") //
+                                .addIncludeName("milestone") //
+                                .addIncludeName("limitMetric") //
+                                .addIncludeName("maxIssueCount") //
+                                .addIncludeName("maxIssueWeight") //
                         ) //
                         // --- ADDITIONAL TYPES ---
                         .addFilter(new FieldsFilter()
