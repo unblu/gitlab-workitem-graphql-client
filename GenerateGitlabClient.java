@@ -1134,19 +1134,19 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("Board")
                                 .addIncludeName("id") //
-                                .addIncludeName("hideBacklogList") //
-                                .addIncludeName("hideClosedList") //
+                                //.addIncludeName("hideBacklogList") //--> reduce complexity
+                                //.addIncludeName("hideClosedList") //--> reduce complexity
+                                //.addIncludeName("assignee") //--> reduce complexity
+                                //.addIncludeName("iteration") //--> reduce complexity
+                                //.addIncludeName("iterationCadence") //--> reduce complexity
+                                //.addIncludeName("labels") //--> reduce complexity
+                                //.addIncludeName("milestone") //--> reduce complexity
+                                //.addIncludeName("weight") //--> reduce complexity
+                                //.addIncludeName("createdAt") //--> reduce complexity
+                                //.addIncludeName("updatedAt") //--> reduce complexity
                                 .addIncludeName("name") //
                                 .addIncludeName("webUrl") //
                                 .addIncludeName("lists") //
-                                .addIncludeName("assignee") //
-                                .addIncludeName("iteration") //
-                                .addIncludeName("iterationCadence") //
-                                .addIncludeName("labels") //
-                                .addIncludeName("milestone") //
-                                .addIncludeName("weight") //
-                                .addIncludeName("createdAt") //
-                                .addIncludeName("updatedAt") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
