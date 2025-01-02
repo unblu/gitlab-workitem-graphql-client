@@ -20,6 +20,8 @@ import graphql.gitlab.model.CreateBoardPayload;
 import graphql.gitlab.model.CreateNoteInput;
 import graphql.gitlab.model.CreateNotePayload;
 import graphql.gitlab.model.DestroyBoardInput;
+import graphql.gitlab.model.DestroyBoardListInput;
+import graphql.gitlab.model.DestroyBoardListPayload;
 import graphql.gitlab.model.DestroyBoardPayload;
 import graphql.gitlab.model.DestroyEpicBoardInput;
 import graphql.gitlab.model.DestroyEpicBoardPayload;
@@ -29,6 +31,8 @@ import graphql.gitlab.model.EpicBoardCreateInput;
 import graphql.gitlab.model.EpicBoardCreatePayload;
 import graphql.gitlab.model.EpicBoardListCreateInput;
 import graphql.gitlab.model.EpicBoardListCreatePayload;
+import graphql.gitlab.model.EpicBoardListDestroyInput;
+import graphql.gitlab.model.EpicBoardListDestroyPayload;
 import graphql.gitlab.model.EpicBoardUpdateInput;
 import graphql.gitlab.model.EpicBoardUpdatePayload;
 import graphql.gitlab.model.EpicList;
@@ -41,7 +45,11 @@ import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
 import graphql.gitlab.model.ProjectContainingIssueBoard;
 import graphql.gitlab.model.UpdateBoardInput;
+import graphql.gitlab.model.UpdateBoardListInput;
+import graphql.gitlab.model.UpdateBoardListPayload;
 import graphql.gitlab.model.UpdateBoardPayload;
+import graphql.gitlab.model.UpdateEpicBoardListInput;
+import graphql.gitlab.model.UpdateEpicBoardListPayload;
 import graphql.gitlab.model.UpdateNoteInput;
 import graphql.gitlab.model.UpdateNotePayload;
 import graphql.gitlab.model.WorkItem;
@@ -130,6 +138,9 @@ public interface WorkitemClientApi {
     @Mutation("destroyBoard")
     DestroyBoardPayload deleteIssueBoard(@Name("input") @NonNull @Source DestroyBoardInput input);
 
+    @Mutation("destroyBoardList")
+    DestroyBoardListPayload deleteIssueBoardList(@Name("input") @NonNull @Source DestroyBoardListInput input);
+
     @Mutation("destroyEpicBoard")
     DestroyEpicBoardPayload deleteEpicBoard(@Name("input") @NonNull @Source DestroyEpicBoardInput input);
 
@@ -142,11 +153,23 @@ public interface WorkitemClientApi {
     @Mutation("epicBoardListCreate")
     EpicBoardListCreatePayload createEpicBoardList(@Name("input") @NonNull @Source EpicBoardListCreateInput input);
 
+    /**
+     * Destroys an epic board list. Deprecated in GitLab 17.5: Replaced by WorkItem type.
+     */
+    @Mutation("epicBoardListDestroy")
+    EpicBoardListDestroyPayload deleteEpicBoardList(@Name("input") @NonNull @Source EpicBoardListDestroyInput input);
+
     @Mutation("epicBoardUpdate")
     EpicBoardUpdatePayload updateEpicBoard(@Name("input") @NonNull @Source EpicBoardUpdateInput input);
 
     @Mutation("updateBoard")
     UpdateBoardPayload updateIssueBoard(@Name("input") @NonNull @Source UpdateBoardInput input);
+
+    @Mutation("updateBoardList")
+    UpdateBoardListPayload updateIssueBoardList(@Name("input") @NonNull @Source UpdateBoardListInput input);
+
+    @Mutation("updateEpicBoardList")
+    UpdateEpicBoardListPayload updateEpicBoardList(@Name("input") @NonNull @Source UpdateEpicBoardListInput input);
 
     /**
      * Updates a Note.
