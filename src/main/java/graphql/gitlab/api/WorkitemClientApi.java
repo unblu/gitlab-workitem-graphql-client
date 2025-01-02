@@ -27,6 +27,8 @@ import graphql.gitlab.model.DestroyNoteInput;
 import graphql.gitlab.model.DestroyNotePayload;
 import graphql.gitlab.model.EpicBoardCreateInput;
 import graphql.gitlab.model.EpicBoardCreatePayload;
+import graphql.gitlab.model.EpicBoardListCreateInput;
+import graphql.gitlab.model.EpicBoardListCreatePayload;
 import graphql.gitlab.model.EpicBoardUpdateInput;
 import graphql.gitlab.model.EpicBoardUpdatePayload;
 import graphql.gitlab.model.EpicList;
@@ -136,6 +138,9 @@ public interface WorkitemClientApi {
 
     @Mutation("epicBoardCreate")
     EpicBoardCreatePayload createEpicBoard(@Name("input") @NonNull @Source EpicBoardCreateInput input);
+
+    @Mutation("epicBoardListCreate")
+    EpicBoardListCreatePayload createEpicBoardList(@Name("input") @NonNull @Source EpicBoardListCreateInput input);
 
     @Mutation("epicBoardUpdate")
     EpicBoardUpdatePayload updateEpicBoard(@Name("input") @NonNull @Source EpicBoardUpdateInput input);
