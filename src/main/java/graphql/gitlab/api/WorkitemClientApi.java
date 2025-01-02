@@ -11,14 +11,45 @@ import org.eclipse.microprofile.graphql.Source;
 
 import graphql.gitlab.model.AwardEmojiAddInput;
 import graphql.gitlab.model.AwardEmojiAddPayload;
+import graphql.gitlab.model.BoardList;
+import graphql.gitlab.model.BoardListCreateInput;
+import graphql.gitlab.model.BoardListCreatePayload;
+import graphql.gitlab.model.BoardsEpicListID;
+import graphql.gitlab.model.CreateBoardInput;
+import graphql.gitlab.model.CreateBoardPayload;
 import graphql.gitlab.model.CreateNoteInput;
 import graphql.gitlab.model.CreateNotePayload;
+import graphql.gitlab.model.DestroyBoardInput;
+import graphql.gitlab.model.DestroyBoardListInput;
+import graphql.gitlab.model.DestroyBoardListPayload;
+import graphql.gitlab.model.DestroyBoardPayload;
+import graphql.gitlab.model.DestroyEpicBoardInput;
+import graphql.gitlab.model.DestroyEpicBoardPayload;
 import graphql.gitlab.model.DestroyNoteInput;
 import graphql.gitlab.model.DestroyNotePayload;
+import graphql.gitlab.model.EpicBoardCreateInput;
+import graphql.gitlab.model.EpicBoardCreatePayload;
+import graphql.gitlab.model.EpicBoardListCreateInput;
+import graphql.gitlab.model.EpicBoardListCreatePayload;
+import graphql.gitlab.model.EpicBoardListDestroyInput;
+import graphql.gitlab.model.EpicBoardListDestroyPayload;
+import graphql.gitlab.model.EpicBoardUpdateInput;
+import graphql.gitlab.model.EpicBoardUpdatePayload;
+import graphql.gitlab.model.EpicList;
 import graphql.gitlab.model.Group;
+import graphql.gitlab.model.GroupContainingEpicBoard;
+import graphql.gitlab.model.GroupContainingIssueBoard;
+import graphql.gitlab.model.ListID;
 import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
+import graphql.gitlab.model.ProjectContainingIssueBoard;
+import graphql.gitlab.model.UpdateBoardInput;
+import graphql.gitlab.model.UpdateBoardListInput;
+import graphql.gitlab.model.UpdateBoardListPayload;
+import graphql.gitlab.model.UpdateBoardPayload;
+import graphql.gitlab.model.UpdateEpicBoardListInput;
+import graphql.gitlab.model.UpdateEpicBoardListPayload;
 import graphql.gitlab.model.UpdateNoteInput;
 import graphql.gitlab.model.UpdateNotePayload;
 import graphql.gitlab.model.WorkItem;
@@ -39,10 +70,25 @@ import io.smallrye.graphql.client.typesafe.api.NestedParameter;
 public interface WorkitemClientApi {
 
     /**
+     * Find an issue board list.
+     */
+    @Query("boardList")
+    BoardList getIssueBoardList(@Name("id") @NonNull ListID id);
+
+    @Query("epicBoardList")
+    EpicList getEpicBoardList(@Name("id") @NonNull BoardsEpicListID id);
+
+    /**
      * Find a group.
      */
     @Query("group")
     Group group(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
+
+    @Query("group")
+    GroupContainingIssueBoard getIssueBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
+
+    @Query("group")
+    GroupContainingEpicBoard getEpicBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
 
     /**
      * Find a namespace.
@@ -55,6 +101,9 @@ public interface WorkitemClientApi {
      */
     @Query("project")
     Project project(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
+
+    @Query("project")
+    ProjectContainingIssueBoard getIssueBoardsInProject(@Name("fullPath") @NonNull @Id String fullPath);
 
     /**
      * Find a work item. Introduced in GitLab 15.1: **Status**: Experiment.
@@ -71,6 +120,12 @@ public interface WorkitemClientApi {
     @Mutation("awardEmojiAdd")
     AwardEmojiAddPayload awardEmojiAdd(@Name("input") @NonNull @Source AwardEmojiAddInput input);
 
+    @Mutation("boardListCreate")
+    BoardListCreatePayload createIssueBoardList(@Name("input") @NonNull @Source BoardListCreateInput input);
+
+    @Mutation("createBoard")
+    CreateBoardPayload createIssueBoard(@Name("input") @NonNull @Source CreateBoardInput input);
+
     /**
      * Creates a Note.
      * If the body of the Note contains only quick actions,
@@ -80,8 +135,41 @@ public interface WorkitemClientApi {
     @Mutation("createNote")
     CreateNotePayload createNote(@Name("input") @NonNull @Source CreateNoteInput input);
 
+    @Mutation("destroyBoard")
+    DestroyBoardPayload deleteIssueBoard(@Name("input") @NonNull @Source DestroyBoardInput input);
+
+    @Mutation("destroyBoardList")
+    DestroyBoardListPayload deleteIssueBoardList(@Name("input") @NonNull @Source DestroyBoardListInput input);
+
+    @Mutation("destroyEpicBoard")
+    DestroyEpicBoardPayload deleteEpicBoard(@Name("input") @NonNull @Source DestroyEpicBoardInput input);
+
     @Mutation("destroyNote")
     DestroyNotePayload destroyNote(@Name("input") @NonNull @Source DestroyNoteInput input);
+
+    @Mutation("epicBoardCreate")
+    EpicBoardCreatePayload createEpicBoard(@Name("input") @NonNull @Source EpicBoardCreateInput input);
+
+    @Mutation("epicBoardListCreate")
+    EpicBoardListCreatePayload createEpicBoardList(@Name("input") @NonNull @Source EpicBoardListCreateInput input);
+
+    /**
+     * Destroys an epic board list. Deprecated in GitLab 17.5: Replaced by WorkItem type.
+     */
+    @Mutation("epicBoardListDestroy")
+    EpicBoardListDestroyPayload deleteEpicBoardList(@Name("input") @NonNull @Source EpicBoardListDestroyInput input);
+
+    @Mutation("epicBoardUpdate")
+    EpicBoardUpdatePayload updateEpicBoard(@Name("input") @NonNull @Source EpicBoardUpdateInput input);
+
+    @Mutation("updateBoard")
+    UpdateBoardPayload updateIssueBoard(@Name("input") @NonNull @Source UpdateBoardInput input);
+
+    @Mutation("updateBoardList")
+    UpdateBoardListPayload updateIssueBoardList(@Name("input") @NonNull @Source UpdateBoardListInput input);
+
+    @Mutation("updateEpicBoardList")
+    UpdateEpicBoardListPayload updateEpicBoardList(@Name("input") @NonNull @Source UpdateEpicBoardListInput input);
 
     /**
      * Updates a Note.
