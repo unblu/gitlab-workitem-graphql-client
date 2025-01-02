@@ -16,3 +16,11 @@ WorkitemClientApi api =  TypesafeGraphQLClientBuilder.newBuilder()
 Check the `RunTest` class in this project for usage example.
 
 This library can be used with Quarkus.
+
+### Example jbang script:
+
+Check the [`run.java`](run.java) script that can be executed with [jbang](https://www.jbang.dev/) using:
+
+```
+jbang run.java
+```
