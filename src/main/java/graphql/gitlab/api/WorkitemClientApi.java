@@ -12,6 +12,8 @@ import org.eclipse.microprofile.graphql.Source;
 import graphql.gitlab.model.AwardEmojiAddInput;
 import graphql.gitlab.model.AwardEmojiAddPayload;
 import graphql.gitlab.model.BoardList;
+import graphql.gitlab.model.BoardListCreateInput;
+import graphql.gitlab.model.BoardListCreatePayload;
 import graphql.gitlab.model.BoardsEpicListID;
 import graphql.gitlab.model.CreateBoardInput;
 import graphql.gitlab.model.CreateBoardPayload;
@@ -107,6 +109,9 @@ public interface WorkitemClientApi {
 
     @Mutation("awardEmojiAdd")
     AwardEmojiAddPayload awardEmojiAdd(@Name("input") @NonNull @Source AwardEmojiAddInput input);
+
+    @Mutation("boardListCreate")
+    BoardListCreatePayload createIssueBoardList(@Name("input") @NonNull @Source BoardListCreateInput input);
 
     @Mutation("createBoard")
     CreateBoardPayload createIssueBoard(@Name("input") @NonNull @Source CreateBoardInput input);
