@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
-@Name("Project")
+@Name("ProjectContainingIssueBoard")
 public class ProjectContainingIssueBoard {
 
     /**
@@ -28,6 +28,11 @@ public class ProjectContainingIssueBoard {
     private String nameWithNamespace;
 
     /**
+     * Namespace of the project.
+     */
+    private Namespace namespace;
+
+    /**
      * Path of the project.
      */
     private String path;
@@ -36,7 +41,6 @@ public class ProjectContainingIssueBoard {
      * Web URL of the project.
      */
     private String webUrl;
-
 
     public BoardConnection getBoards() {
         return boards;
@@ -74,6 +78,15 @@ public class ProjectContainingIssueBoard {
         return this;
     }
 
+    public Namespace getNamespace() {
+        return namespace;
+    }
+
+    public ProjectContainingIssueBoard setNamespace(Namespace namespace) {
+        this.namespace = namespace;
+        return this;
+    }
+
     public String getPath() {
         return path;
     }
@@ -94,7 +107,7 @@ public class ProjectContainingIssueBoard {
 
     @Override
     public int hashCode() {
-        return Objects.hash(boards, id, name, nameWithNamespace, path, webUrl);
+        return Objects.hash(boards, id, name, nameWithNamespace, namespace, path, webUrl);
     }
 
     @Override
@@ -106,12 +119,12 @@ public class ProjectContainingIssueBoard {
         if (getClass() != obj.getClass())
             return false;
         ProjectContainingIssueBoard other = (ProjectContainingIssueBoard) obj;
-        return Objects.equals(boards, other.boards) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(nameWithNamespace, other.nameWithNamespace) && Objects.equals(path, other.path) && Objects.equals(webUrl, other.webUrl);
+        return Objects.equals(boards, other.boards) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(nameWithNamespace, other.nameWithNamespace) && Objects.equals(namespace, other.namespace) && Objects.equals(path, other.path) && Objects.equals(webUrl, other.webUrl);
     }
 
     @Override
     public String toString() {
-        return "Project [boards=" + boards + ", id=" + id + ", name=" + name + ", nameWithNamespace=" + nameWithNamespace + ", path=" + path + ", webUrl=" + webUrl + "]";
+        return "ProjectContainingIssueBoard [boards=" + boards + ", id=" + id + ", name=" + name + ", nameWithNamespace=" + nameWithNamespace + ", namespace=" + namespace + ", path=" + path + ", webUrl=" + webUrl + "]";
     }
 
 }

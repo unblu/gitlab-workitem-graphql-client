@@ -100,6 +100,8 @@ class GenerateGitlabClient {
 
         Type boardList = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "BoardList");
         Type epicList = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicList");
+        Type group = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Group");
+        Type project = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Project");
 
         SchemaUtil.getFieldByName(schema, boardList, "id")
                 .getType()
@@ -114,6 +116,12 @@ class GenerateGitlabClient {
                 .add(createBoardListRef(mapper, boardList));
         schema.getTypes()
                 .add(createEpicListRef(mapper, epicList));
+        schema.getTypes()
+                .add(createGroupContainingIssueBoard(mapper, group));
+        schema.getTypes()
+                .add(createGroupContainingEpicBoard(mapper, group));
+        schema.getTypes()
+                .add(createProjectContainingIssueBoard(mapper, project));
 
         //See: https://gitlab.com/gitlab-org/gitlab/-/issues/499834
         Type label = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Label");
@@ -343,7 +351,10 @@ class GenerateGitlabClient {
                                 .addIncludeName("IterationCadence") //
                                 .addIncludeName("TimeboxReport") //
                                 .addIncludeName("Group") //
+                                .addIncludeName("GroupContainingEpicBoard") //
+                                .addIncludeName("GroupContainingIssueBoard") //
                                 .addIncludeName("Project") //
+                                .addIncludeName("ProjectContainingIssueBoard") //
                                 .addIncludeName("ReleaseConnection") //
                                 .addIncludeName("Todo") //
                                 .addIncludeName("WorkItemClosingMergeRequest") //
@@ -956,8 +967,6 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("Group")
-                                //.addIncludeName("boards") // --> in GroupContainingIssueBoard
-                                //.addIncludeName("epicBoards") // --> in GroupContainingEpicBoard
                                 .addIncludeName("fullName") //
                                 .addIncludeName("fullPath") //
                                 .addIncludeName("id") //
@@ -966,6 +975,26 @@ class GenerateGitlabClient {
                                 .addIncludeName("labels") //
                                 .addIncludeName("workItemTypes") //
                         //XXX .addIncludeName("workItem") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("GroupContainingIssueBoard")
+                                .addIncludeName("boards") // --> in GroupContainingIssueBoard
+                                .addIncludeName("fullName") //
+                                .addIncludeName("fullPath") //
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("webUrl") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("GroupContainingEpicBoard")
+                                .addIncludeName("epicBoards") // --> in GroupContainingEpicBoard
+                                .addIncludeName("fullName") //
+                                .addIncludeName("fullPath") //
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("webUrl") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -994,7 +1023,6 @@ class GenerateGitlabClient {
                                 .setTypeName("Project")
                                 // .addIncludeName("group") //
                                 .addIncludeName("id") //
-                                // .addIncludeName("boards") // --> in ProjectContainingIssueBoard
                                 .addIncludeName("name") //
                                 .addIncludeName("nameWithNamespace") //
                                 .addIncludeName("namespace") //
@@ -1002,6 +1030,17 @@ class GenerateGitlabClient {
                                 .addIncludeName("webUrl") //
                                 .addIncludeName("workItemTypes") //
                                 .addIncludeName("labels") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("ProjectContainingIssueBoard")
+                                .addIncludeName("id") //
+                                .addIncludeName("boards") // --> in ProjectContainingIssueBoard
+                                .addIncludeName("name") //
+                                .addIncludeName("nameWithNamespace") //
+                                .addIncludeName("namespace") //
+                                .addIncludeName("path") //
+                                .addIncludeName("webUrl") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1619,6 +1658,18 @@ class GenerateGitlabClient {
 
     private static Type createEpicListRef(ObjectMapper mapper, Type typeBoardList) {
         return duplicateType(mapper, typeBoardList, "EpicListRef");
+    }
+
+    private static Type createGroupContainingIssueBoard(ObjectMapper mapper, Type group) {
+        return duplicateType(mapper, group, "GroupContainingIssueBoard");
+    }
+
+    private static Type createGroupContainingEpicBoard(ObjectMapper mapper, Type group) {
+        return duplicateType(mapper, group, "GroupContainingEpicBoard");
+    }
+
+    private static Type createProjectContainingIssueBoard(ObjectMapper mapper, Type project) {
+        return duplicateType(mapper, project, "ProjectContainingIssueBoard");
     }
 
     private static Type duplicateType(ObjectMapper mapper, Type type, String newName) {

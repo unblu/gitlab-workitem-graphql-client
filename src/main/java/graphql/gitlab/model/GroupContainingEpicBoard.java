@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
-@Name("Group")
+@Name("GroupContainingEpicBoard")
 public class GroupContainingEpicBoard {
 
     /**
@@ -110,7 +110,7 @@ public class GroupContainingEpicBoard {
 
     @Override
     public String toString() {
-        return "Group [epicBoards=" + epicBoards + ", fullName=" + fullName + ", fullPath=" + fullPath + ", id=" + id + ", name=" + name + ", webUrl=" + webUrl + "]";
+        return "GroupContainingEpicBoard [epicBoards=" + epicBoards + ", fullName=" + fullName + ", fullPath=" + fullPath + ", id=" + id + ", name=" + name + ", webUrl=" + webUrl + "]";
     }
 
 }
