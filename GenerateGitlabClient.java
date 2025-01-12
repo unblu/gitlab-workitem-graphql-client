@@ -109,6 +109,11 @@ class GenerateGitlabClient {
                 .getOfType()
                 .setName("ListID");
 
+        SchemaUtil.getFieldByName(schema, board, "id")
+                .getType()
+                .getOfType()
+                .setName("BoardID");
+
         schema.getTypes()
                 .add(createWorkItemConnectionRef());
         schema.getTypes()
@@ -143,11 +148,6 @@ class GenerateGitlabClient {
                 .getType()
                 .getOfType()
                 .setName("UserID");
-
-        SchemaUtil.getFieldByName(schema, board, "id")
-                .getType()
-                .getOfType()
-                .setName("BoardID");
 
         Config config = new Config()
                 .setSchema(schema)

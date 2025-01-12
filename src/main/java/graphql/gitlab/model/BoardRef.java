@@ -13,7 +13,7 @@ public class BoardRef {
     /**
      * ID (global ID) of the board.
      */
-    private String id;
+    private BoardID id;
 
     /**
      * Name of the board.
@@ -25,11 +25,11 @@ public class BoardRef {
      */
     private String webUrl;
 
-    public String getId() {
+    public BoardID getId() {
         return id;
     }
 
-    public BoardRef setId(String id) {
+    public BoardRef setId(BoardID id) {
         this.id = id;
         return this;
     }
