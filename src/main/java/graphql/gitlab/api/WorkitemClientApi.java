@@ -90,10 +90,10 @@ public interface WorkitemClientApi {
     Group group(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
 
     @Query("group")
-    GroupContainingSingleIssueBoard getIssueBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") BoardID boardId);
+    GroupContainingSingleIssueBoard getIssueBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") @NonNull BoardID boardId);
 
     @Query("group")
-    GroupContainingSingleEpicBoard getEpicBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") BoardsEpicBoardID boardId);
+    GroupContainingSingleEpicBoard getEpicBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") @NonNull BoardsEpicBoardID boardId);
 
     @Query("group")
     GroupContainingIssueBoards getIssueBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
@@ -114,7 +114,7 @@ public interface WorkitemClientApi {
     Project project(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
 
     @Query("project")
-    ProjectContainingSingleIssueBoard getIssueBoardInProject(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") BoardID boardId);
+    ProjectContainingSingleIssueBoard getIssueBoardInProject(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") @NonNull BoardID boardId);
 
     @Query("project")
     ProjectContainingIssueBoards getIssueBoardsInProject(@Name("fullPath") @NonNull @Id String fullPath);
