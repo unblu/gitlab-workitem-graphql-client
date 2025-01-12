@@ -4,13 +4,13 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
-@Name("GroupContainingEpicBoard")
-public class GroupContainingEpicBoard {
+@Name("GroupContainingSingleEpicBoard")
+public class GroupContainingSingleEpicBoard {
 
     /**
-     * Find epic boards. Deprecated in GitLab 17.5: Replaced by WorkItem type.
+     * Find a single epic board. Deprecated in GitLab 17.5: Replaced by WorkItem type.
      */
-    private EpicBoardConnection epicBoards;
+    private EpicBoard epicBoard;
 
     /**
      * Full name of the namespace.
@@ -37,12 +37,12 @@ public class GroupContainingEpicBoard {
      */
     private String webUrl;
 
-    public EpicBoardConnection getEpicBoards() {
-        return epicBoards;
+    public EpicBoard getEpicBoard() {
+        return epicBoard;
     }
 
-    public GroupContainingEpicBoard setEpicBoards(EpicBoardConnection epicBoards) {
-        this.epicBoards = epicBoards;
+    public GroupContainingSingleEpicBoard setEpicBoard(EpicBoard epicBoard) {
+        this.epicBoard = epicBoard;
         return this;
     }
 
@@ -50,7 +50,7 @@ public class GroupContainingEpicBoard {
         return fullName;
     }
 
-    public GroupContainingEpicBoard setFullName(String fullName) {
+    public GroupContainingSingleEpicBoard setFullName(String fullName) {
         this.fullName = fullName;
         return this;
     }
@@ -59,7 +59,7 @@ public class GroupContainingEpicBoard {
         return fullPath;
     }
 
-    public GroupContainingEpicBoard setFullPath(String fullPath) {
+    public GroupContainingSingleEpicBoard setFullPath(String fullPath) {
         this.fullPath = fullPath;
         return this;
     }
@@ -68,7 +68,7 @@ public class GroupContainingEpicBoard {
         return id;
     }
 
-    public GroupContainingEpicBoard setId(String id) {
+    public GroupContainingSingleEpicBoard setId(String id) {
         this.id = id;
         return this;
     }
@@ -77,7 +77,7 @@ public class GroupContainingEpicBoard {
         return name;
     }
 
-    public GroupContainingEpicBoard setName(String name) {
+    public GroupContainingSingleEpicBoard setName(String name) {
         this.name = name;
         return this;
     }
@@ -86,14 +86,14 @@ public class GroupContainingEpicBoard {
         return webUrl;
     }
 
-    public GroupContainingEpicBoard setWebUrl(String webUrl) {
+    public GroupContainingSingleEpicBoard setWebUrl(String webUrl) {
         this.webUrl = webUrl;
         return this;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(epicBoards, fullName, fullPath, id, name, webUrl);
+        return Objects.hash(epicBoard, fullName, fullPath, id, name, webUrl);
     }
 
     @Override
@@ -104,13 +104,13 @@ public class GroupContainingEpicBoard {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        GroupContainingEpicBoard other = (GroupContainingEpicBoard) obj;
-        return Objects.equals(epicBoards, other.epicBoards) && Objects.equals(fullName, other.fullName) && Objects.equals(fullPath, other.fullPath) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(webUrl, other.webUrl);
+        GroupContainingSingleEpicBoard other = (GroupContainingSingleEpicBoard) obj;
+        return Objects.equals(epicBoard, other.epicBoard) && Objects.equals(fullName, other.fullName) && Objects.equals(fullPath, other.fullPath) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(webUrl, other.webUrl);
     }
 
     @Override
     public String toString() {
-        return "GroupContainingEpicBoard [epicBoards=" + epicBoards + ", fullName=" + fullName + ", fullPath=" + fullPath + ", id=" + id + ", name=" + name + ", webUrl=" + webUrl + "]";
+        return "GroupContainingSingleEpicBoard [epicBoard=" + epicBoard + ", fullName=" + fullName + ", fullPath=" + fullPath + ", id=" + id + ", name=" + name + ", webUrl=" + webUrl + "]";
     }
 
 }

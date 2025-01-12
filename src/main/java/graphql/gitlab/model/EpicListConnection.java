@@ -14,13 +14,13 @@ public class EpicListConnection {
     /**
      * A list of nodes.
      */
-    private List<EpicListRef> nodes;
+    private List<EpicList> nodes;
 
-    public List<EpicListRef> getNodes() {
+    public List<EpicList> getNodes() {
         return nodes;
     }
 
-    public EpicListConnection setNodes(List<EpicListRef> nodes) {
+    public EpicListConnection setNodes(List<EpicList> nodes) {
         this.nodes = nodes;
         return this;
     }

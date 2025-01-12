@@ -11,9 +11,11 @@ import org.eclipse.microprofile.graphql.Source;
 
 import graphql.gitlab.model.AwardEmojiAddInput;
 import graphql.gitlab.model.AwardEmojiAddPayload;
+import graphql.gitlab.model.BoardID;
 import graphql.gitlab.model.BoardList;
 import graphql.gitlab.model.BoardListCreateInput;
 import graphql.gitlab.model.BoardListCreatePayload;
+import graphql.gitlab.model.BoardsEpicBoardID;
 import graphql.gitlab.model.BoardsEpicListID;
 import graphql.gitlab.model.CreateBoardInput;
 import graphql.gitlab.model.CreateBoardPayload;
@@ -37,13 +39,16 @@ import graphql.gitlab.model.EpicBoardUpdateInput;
 import graphql.gitlab.model.EpicBoardUpdatePayload;
 import graphql.gitlab.model.EpicList;
 import graphql.gitlab.model.Group;
-import graphql.gitlab.model.GroupContainingEpicBoard;
-import graphql.gitlab.model.GroupContainingIssueBoard;
+import graphql.gitlab.model.GroupContainingEpicBoards;
+import graphql.gitlab.model.GroupContainingIssueBoards;
+import graphql.gitlab.model.GroupContainingSingleEpicBoard;
+import graphql.gitlab.model.GroupContainingSingleIssueBoard;
 import graphql.gitlab.model.ListID;
 import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
-import graphql.gitlab.model.ProjectContainingIssueBoard;
+import graphql.gitlab.model.ProjectContainingIssueBoards;
+import graphql.gitlab.model.ProjectContainingSingleIssueBoard;
 import graphql.gitlab.model.UpdateBoardInput;
 import graphql.gitlab.model.UpdateBoardListInput;
 import graphql.gitlab.model.UpdateBoardListPayload;
@@ -85,10 +90,16 @@ public interface WorkitemClientApi {
     Group group(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
 
     @Query("group")
-    GroupContainingIssueBoard getIssueBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
+    GroupContainingSingleIssueBoard getIssueBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") BoardID boardId);
 
     @Query("group")
-    GroupContainingEpicBoard getEpicBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
+    GroupContainingSingleEpicBoard getEpicBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") BoardsEpicBoardID boardId);
+
+    @Query("group")
+    GroupContainingIssueBoards getIssueBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
+
+    @Query("group")
+    GroupContainingEpicBoards getEpicBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
 
     /**
      * Find a namespace.
@@ -103,7 +114,10 @@ public interface WorkitemClientApi {
     Project project(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
 
     @Query("project")
-    ProjectContainingIssueBoard getIssueBoardsInProject(@Name("fullPath") @NonNull @Id String fullPath);
+    ProjectContainingSingleIssueBoard getIssueBoardInProject(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") BoardID boardId);
+
+    @Query("project")
+    ProjectContainingIssueBoards getIssueBoardsInProject(@Name("fullPath") @NonNull @Id String fullPath);
 
     /**
      * Find a work item. Introduced in GitLab 15.1: **Status**: Experiment.

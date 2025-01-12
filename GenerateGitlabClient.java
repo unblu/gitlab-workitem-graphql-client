@@ -76,16 +76,16 @@ class GenerateGitlabClient {
         Field parentField = SchemaUtil.getFieldByName(schema, workItemWidgetHierarchy, "parent");
         parentField.getType()
                 .setName("WorkItemRef");
-        Type boardListConnection = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "BoardListConnection");
-        Field boardListConnectionNodesField = SchemaUtil.getFieldByName(schema, boardListConnection, "nodes");
-        boardListConnectionNodesField.getType()
+        Type issueBoardConnection = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "BoardConnection");
+        Field issueBoardConnectionNodesField = SchemaUtil.getFieldByName(schema, issueBoardConnection, "nodes");
+        issueBoardConnectionNodesField.getType()
                 .getOfType()
-                .setName("BoardListRef");
-        Type epicListConnection = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicListConnection");
-        Field epicListConnectionNodesField = SchemaUtil.getFieldByName(schema, epicListConnection, "nodes");
-        epicListConnectionNodesField.getType()
+                .setName("BoardRef");
+        Type epicBoardConnection = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicBoardConnection");
+        Field epicBoardConnectionNodesField = SchemaUtil.getFieldByName(schema, epicBoardConnection, "nodes");
+        epicBoardConnectionNodesField.getType()
                 .getOfType()
-                .setName("EpicListRef");
+                .setName("EpicBoardRef");
 
         Type workItemUpdateInput = SchemaUtil.getTypeByKindAndName(schema, Kind.INPUT_OBJECT, "WorkItemUpdateInput");
         Type workItemWidgetRolledupDatesInput = SchemaUtil.getTypeByKindAndName(schema, Kind.INPUT_OBJECT, "WorkItemWidgetRolledupDatesInput");
@@ -99,9 +99,10 @@ class GenerateGitlabClient {
                 .add(rolledupDatesWidget);
 
         Type boardList = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "BoardList");
-        Type epicList = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicList");
         Type group = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Group");
         Type project = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Project");
+        Type board = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Board");
+        Type epicBoard = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicBoard");
 
         SchemaUtil.getFieldByName(schema, boardList, "id")
                 .getType()
@@ -113,15 +114,23 @@ class GenerateGitlabClient {
         schema.getTypes()
                 .add(createWorkItemRef());
         schema.getTypes()
-                .add(createBoardListRef(mapper, boardList));
+                .add(createBoardRef(mapper, board));
         schema.getTypes()
-                .add(createEpicListRef(mapper, epicList));
+                .add(createEpicBoardRef(mapper, epicBoard));
         schema.getTypes()
-                .add(createGroupContainingIssueBoard(mapper, group));
+                .add(createProjectContainingSingleIssueBoard(mapper, project));
         schema.getTypes()
-                .add(createGroupContainingEpicBoard(mapper, group));
+                .add(createGroupContainingSingleIssueBoard(mapper, group));
         schema.getTypes()
-                .add(createProjectContainingIssueBoard(mapper, project));
+                .add(createGroupContainingSingleEpicBoard(mapper, group));
+        schema.getTypes()
+                .add(createProjectContainingSingleIssueBoard(mapper, project));
+        schema.getTypes()
+                .add(createGroupContainingIssueBoards(mapper, group));
+        schema.getTypes()
+                .add(createGroupContainingEpicBoards(mapper, group));
+        schema.getTypes()
+                .add(createProjectContainingIssueBoards(mapper, project));
 
         //See: https://gitlab.com/gitlab-org/gitlab/-/issues/499834
         Type label = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Label");
@@ -135,7 +144,6 @@ class GenerateGitlabClient {
                 .getOfType()
                 .setName("UserID");
 
-        Type board = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Board");
         SchemaUtil.getFieldByName(schema, board, "id")
                 .getType()
                 .getOfType()
@@ -188,12 +196,32 @@ class GenerateGitlabClient {
                                         .setParameterName("labelsAfter") //
                                 ) //
                                 .addAdditionalMethod(new AdditionalMethod()
+                                        .setJavaMethodName("getIssueBoardInGroup")
+                                        .addNestedParameter(new NestedParameter()
+                                                .setGraphQlNestedParameterPath("board")
+                                                .setGraphQlName("id")
+                                                .setParameterType("{ModelPackageName}.BoardID") //
+                                                .setParameterName("boardId") //
+                                        )
+                                        .setReturnType("{ModelPackageName}.GroupContainingSingleIssueBoard") //
+                                ) //
+                                .addAdditionalMethod(new AdditionalMethod()
+                                        .setJavaMethodName("getEpicBoardInGroup")
+                                        .addNestedParameter(new NestedParameter()
+                                                .setGraphQlNestedParameterPath("board")
+                                                .setGraphQlName("id")
+                                                .setParameterType("{ModelPackageName}.BoardsEpicBoardID") //
+                                                .setParameterName("boardId") //
+                                        )
+                                        .setReturnType("{ModelPackageName}.GroupContainingSingleEpicBoard") //
+                                ) //
+                                .addAdditionalMethod(new AdditionalMethod()
                                         .setJavaMethodName("getIssueBoardsInGroup")
-                                        .setReturnType("{ModelPackageName}.GroupContainingIssueBoard") //
+                                        .setReturnType("{ModelPackageName}.GroupContainingIssueBoards") //
                                 ) //
                                 .addAdditionalMethod(new AdditionalMethod()
                                         .setJavaMethodName("getEpicBoardsInGroup")
-                                        .setReturnType("{ModelPackageName}.GroupContainingEpicBoard") //
+                                        .setReturnType("{ModelPackageName}.GroupContainingEpicBoards") //
                                 ) //
                         )
                         .addHint(new FieldHint()
@@ -214,8 +242,18 @@ class GenerateGitlabClient {
                                         .setParameterName("labelsAfter") //
                                 ) //
                                 .addAdditionalMethod(new AdditionalMethod()
+                                        .setJavaMethodName("getIssueBoardInProject")
+                                        .addNestedParameter(new NestedParameter()
+                                                .setGraphQlNestedParameterPath("board")
+                                                .setGraphQlName("id")
+                                                .setParameterType("{ModelPackageName}.BoardID") //
+                                                .setParameterName("boardId") //
+                                        )
+                                        .setReturnType("{ModelPackageName}.ProjectContainingSingleIssueBoard") //
+                                ) //
+                                .addAdditionalMethod(new AdditionalMethod()
                                         .setJavaMethodName("getIssueBoardsInProject")
-                                        .setReturnType("{ModelPackageName}.ProjectContainingIssueBoard") //
+                                        .setReturnType("{ModelPackageName}.ProjectContainingIssueBoards") //
                                 ) //
                         )
                         .addHint(new FieldHint()
@@ -379,10 +417,13 @@ class GenerateGitlabClient {
                                 .addIncludeName("IterationCadence") //
                                 .addIncludeName("TimeboxReport") //
                                 .addIncludeName("Group") //
-                                .addIncludeName("GroupContainingEpicBoard") //
-                                .addIncludeName("GroupContainingIssueBoard") //
+                                .addIncludeName("GroupContainingSingleEpicBoard") //
+                                .addIncludeName("GroupContainingSingleIssueBoard") //
+                                .addIncludeName("GroupContainingEpicBoards") //
+                                .addIncludeName("GroupContainingIssueBoards") //
                                 .addIncludeName("Project") //
-                                .addIncludeName("ProjectContainingIssueBoard") //
+                                .addIncludeName("ProjectContainingSingleIssueBoard") //
+                                .addIncludeName("ProjectContainingIssueBoards") //
                                 .addIncludeName("ReleaseConnection") //
                                 .addIncludeName("Todo") //
                                 .addIncludeName("WorkItemClosingMergeRequest") //
@@ -393,13 +434,13 @@ class GenerateGitlabClient {
                                 .addIncludeName("Note") //
                                 .addIncludeName("BoardConnection") //
                                 .addIncludeName("Board") //
+                                .addIncludeName("BoardRef") //
                                 .addIncludeName("BoardListConnection") //
-                                .addIncludeName("BoardListRef") //
                                 .addIncludeName("BoardList") //
                                 .addIncludeName("EpicBoardConnection") //
                                 .addIncludeName("EpicBoard") //
+                                .addIncludeName("EpicBoardRef") //
                                 .addIncludeName("EpicListConnection") //
-                                .addIncludeName("EpicListRef") //
                                 .addIncludeName("EpicList") //
                                 // --- ADDITIONAL TYPES ---
                                 .addIncludeName("WorkItemRef") //
@@ -1011,8 +1052,8 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("GroupContainingIssueBoard")
-                                .addIncludeName("boards") // --> in GroupContainingIssueBoard
+                                .setTypeName("GroupContainingSingleIssueBoard")
+                                .addIncludeName("board") // --> in GroupContainingSingleIssueBoard
                                 .addIncludeName("fullName") //
                                 .addIncludeName("fullPath") //
                                 .addIncludeName("id") //
@@ -1021,8 +1062,28 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("GroupContainingEpicBoard")
-                                .addIncludeName("epicBoards") // --> in GroupContainingEpicBoard
+                                .setTypeName("GroupContainingIssueBoards")
+                                .addIncludeName("boards") // --> in GroupContainingIssueBoards
+                                .addIncludeName("fullName") //
+                                .addIncludeName("fullPath") //
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("webUrl") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("GroupContainingSingleEpicBoard")
+                                .addIncludeName("epicBoard") // --> in GroupContainingSingleEpicBoard
+                                .addIncludeName("fullName") //
+                                .addIncludeName("fullPath") //
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("webUrl") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("GroupContainingEpicBoards")
+                                .addIncludeName("epicBoards") // --> in GroupContainingEpicBoards
                                 .addIncludeName("fullName") //
                                 .addIncludeName("fullPath") //
                                 .addIncludeName("id") //
@@ -1066,9 +1127,20 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("ProjectContainingIssueBoard")
+                                .setTypeName("ProjectContainingSingleIssueBoard")
                                 .addIncludeName("id") //
-                                .addIncludeName("boards") // --> in ProjectContainingIssueBoard
+                                .addIncludeName("board") // --> in ProjectContainingSingleIssueBoard
+                                .addIncludeName("name") //
+                                .addIncludeName("nameWithNamespace") //
+                                .addIncludeName("namespace") //
+                                .addIncludeName("path") //
+                                .addIncludeName("webUrl") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("ProjectContainingIssueBoards")
+                                .addIncludeName("id") //
+                                .addIncludeName("boards") // --> in ProjectContainingIssueBoards
                                 .addIncludeName("name") //
                                 .addIncludeName("nameWithNamespace") //
                                 .addIncludeName("namespace") //
@@ -1159,29 +1231,31 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("Board")
                                 .addIncludeName("id") //
-                                //.addIncludeName("hideBacklogList") //--> reduce complexity
-                                //.addIncludeName("hideClosedList") //--> reduce complexity
-                                //.addIncludeName("assignee") //--> reduce complexity
-                                //.addIncludeName("iteration") //--> reduce complexity
-                                //.addIncludeName("iterationCadence") //--> reduce complexity
-                                //.addIncludeName("labels") //--> reduce complexity
-                                //.addIncludeName("milestone") //--> reduce complexity
-                                //.addIncludeName("weight") //--> reduce complexity
-                                //.addIncludeName("createdAt") //--> reduce complexity
-                                //.addIncludeName("updatedAt") //--> reduce complexity
+                                .addIncludeName("hideBacklogList") //
+                                .addIncludeName("hideClosedList") //
+                                .addIncludeName("assignee") //
+                                .addIncludeName("iteration") //
+                                .addIncludeName("iterationCadence") //
+                                .addIncludeName("labels") //
+                                .addIncludeName("milestone") //
+                                .addIncludeName("weight") //
+                                .addIncludeName("createdAt") //
+                                .addIncludeName("updatedAt") //
                                 .addIncludeName("name") //
                                 .addIncludeName("webUrl") //
                                 .addIncludeName("lists") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("BoardListConnection")
-                                .addIncludeName("nodes") //
+                                .setTypeName("BoardRef")
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("webUrl") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("BoardListRef")
-                                .addIncludeName("id") //
+                                .setTypeName("BoardListConnection")
+                                .addIncludeName("nodes") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1218,13 +1292,15 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("EpicListConnection")
-                                .addIncludeName("nodes") //
+                                .setTypeName("EpicBoardRef")
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("webUrl") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("EpicListRef")
-                                .addIncludeName("id") //
+                                .setTypeName("EpicListConnection")
+                                .addIncludeName("nodes") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1792,24 +1868,36 @@ class GenerateGitlabClient {
         return config;
     }
 
-    private static Type createBoardListRef(ObjectMapper mapper, Type typeBoardList) {
-        return duplicateType(mapper, typeBoardList, "BoardListRef");
+    private static Type createBoardRef(ObjectMapper mapper, Type board) {
+        return duplicateType(mapper, board, "BoardRef");
     }
 
-    private static Type createEpicListRef(ObjectMapper mapper, Type typeBoardList) {
-        return duplicateType(mapper, typeBoardList, "EpicListRef");
+    private static Type createEpicBoardRef(ObjectMapper mapper, Type epicBoard) {
+        return duplicateType(mapper, epicBoard, "EpicBoardRef");
     }
 
-    private static Type createGroupContainingIssueBoard(ObjectMapper mapper, Type group) {
-        return duplicateType(mapper, group, "GroupContainingIssueBoard");
+    private static Type createGroupContainingSingleIssueBoard(ObjectMapper mapper, Type group) {
+        return duplicateType(mapper, group, "GroupContainingSingleIssueBoard");
     }
 
-    private static Type createGroupContainingEpicBoard(ObjectMapper mapper, Type group) {
-        return duplicateType(mapper, group, "GroupContainingEpicBoard");
+    private static Type createGroupContainingSingleEpicBoard(ObjectMapper mapper, Type group) {
+        return duplicateType(mapper, group, "GroupContainingSingleEpicBoard");
     }
 
-    private static Type createProjectContainingIssueBoard(ObjectMapper mapper, Type project) {
-        return duplicateType(mapper, project, "ProjectContainingIssueBoard");
+    private static Type createProjectContainingSingleIssueBoard(ObjectMapper mapper, Type project) {
+        return duplicateType(mapper, project, "ProjectContainingSingleIssueBoard");
+    }
+
+    private static Type createGroupContainingIssueBoards(ObjectMapper mapper, Type group) {
+        return duplicateType(mapper, group, "GroupContainingIssueBoards");
+    }
+
+    private static Type createGroupContainingEpicBoards(ObjectMapper mapper, Type group) {
+        return duplicateType(mapper, group, "GroupContainingEpicBoards");
+    }
+
+    private static Type createProjectContainingIssueBoards(ObjectMapper mapper, Type project) {
+        return duplicateType(mapper, project, "ProjectContainingIssueBoards");
     }
 
     private static Type duplicateType(ObjectMapper mapper, Type type, String newName) {
