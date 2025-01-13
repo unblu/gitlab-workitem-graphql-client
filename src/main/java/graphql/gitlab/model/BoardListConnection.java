@@ -14,13 +14,13 @@ public class BoardListConnection {
     /**
      * A list of nodes.
      */
-    private List<BoardListRef> nodes;
+    private List<BoardList> nodes;
 
-    public List<BoardListRef> getNodes() {
+    public List<BoardList> getNodes() {
         return nodes;
     }
 
-    public BoardListConnection setNodes(List<BoardListRef> nodes) {
+    public BoardListConnection setNodes(List<BoardList> nodes) {
         this.nodes = nodes;
         return this;
     }

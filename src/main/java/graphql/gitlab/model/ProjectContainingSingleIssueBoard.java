@@ -4,13 +4,13 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
-@Name("ProjectContainingIssueBoard")
-public class ProjectContainingIssueBoard {
+@Name("ProjectContainingSingleIssueBoard")
+public class ProjectContainingSingleIssueBoard {
 
     /**
-     * Boards of the project.
+     * A single board of the project.
      */
-    private BoardConnection boards;
+    private Board board;
 
     /**
      * ID of the project.
@@ -42,12 +42,12 @@ public class ProjectContainingIssueBoard {
      */
     private String webUrl;
 
-    public BoardConnection getBoards() {
-        return boards;
+    public Board getBoard() {
+        return board;
     }
 
-    public ProjectContainingIssueBoard setBoards(BoardConnection boards) {
-        this.boards = boards;
+    public ProjectContainingSingleIssueBoard setBoard(Board board) {
+        this.board = board;
         return this;
     }
 
@@ -55,7 +55,7 @@ public class ProjectContainingIssueBoard {
         return id;
     }
 
-    public ProjectContainingIssueBoard setId(String id) {
+    public ProjectContainingSingleIssueBoard setId(String id) {
         this.id = id;
         return this;
     }
@@ -64,7 +64,7 @@ public class ProjectContainingIssueBoard {
         return name;
     }
 
-    public ProjectContainingIssueBoard setName(String name) {
+    public ProjectContainingSingleIssueBoard setName(String name) {
         this.name = name;
         return this;
     }
@@ -73,7 +73,7 @@ public class ProjectContainingIssueBoard {
         return nameWithNamespace;
     }
 
-    public ProjectContainingIssueBoard setNameWithNamespace(String nameWithNamespace) {
+    public ProjectContainingSingleIssueBoard setNameWithNamespace(String nameWithNamespace) {
         this.nameWithNamespace = nameWithNamespace;
         return this;
     }
@@ -82,7 +82,7 @@ public class ProjectContainingIssueBoard {
         return namespace;
     }
 
-    public ProjectContainingIssueBoard setNamespace(Namespace namespace) {
+    public ProjectContainingSingleIssueBoard setNamespace(Namespace namespace) {
         this.namespace = namespace;
         return this;
     }
@@ -91,7 +91,7 @@ public class ProjectContainingIssueBoard {
         return path;
     }
 
-    public ProjectContainingIssueBoard setPath(String path) {
+    public ProjectContainingSingleIssueBoard setPath(String path) {
         this.path = path;
         return this;
     }
@@ -100,14 +100,14 @@ public class ProjectContainingIssueBoard {
         return webUrl;
     }
 
-    public ProjectContainingIssueBoard setWebUrl(String webUrl) {
+    public ProjectContainingSingleIssueBoard setWebUrl(String webUrl) {
         this.webUrl = webUrl;
         return this;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(boards, id, name, nameWithNamespace, namespace, path, webUrl);
+        return Objects.hash(board, id, name, nameWithNamespace, namespace, path, webUrl);
     }
 
     @Override
@@ -118,13 +118,13 @@ public class ProjectContainingIssueBoard {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ProjectContainingIssueBoard other = (ProjectContainingIssueBoard) obj;
-        return Objects.equals(boards, other.boards) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(nameWithNamespace, other.nameWithNamespace) && Objects.equals(namespace, other.namespace) && Objects.equals(path, other.path) && Objects.equals(webUrl, other.webUrl);
+        ProjectContainingSingleIssueBoard other = (ProjectContainingSingleIssueBoard) obj;
+        return Objects.equals(board, other.board) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(nameWithNamespace, other.nameWithNamespace) && Objects.equals(namespace, other.namespace) && Objects.equals(path, other.path) && Objects.equals(webUrl, other.webUrl);
     }
 
     @Override
     public String toString() {
-        return "ProjectContainingIssueBoard [boards=" + boards + ", id=" + id + ", name=" + name + ", nameWithNamespace=" + nameWithNamespace + ", namespace=" + namespace + ", path=" + path + ", webUrl=" + webUrl + "]";
+        return "ProjectContainingSingleIssueBoard [board=" + board + ", id=" + id + ", name=" + name + ", nameWithNamespace=" + nameWithNamespace + ", namespace=" + namespace + ", path=" + path + ", webUrl=" + webUrl + "]";
     }
 
 }

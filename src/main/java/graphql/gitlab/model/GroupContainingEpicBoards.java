@@ -4,13 +4,13 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
-@Name("GroupContainingIssueBoard")
-public class GroupContainingIssueBoard {
+@Name("GroupContainingEpicBoards")
+public class GroupContainingEpicBoards {
 
     /**
-     * Boards of the group.
+     * Find epic boards. Deprecated in GitLab 17.5: Replaced by WorkItem type.
      */
-    private BoardConnection boards;
+    private EpicBoardConnection epicBoards;
 
     /**
      * Full name of the namespace.
@@ -37,12 +37,12 @@ public class GroupContainingIssueBoard {
      */
     private String webUrl;
 
-    public BoardConnection getBoards() {
-        return boards;
+    public EpicBoardConnection getEpicBoards() {
+        return epicBoards;
     }
 
-    public GroupContainingIssueBoard setBoards(BoardConnection boards) {
-        this.boards = boards;
+    public GroupContainingEpicBoards setEpicBoards(EpicBoardConnection epicBoards) {
+        this.epicBoards = epicBoards;
         return this;
     }
 
@@ -50,7 +50,7 @@ public class GroupContainingIssueBoard {
         return fullName;
     }
 
-    public GroupContainingIssueBoard setFullName(String fullName) {
+    public GroupContainingEpicBoards setFullName(String fullName) {
         this.fullName = fullName;
         return this;
     }
@@ -59,7 +59,7 @@ public class GroupContainingIssueBoard {
         return fullPath;
     }
 
-    public GroupContainingIssueBoard setFullPath(String fullPath) {
+    public GroupContainingEpicBoards setFullPath(String fullPath) {
         this.fullPath = fullPath;
         return this;
     }
@@ -68,7 +68,7 @@ public class GroupContainingIssueBoard {
         return id;
     }
 
-    public GroupContainingIssueBoard setId(String id) {
+    public GroupContainingEpicBoards setId(String id) {
         this.id = id;
         return this;
     }
@@ -77,7 +77,7 @@ public class GroupContainingIssueBoard {
         return name;
     }
 
-    public GroupContainingIssueBoard setName(String name) {
+    public GroupContainingEpicBoards setName(String name) {
         this.name = name;
         return this;
     }
@@ -86,14 +86,14 @@ public class GroupContainingIssueBoard {
         return webUrl;
     }
 
-    public GroupContainingIssueBoard setWebUrl(String webUrl) {
+    public GroupContainingEpicBoards setWebUrl(String webUrl) {
         this.webUrl = webUrl;
         return this;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(boards, fullName, fullPath, id, name, webUrl);
+        return Objects.hash(epicBoards, fullName, fullPath, id, name, webUrl);
     }
 
     @Override
@@ -104,13 +104,13 @@ public class GroupContainingIssueBoard {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        GroupContainingIssueBoard other = (GroupContainingIssueBoard) obj;
-        return Objects.equals(boards, other.boards) && Objects.equals(fullName, other.fullName) && Objects.equals(fullPath, other.fullPath) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(webUrl, other.webUrl);
+        GroupContainingEpicBoards other = (GroupContainingEpicBoards) obj;
+        return Objects.equals(epicBoards, other.epicBoards) && Objects.equals(fullName, other.fullName) && Objects.equals(fullPath, other.fullPath) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(webUrl, other.webUrl);
     }
 
     @Override
     public String toString() {
-        return "GroupContainingIssueBoard [boards=" + boards + ", fullName=" + fullName + ", fullPath=" + fullPath + ", id=" + id + ", name=" + name + ", webUrl=" + webUrl + "]";
+        return "GroupContainingEpicBoards [epicBoards=" + epicBoards + ", fullName=" + fullName + ", fullPath=" + fullPath + ", id=" + id + ", name=" + name + ", webUrl=" + webUrl + "]";
     }
 
 }

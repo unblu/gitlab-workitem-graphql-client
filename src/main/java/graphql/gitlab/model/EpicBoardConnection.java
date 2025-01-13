@@ -14,13 +14,13 @@ public class EpicBoardConnection {
     /**
      * A list of nodes.
      */
-    private List<EpicBoard> nodes;
+    private List<EpicBoardRef> nodes;
 
-    public List<EpicBoard> getNodes() {
+    public List<EpicBoardRef> getNodes() {
         return nodes;
     }
 
-    public EpicBoardConnection setNodes(List<EpicBoard> nodes) {
+    public EpicBoardConnection setNodes(List<EpicBoardRef> nodes) {
         this.nodes = nodes;
         return this;
     }
