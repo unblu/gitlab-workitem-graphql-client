@@ -63,6 +63,8 @@ import graphql.gitlab.model.WorkItemAddLinkedItemsPayload;
 import graphql.gitlab.model.WorkItemConnection;
 import graphql.gitlab.model.WorkItemCreateInput;
 import graphql.gitlab.model.WorkItemCreatePayload;
+import graphql.gitlab.model.WorkItemDeleteInput;
+import graphql.gitlab.model.WorkItemDeletePayload;
 import graphql.gitlab.model.WorkItemID;
 import graphql.gitlab.model.WorkItemRemoveLinkedItemsInput;
 import graphql.gitlab.model.WorkItemRemoveLinkedItemsPayload;
@@ -205,6 +207,12 @@ public interface WorkitemClientApi {
      */
     @Mutation("workItemCreate")
     WorkItemCreatePayload workItemCreate(@Name("input") @NonNull @Source WorkItemCreateInput input);
+
+    /**
+     * Deletes a work item. Introduced in GitLab 15.1: **Status**: Experiment.
+     */
+    @Mutation("workItemDelete")
+    WorkItemDeletePayload workItemDelete(@Name("input") @NonNull @Source WorkItemDeleteInput input);
 
     /**
      * Remove items linked to the work item. Introduced in GitLab 16.3: **Status**: Experiment.

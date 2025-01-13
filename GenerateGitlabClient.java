@@ -451,6 +451,7 @@ class GenerateGitlabClient {
                                 // ---- MUTATION objects ----
                                 .addIncludeName("WorkItemCreatePayload") //
                                 .addIncludeName("WorkItemUpdatePayload") //
+                                .addIncludeName("WorkItemDeletePayload") //
                                 .addIncludeName("WorkItemAddLinkedItemsPayload") //
                                 .addIncludeName("WorkItemRemoveLinkedItemsPayload") //
                                 .addIncludeName("CreateNotePayload") //
@@ -1346,6 +1347,7 @@ class GenerateGitlabClient {
                                         .getName())
                                 .addIncludeName("workItemCreate") //
                                 .addIncludeName("workItemUpdate") //
+                                .addIncludeName("workItemDelete") //
                                 .addIncludeName("workItemAddLinkedItems") //
                                 .addIncludeName("workItemRemoveLinkedItems") //
                                 .addIncludeName("createNote") //
@@ -1378,6 +1380,13 @@ class GenerateGitlabClient {
                                 .setTypeName(schema.getMutationType()
                                         .getName())
                                 .setFieldName("workItemUpdate") //
+                                .addIncludeName("input") //
+                        ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getMutationType()
+                                        .getName())
+                                .setFieldName("workItemDelete") //
                                 .addIncludeName("input") //
                         ) //
                         .addFilter(new ArgsFilter()
@@ -1510,6 +1519,7 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .addIncludeName("WorkItemCreateInput") //
                                 .addIncludeName("WorkItemUpdateInput") //
+                                .addIncludeName("WorkItemDeleteInput") //
                                 .addIncludeName("WorkItemWidgetAssigneesInput") //
                                 .addIncludeName("WorkItemWidgetDescriptionInput") //
                                 .addIncludeName("WorkItemWidgetAssigneesInput") //
@@ -1565,11 +1575,22 @@ class GenerateGitlabClient {
                                 .addIncludeName("id") //
                                 .addIncludeName("stateEvent") //
                         ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("WorkItemDeleteInput")
+                                .addIncludeName("id") //
+                        ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemUpdatePayload")
                                 .addIncludeName("errors") //
                                 .addIncludeName("workItem") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("WorkItemDeletePayload")
+                                .addIncludeName("errors") //
+                                .addIncludeName("namespace") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
