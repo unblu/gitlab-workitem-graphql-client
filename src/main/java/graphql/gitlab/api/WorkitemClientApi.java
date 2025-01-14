@@ -89,7 +89,7 @@ public interface WorkitemClientApi {
      * Find a group.
      */
     @Query("group")
-    Group group(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeAncestorGroups") boolean labelsIncludeAncestorGroups, @NestedParameter("labels") @Name("after") String labelsAfter);
+    Group group(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("labels") @Name("includeDescendantGroups") boolean labelsIncludeDescendantGroups, @NestedParameter("labels") @Name("onlyGroupLabels") boolean labelsOnlyGroupLabels, @NestedParameter("labels") @Name("after") String labelsAfter);
 
     @Query("group")
     GroupContainingSingleIssueBoard getIssueBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") @NonNull BoardID boardId);
