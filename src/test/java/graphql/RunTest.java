@@ -28,7 +28,7 @@ class RunTest {
 
     @Test
     void readGroup() {
-        Group response = api.group("tech-marketing/demos/gitlab-agile-demo/initech", true, null);
+        Group response = api.group("tech-marketing/demos/gitlab-agile-demo/initech", true, false, true, null);
         assertThat(response).isNotNull();
     }
 
