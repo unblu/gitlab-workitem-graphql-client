@@ -185,6 +185,12 @@ class GenerateGitlabClient {
                                 .setFieldName("group")
                                 .addNestedParameter(new NestedParameter()
                                         .setGraphQlNestedParameterPath("labels")
+                                        .setGraphQlName("includeAncestorGroups")
+                                        .setParameterType("boolean") //
+                                        .setParameterName("labelsIncludeAncestorGroups") //
+                                )
+                                .addNestedParameter(new NestedParameter()
+                                        .setGraphQlNestedParameterPath("labels")
                                         .setGraphQlName("includeDescendantGroups")
                                         .setParameterType("boolean") //
                                         .setParameterName("labelsIncludeDescendantGroups") //
