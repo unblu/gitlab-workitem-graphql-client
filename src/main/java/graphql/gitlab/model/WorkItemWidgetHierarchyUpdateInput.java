@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import jakarta.json.bind.annotation.JsonbProperty;
+
 @Name("WorkItemWidgetHierarchyUpdateInput")
 public class WorkItemWidgetHierarchyUpdateInput {
 
@@ -21,6 +23,7 @@ public class WorkItemWidgetHierarchyUpdateInput {
     /**
      * Global ID of the parent work item. Use `null` to remove the association.
      */
+    @JsonbProperty(value = "parentId", nillable = true)
     private WorkItemID parentId;
 
     /**

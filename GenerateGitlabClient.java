@@ -178,6 +178,12 @@ class GenerateGitlabClient {
                                 .setInputValueName("dueDate")
                                 .setNullable() //
                         )
+                        .addHint(new InputValueHint()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("WorkItemWidgetHierarchyUpdateInput")
+                                .setInputValueName("parentId")
+                                .setNullable() //
+                        )
                         .addHint(new FieldHint()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName(SchemaUtil.getQueryType(schema)
