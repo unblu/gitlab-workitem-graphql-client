@@ -1548,6 +1548,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("WorkItemAddLinkedItemsInput") //
                                 .addIncludeName("WorkItemRemoveLinkedItemsInput") //
                                 .addIncludeName("WorkItemWidgetRolledupDatesInput") //
+                                .addIncludeName("WorkItemWidgetHierarchyCreateInput") //
+                                .addIncludeName("WorkItemWidgetLabelsCreateInput") //
                                 .addIncludeName("CreateNoteInput") //
                                 .addIncludeName("UpdateNoteInput") //
                                 .addIncludeName("DestroyNoteInput") //
@@ -1573,6 +1575,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("namespacePath") //
                                 .addIncludeName("title") //
                                 .addIncludeName("workItemTypeId") //
+                                .addIncludeName("labelsWidget") //
+                                .addIncludeName("hierarchyWidget") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1771,6 +1775,16 @@ class GenerateGitlabClient {
                                 .addIncludeName("startDateIsFixed") //
                                 .addIncludeName("dueDateFixed") //
                                 .addIncludeName("startDateFixed") //
+                        ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("WorkItemWidgetHierarchyCreateInput")
+                                .addIncludeName("parentId") //
+                        ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("WorkItemWidgetLabelsCreateInput")
+                                .addIncludeName("labelIds") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)

@@ -21,6 +21,16 @@ public class WorkItemCreateInput {
     private WorkItemWidgetDescriptionInput descriptionWidget;
 
     /**
+     * Input for hierarchy widget.
+     */
+    private WorkItemWidgetHierarchyCreateInput hierarchyWidget;
+
+    /**
+     * Input for labels widget.
+     */
+    private WorkItemWidgetLabelsCreateInput labelsWidget;
+
+    /**
      * Full path of the namespace(project or group) the work item is created in.
      */
     private String namespacePath;
@@ -53,6 +63,24 @@ public class WorkItemCreateInput {
         return this;
     }
 
+    public WorkItemWidgetHierarchyCreateInput getHierarchyWidget() {
+        return hierarchyWidget;
+    }
+
+    public WorkItemCreateInput setHierarchyWidget(WorkItemWidgetHierarchyCreateInput hierarchyWidget) {
+        this.hierarchyWidget = hierarchyWidget;
+        return this;
+    }
+
+    public WorkItemWidgetLabelsCreateInput getLabelsWidget() {
+        return labelsWidget;
+    }
+
+    public WorkItemCreateInput setLabelsWidget(WorkItemWidgetLabelsCreateInput labelsWidget) {
+        this.labelsWidget = labelsWidget;
+        return this;
+    }
+
     public String getNamespacePath() {
         return namespacePath;
     }
@@ -82,7 +110,7 @@ public class WorkItemCreateInput {
 
     @Override
     public int hashCode() {
-        return Objects.hash(assigneesWidget, descriptionWidget, namespacePath, title, workItemTypeId);
+        return Objects.hash(assigneesWidget, descriptionWidget, hierarchyWidget, labelsWidget, namespacePath, title, workItemTypeId);
     }
 
     @Override
@@ -94,12 +122,12 @@ public class WorkItemCreateInput {
         if (getClass() != obj.getClass())
             return false;
         WorkItemCreateInput other = (WorkItemCreateInput) obj;
-        return Objects.equals(assigneesWidget, other.assigneesWidget) && Objects.equals(descriptionWidget, other.descriptionWidget) && Objects.equals(namespacePath, other.namespacePath) && Objects.equals(title, other.title) && Objects.equals(workItemTypeId, other.workItemTypeId);
+        return Objects.equals(assigneesWidget, other.assigneesWidget) && Objects.equals(descriptionWidget, other.descriptionWidget) && Objects.equals(hierarchyWidget, other.hierarchyWidget) && Objects.equals(labelsWidget, other.labelsWidget) && Objects.equals(namespacePath, other.namespacePath) && Objects.equals(title, other.title) && Objects.equals(workItemTypeId, other.workItemTypeId);
     }
 
     @Override
     public String toString() {
-        return "WorkItemCreateInput [assigneesWidget=" + assigneesWidget + ", descriptionWidget=" + descriptionWidget + ", namespacePath=" + namespacePath + ", title=" + title + ", workItemTypeId=" + workItemTypeId + "]";
+        return "WorkItemCreateInput [assigneesWidget=" + assigneesWidget + ", descriptionWidget=" + descriptionWidget + ", hierarchyWidget=" + hierarchyWidget + ", labelsWidget=" + labelsWidget + ", namespacePath=" + namespacePath + ", title=" + title + ", workItemTypeId=" + workItemTypeId + "]";
     }
 
 }
