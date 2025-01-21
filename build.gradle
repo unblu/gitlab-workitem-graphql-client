@@ -34,7 +34,7 @@ java {
 
     compileJava.options.encoding = "UTF-8"
     toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
