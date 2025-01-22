@@ -5,7 +5,11 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
-import jakarta.json.bind.annotation.JsonbProperty;
+import graphql.NullableProperty;
+import graphql.NullablePropertyDeserializer;
+import graphql.NullablePropertySerializer;
+import jakarta.json.bind.annotation.JsonbTypeDeserializer;
+import jakarta.json.bind.annotation.JsonbTypeSerializer;
 
 @Name("WorkItemWidgetHierarchyUpdateInput")
 public class WorkItemWidgetHierarchyUpdateInput {
@@ -23,9 +27,9 @@ public class WorkItemWidgetHierarchyUpdateInput {
     /**
      * Global ID of the parent work item. Use `null` to remove the association.
      */
-    @JsonbProperty(value = "parentId", nillable = true)
-    private WorkItemID parentId;
-
+    @JsonbTypeSerializer(NullablePropertySerializer.class)
+    @JsonbTypeDeserializer(NullablePropertyDeserializer.class)
+    private NullableProperty<WorkItemID> parentId;
     /**
      * Type of switch. Valid values are `BEFORE` or `AFTER`.
      */
@@ -49,12 +53,12 @@ public class WorkItemWidgetHierarchyUpdateInput {
         return this;
     }
 
-    public WorkItemID getParentId() {
+    public NullableProperty<WorkItemID> getParentId() {
         return parentId;
     }
 
     public WorkItemWidgetHierarchyUpdateInput setParentId(WorkItemID parentId) {
-        this.parentId = parentId;
+        this.parentId = NullableProperty.ofNullable(parentId);
         return this;
     }
 
