@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -27,12 +28,14 @@ import fr.jmini.gql.codegen.config.Config;
 import fr.jmini.gql.codegen.config.CustomScalarMappingStrategy;
 import fr.jmini.gql.codegen.config.FieldHint;
 import fr.jmini.gql.codegen.config.FieldsFilter;
+import fr.jmini.gql.codegen.config.Filter;
 import fr.jmini.gql.codegen.config.GraphQLClientApiAnnotation;
 import fr.jmini.gql.codegen.config.IncludeStrategy;
 import fr.jmini.gql.codegen.config.InputFieldsFilter;
 import fr.jmini.gql.codegen.config.InputValueHint;
 import fr.jmini.gql.codegen.config.NestedParameter;
 import fr.jmini.gql.codegen.config.Scope;
+import fr.jmini.gql.codegen.config.TypeHint;
 import fr.jmini.gql.codegen.config.TypesFilter;
 import fr.jmini.gql.schema.SchemaUtil;
 import fr.jmini.gql.schema.model.Field;
@@ -1921,6 +1924,28 @@ class GenerateGitlabClient {
                         .setConfigKey("gitlab")//
                         .setEndpoint("https://gitlab.com/api/graphql") //
                 );
+        List<Filter> filters = config.getScope()
+                .getFilters();
+        for (Filter f : filters) {
+            if (f instanceof FieldsFilter) {
+                FieldsFilter filter = (FieldsFilter) f;
+                if (filter.getTypeKind() == Kind.OBJECT &&
+                        filter.getTypeName()
+                                .endsWith("Payload")) {
+                    if (filter.getIncludeNames()
+                            .contains("errors")) {
+                        config.getScope()
+                                .addHint(new TypeHint()
+                                        .setTypeKind(Kind.OBJECT)
+                                        .setTypeName(filter.getTypeName())
+                                        .addJavaInterface("graphql.gitlab.GitLabPayloadResponse") //
+                                );
+                    } else {
+                        throw new IllegalStateException("Was expecting a 'errors' field in the object " + filter.getTypeName());
+                    }
+                }
+            }
+        }
         return config;
     }
 
