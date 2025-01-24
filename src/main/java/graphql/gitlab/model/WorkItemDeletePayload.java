@@ -14,6 +14,11 @@ import graphql.gitlab.GitLabPayloadResponse;
 public class WorkItemDeletePayload implements GitLabPayloadResponse {
 
     /**
+     * A unique identifier for the client performing the mutation.
+     */
+    private String clientMutationId;
+
+    /**
      * Errors encountered during execution of the mutation.
      */
     private List<String> errors;
@@ -22,6 +27,15 @@ public class WorkItemDeletePayload implements GitLabPayloadResponse {
      * Namespace the deleted work item belonged to.
      */
     private Namespace namespace;
+
+    public String getClientMutationId() {
+        return clientMutationId;
+    }
+
+    public WorkItemDeletePayload setClientMutationId(String clientMutationId) {
+        this.clientMutationId = clientMutationId;
+        return this;
+    }
 
     public List<String> getErrors() {
         return errors;
@@ -43,7 +57,7 @@ public class WorkItemDeletePayload implements GitLabPayloadResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(errors, namespace);
+        return Objects.hash(clientMutationId, errors, namespace);
     }
 
     @Override
@@ -55,12 +69,12 @@ public class WorkItemDeletePayload implements GitLabPayloadResponse {
         if (getClass() != obj.getClass())
             return false;
         WorkItemDeletePayload other = (WorkItemDeletePayload) obj;
-        return Objects.equals(errors, other.errors) && Objects.equals(namespace, other.namespace);
+        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(errors, other.errors) && Objects.equals(namespace, other.namespace);
     }
 
     @Override
     public String toString() {
-        return "WorkItemDeletePayload [errors=" + errors + ", namespace=" + namespace + "]";
+        return "WorkItemDeletePayload [clientMutationId=" + clientMutationId + ", errors=" + errors + ", namespace=" + namespace + "]";
     }
 
 }

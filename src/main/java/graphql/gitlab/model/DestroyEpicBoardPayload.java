@@ -14,6 +14,11 @@ import graphql.gitlab.GitLabPayloadResponse;
 public class DestroyEpicBoardPayload implements GitLabPayloadResponse {
 
     /**
+     * A unique identifier for the client performing the mutation.
+     */
+    private String clientMutationId;
+
+    /**
      * Epic board after mutation.
      */
     private EpicBoard epicBoard;
@@ -22,6 +27,15 @@ public class DestroyEpicBoardPayload implements GitLabPayloadResponse {
      * Errors encountered during execution of the mutation.
      */
     private List<String> errors;
+
+    public String getClientMutationId() {
+        return clientMutationId;
+    }
+
+    public DestroyEpicBoardPayload setClientMutationId(String clientMutationId) {
+        this.clientMutationId = clientMutationId;
+        return this;
+    }
 
     public EpicBoard getEpicBoard() {
         return epicBoard;
@@ -43,7 +57,7 @@ public class DestroyEpicBoardPayload implements GitLabPayloadResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(epicBoard, errors);
+        return Objects.hash(clientMutationId, epicBoard, errors);
     }
 
     @Override
@@ -55,12 +69,12 @@ public class DestroyEpicBoardPayload implements GitLabPayloadResponse {
         if (getClass() != obj.getClass())
             return false;
         DestroyEpicBoardPayload other = (DestroyEpicBoardPayload) obj;
-        return Objects.equals(epicBoard, other.epicBoard) && Objects.equals(errors, other.errors);
+        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(epicBoard, other.epicBoard) && Objects.equals(errors, other.errors);
     }
 
     @Override
     public String toString() {
-        return "DestroyEpicBoardPayload [epicBoard=" + epicBoard + ", errors=" + errors + "]";
+        return "DestroyEpicBoardPayload [clientMutationId=" + clientMutationId + ", epicBoard=" + epicBoard + ", errors=" + errors + "]";
     }
 
 }

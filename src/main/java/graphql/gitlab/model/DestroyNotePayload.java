@@ -14,6 +14,11 @@ import graphql.gitlab.GitLabPayloadResponse;
 public class DestroyNotePayload implements GitLabPayloadResponse {
 
     /**
+     * A unique identifier for the client performing the mutation.
+     */
+    private String clientMutationId;
+
+    /**
      * Errors encountered during execution of the mutation.
      */
     private List<String> errors;
@@ -22,6 +27,15 @@ public class DestroyNotePayload implements GitLabPayloadResponse {
      * Note after mutation.
      */
     private Note note;
+
+    public String getClientMutationId() {
+        return clientMutationId;
+    }
+
+    public DestroyNotePayload setClientMutationId(String clientMutationId) {
+        this.clientMutationId = clientMutationId;
+        return this;
+    }
 
     public List<String> getErrors() {
         return errors;
@@ -43,7 +57,7 @@ public class DestroyNotePayload implements GitLabPayloadResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(errors, note);
+        return Objects.hash(clientMutationId, errors, note);
     }
 
     @Override
@@ -55,12 +69,12 @@ public class DestroyNotePayload implements GitLabPayloadResponse {
         if (getClass() != obj.getClass())
             return false;
         DestroyNotePayload other = (DestroyNotePayload) obj;
-        return Objects.equals(errors, other.errors) && Objects.equals(note, other.note);
+        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(errors, other.errors) && Objects.equals(note, other.note);
     }
 
     @Override
     public String toString() {
-        return "DestroyNotePayload [errors=" + errors + ", note=" + note + "]";
+        return "DestroyNotePayload [clientMutationId=" + clientMutationId + ", errors=" + errors + ", note=" + note + "]";
     }
 
 }

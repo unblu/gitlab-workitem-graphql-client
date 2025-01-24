@@ -19,6 +19,11 @@ public class AwardEmojiAddPayload implements GitLabPayloadResponse {
     private AwardEmoji awardEmoji;
 
     /**
+     * A unique identifier for the client performing the mutation.
+     */
+    private String clientMutationId;
+
+    /**
      * Errors encountered during execution of the mutation.
      */
     private List<String> errors;
@@ -29,6 +34,15 @@ public class AwardEmojiAddPayload implements GitLabPayloadResponse {
 
     public AwardEmojiAddPayload setAwardEmoji(AwardEmoji awardEmoji) {
         this.awardEmoji = awardEmoji;
+        return this;
+    }
+
+    public String getClientMutationId() {
+        return clientMutationId;
+    }
+
+    public AwardEmojiAddPayload setClientMutationId(String clientMutationId) {
+        this.clientMutationId = clientMutationId;
         return this;
     }
 
@@ -43,7 +57,7 @@ public class AwardEmojiAddPayload implements GitLabPayloadResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(awardEmoji, errors);
+        return Objects.hash(awardEmoji, clientMutationId, errors);
     }
 
     @Override
@@ -55,12 +69,12 @@ public class AwardEmojiAddPayload implements GitLabPayloadResponse {
         if (getClass() != obj.getClass())
             return false;
         AwardEmojiAddPayload other = (AwardEmojiAddPayload) obj;
-        return Objects.equals(awardEmoji, other.awardEmoji) && Objects.equals(errors, other.errors);
+        return Objects.equals(awardEmoji, other.awardEmoji) && Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(errors, other.errors);
     }
 
     @Override
     public String toString() {
-        return "AwardEmojiAddPayload [awardEmoji=" + awardEmoji + ", errors=" + errors + "]";
+        return "AwardEmojiAddPayload [awardEmoji=" + awardEmoji + ", clientMutationId=" + clientMutationId + ", errors=" + errors + "]";
     }
 
 }

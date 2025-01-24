@@ -14,6 +14,11 @@ import graphql.gitlab.GitLabPayloadResponse;
 public class DestroyBoardListPayload implements GitLabPayloadResponse {
 
     /**
+     * A unique identifier for the client performing the mutation.
+     */
+    private String clientMutationId;
+
+    /**
      * Errors encountered during execution of the mutation.
      */
     private List<String> errors;
@@ -22,6 +27,15 @@ public class DestroyBoardListPayload implements GitLabPayloadResponse {
      * List after mutation.
      */
     private BoardList list;
+
+    public String getClientMutationId() {
+        return clientMutationId;
+    }
+
+    public DestroyBoardListPayload setClientMutationId(String clientMutationId) {
+        this.clientMutationId = clientMutationId;
+        return this;
+    }
 
     public List<String> getErrors() {
         return errors;
@@ -43,7 +57,7 @@ public class DestroyBoardListPayload implements GitLabPayloadResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(errors, list);
+        return Objects.hash(clientMutationId, errors, list);
     }
 
     @Override
@@ -55,12 +69,12 @@ public class DestroyBoardListPayload implements GitLabPayloadResponse {
         if (getClass() != obj.getClass())
             return false;
         DestroyBoardListPayload other = (DestroyBoardListPayload) obj;
-        return Objects.equals(errors, other.errors) && Objects.equals(list, other.list);
+        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(errors, other.errors) && Objects.equals(list, other.list);
     }
 
     @Override
     public String toString() {
-        return "DestroyBoardListPayload [errors=" + errors + ", list=" + list + "]";
+        return "DestroyBoardListPayload [clientMutationId=" + clientMutationId + ", errors=" + errors + ", list=" + list + "]";
     }
 
 }

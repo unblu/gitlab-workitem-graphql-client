@@ -14,6 +14,11 @@ import graphql.gitlab.GitLabPayloadResponse;
 public class WorkItemAddLinkedItemsPayload implements GitLabPayloadResponse {
 
     /**
+     * A unique identifier for the client performing the mutation.
+     */
+    private String clientMutationId;
+
+    /**
      * Errors encountered during execution of the mutation.
      */
     private List<String> errors;
@@ -27,6 +32,15 @@ public class WorkItemAddLinkedItemsPayload implements GitLabPayloadResponse {
      * Updated work item.
      */
     private WorkItem workItem;
+
+    public String getClientMutationId() {
+        return clientMutationId;
+    }
+
+    public WorkItemAddLinkedItemsPayload setClientMutationId(String clientMutationId) {
+        this.clientMutationId = clientMutationId;
+        return this;
+    }
 
     public List<String> getErrors() {
         return errors;
@@ -57,7 +71,7 @@ public class WorkItemAddLinkedItemsPayload implements GitLabPayloadResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(errors, message, workItem);
+        return Objects.hash(clientMutationId, errors, message, workItem);
     }
 
     @Override
@@ -69,12 +83,12 @@ public class WorkItemAddLinkedItemsPayload implements GitLabPayloadResponse {
         if (getClass() != obj.getClass())
             return false;
         WorkItemAddLinkedItemsPayload other = (WorkItemAddLinkedItemsPayload) obj;
-        return Objects.equals(errors, other.errors) && Objects.equals(message, other.message) && Objects.equals(workItem, other.workItem);
+        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(errors, other.errors) && Objects.equals(message, other.message) && Objects.equals(workItem, other.workItem);
     }
 
     @Override
     public String toString() {
-        return "WorkItemAddLinkedItemsPayload [errors=" + errors + ", message=" + message + ", workItem=" + workItem + "]";
+        return "WorkItemAddLinkedItemsPayload [clientMutationId=" + clientMutationId + ", errors=" + errors + ", message=" + message + ", workItem=" + workItem + "]";
     }
 
 }

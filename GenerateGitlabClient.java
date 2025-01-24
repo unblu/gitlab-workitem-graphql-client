@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -1573,6 +1574,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("WorkItemCreateInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("assigneesWidget") //
                                 .addIncludeName("descriptionWidget") //
                                 .addIncludeName("namespacePath") //
@@ -1585,11 +1587,13 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemCreatePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("workItem") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("WorkItemUpdateInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("assigneesWidget") //
                                 .addIncludeName("descriptionWidget") //
                                 .addIncludeName("labelsWidget") //
@@ -1603,24 +1607,28 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("WorkItemDeleteInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemUpdatePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("workItem") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemDeletePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("namespace") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemAddLinkedItemsPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("message") //
                                 .addIncludeName("workItem") //
                         ) //
@@ -1628,6 +1636,7 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemRemoveLinkedItemsPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("message") //
                                 .addIncludeName("workItem") //
                         ) //
@@ -1635,96 +1644,112 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("CreateNotePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("note") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("UpdateNotePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("note") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("DestroyNotePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("note") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("AwardEmojiAddPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("awardEmoji") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("CreateBoardPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("board") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("EpicBoardCreatePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("epicBoard") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("UpdateBoardPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("board") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("EpicBoardUpdatePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("epicBoard") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("DestroyBoardPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("board") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("DestroyEpicBoardPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("epicBoard") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("BoardListCreatePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("list") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("EpicBoardListCreatePayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("list") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("UpdateBoardListPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("list") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("UpdateEpicBoardListPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("list") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("DestroyBoardListPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("list") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("EpicBoardListDestroyPayload")
                                 .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("list") //
                         ) //
                         .addFilter(new InputFieldsFilter()
@@ -1761,6 +1786,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("WorkItemAddLinkedItemsInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                                 .addIncludeName("linkType") //
                                 .addIncludeName("workItemsIds") //
@@ -1768,6 +1794,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("WorkItemRemoveLinkedItemsInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                                 .addIncludeName("workItemsIds") //
                         ) //
@@ -1792,6 +1819,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("CreateNoteInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("noteableId") //
                                 .addIncludeName("body") //
                                 .addIncludeName("internal") //
@@ -1801,23 +1829,27 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("UpdateNoteInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                                 .addIncludeName("body") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("DestroyNoteInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("AwardEmojiAddInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("awardableId") //
                                 .addIncludeName("name") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("CreateBoardInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("projectPath") //
                                 .addIncludeName("groupPath") //
                                 .addIncludeName("name") //
@@ -1833,6 +1865,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("EpicBoardCreateInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("displayColors") //
                                 .addIncludeName("name") //
                                 .addIncludeName("hideBacklogList") //
@@ -1843,6 +1876,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("UpdateBoardInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                                 .addIncludeName("name") //
                                 .addIncludeName("hideBacklogList") //
@@ -1857,6 +1891,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("EpicBoardUpdateInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                                 .addIncludeName("displayColors") //
                                 .addIncludeName("name") //
@@ -1867,16 +1902,19 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("DestroyBoardInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("DestroyEpicBoardInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("BoardListCreateInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("backlog") //
                                 .addIncludeName("labelId") //
                                 .addIncludeName("boardId") //
@@ -1888,6 +1926,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("EpicBoardListCreateInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("backlog") //
                                 .addIncludeName("labelId") //
                                 .addIncludeName("boardId") //
@@ -1895,6 +1934,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("UpdateBoardListInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("position") //
                                 .addIncludeName("collapsed") //
                                 .addIncludeName("listId") //
@@ -1902,6 +1942,7 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("UpdateEpicBoardListInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("position") //
                                 .addIncludeName("collapsed") //
                                 .addIncludeName("listId") //
@@ -1909,11 +1950,13 @@ class GenerateGitlabClient {
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("DestroyBoardListInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("listId") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("EpicBoardListDestroyInput")
+                                .addIncludeName("clientMutationId") //
                                 .addIncludeName("listId") //
                         ) //
                 )
@@ -1932,17 +1975,41 @@ class GenerateGitlabClient {
                 if (filter.getTypeKind() == Kind.OBJECT &&
                         filter.getTypeName()
                                 .endsWith("Payload")) {
-                    if (filter.getIncludeNames()
+                    if (!filter.getIncludeNames()
                             .contains("errors")) {
-                        config.getScope()
-                                .addHint(new TypeHint()
-                                        .setTypeKind(Kind.OBJECT)
-                                        .setTypeName(filter.getTypeName())
-                                        .addJavaInterface("graphql.gitlab.GitLabPayloadResponse") //
-                                );
-                    } else {
                         throw new IllegalStateException("Was expecting a 'errors' field in the object " + filter.getTypeName());
                     }
+                    if (!filter.getIncludeNames()
+                            .contains("clientMutationId")) {
+                        throw new IllegalStateException("Was expecting a 'clientMutationId' field in the object " + filter.getTypeName());
+                    }
+                    config.getScope()
+                            .addHint(new TypeHint()
+                                    .setTypeKind(Kind.OBJECT)
+                                    .setTypeName(filter.getTypeName())
+                                    .addJavaInterface("graphql.gitlab.GitLabPayloadResponse") //
+                            );
+                    String name = filter.getTypeName()
+                            .replace("Payload", "Input");
+                    InputFieldsFilter h = (InputFieldsFilter) filters.stream()
+                            .filter(e -> e instanceof InputFieldsFilter)
+                            .filter(e -> {
+                                InputFieldsFilter g = (InputFieldsFilter) e;
+                                return g.getTypeKind() == Kind.INPUT_OBJECT &&
+                                        Objects.equals(g.getTypeName(), name);
+                            })
+                            .findAny()
+                            .orElseThrow(() -> new IllegalStateException("Could not find input " + name));
+                    if (!h.getIncludeNames()
+                            .contains("clientMutationId")) {
+                        throw new IllegalStateException("Was expecting a 'clientMutationId' field in the input object " + h.getTypeName());
+                    }
+                    config.getScope()
+                            .addHint(new TypeHint()
+                                    .setTypeKind(Kind.INPUT_OBJECT)
+                                    .setTypeName(h.getTypeName())
+                                    .addJavaInterface("graphql.gitlab.GitLabInputRequest") //
+                            );
                 }
             }
         }

@@ -19,6 +19,11 @@ public class CreateBoardPayload implements GitLabPayloadResponse {
     private Board board;
 
     /**
+     * A unique identifier for the client performing the mutation.
+     */
+    private String clientMutationId;
+
+    /**
      * Errors encountered during execution of the mutation.
      */
     private List<String> errors;
@@ -29,6 +34,15 @@ public class CreateBoardPayload implements GitLabPayloadResponse {
 
     public CreateBoardPayload setBoard(Board board) {
         this.board = board;
+        return this;
+    }
+
+    public String getClientMutationId() {
+        return clientMutationId;
+    }
+
+    public CreateBoardPayload setClientMutationId(String clientMutationId) {
+        this.clientMutationId = clientMutationId;
         return this;
     }
 
@@ -43,7 +57,7 @@ public class CreateBoardPayload implements GitLabPayloadResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(board, errors);
+        return Objects.hash(board, clientMutationId, errors);
     }
 
     @Override
@@ -55,12 +69,12 @@ public class CreateBoardPayload implements GitLabPayloadResponse {
         if (getClass() != obj.getClass())
             return false;
         CreateBoardPayload other = (CreateBoardPayload) obj;
-        return Objects.equals(board, other.board) && Objects.equals(errors, other.errors);
+        return Objects.equals(board, other.board) && Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(errors, other.errors);
     }
 
     @Override
     public String toString() {
-        return "CreateBoardPayload [board=" + board + ", errors=" + errors + "]";
+        return "CreateBoardPayload [board=" + board + ", clientMutationId=" + clientMutationId + ", errors=" + errors + "]";
     }
 
 }

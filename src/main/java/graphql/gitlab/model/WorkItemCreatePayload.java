@@ -14,6 +14,11 @@ import graphql.gitlab.GitLabPayloadResponse;
 public class WorkItemCreatePayload implements GitLabPayloadResponse {
 
     /**
+     * A unique identifier for the client performing the mutation.
+     */
+    private String clientMutationId;
+
+    /**
      * Errors encountered during execution of the mutation.
      */
     private List<String> errors;
@@ -22,6 +27,15 @@ public class WorkItemCreatePayload implements GitLabPayloadResponse {
      * Created work item.
      */
     private WorkItem workItem;
+
+    public String getClientMutationId() {
+        return clientMutationId;
+    }
+
+    public WorkItemCreatePayload setClientMutationId(String clientMutationId) {
+        this.clientMutationId = clientMutationId;
+        return this;
+    }
 
     public List<String> getErrors() {
         return errors;
@@ -43,7 +57,7 @@ public class WorkItemCreatePayload implements GitLabPayloadResponse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(errors, workItem);
+        return Objects.hash(clientMutationId, errors, workItem);
     }
 
     @Override
@@ -55,12 +69,12 @@ public class WorkItemCreatePayload implements GitLabPayloadResponse {
         if (getClass() != obj.getClass())
             return false;
         WorkItemCreatePayload other = (WorkItemCreatePayload) obj;
-        return Objects.equals(errors, other.errors) && Objects.equals(workItem, other.workItem);
+        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(errors, other.errors) && Objects.equals(workItem, other.workItem);
     }
 
     @Override
     public String toString() {
-        return "WorkItemCreatePayload [errors=" + errors + ", workItem=" + workItem + "]";
+        return "WorkItemCreatePayload [clientMutationId=" + clientMutationId + ", errors=" + errors + ", workItem=" + workItem + "]";
     }
 
 }
