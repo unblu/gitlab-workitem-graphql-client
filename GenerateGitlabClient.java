@@ -231,7 +231,7 @@ class GenerateGitlabClient {
                                 .addAdditionalMethod(new AdditionalMethod()
                                         .setJavaMethodName("getEpicBoardInGroup")
                                         .addNestedParameter(new NestedParameter()
-                                                .setGraphQlNestedParameterPath("board")
+                                                .setGraphQlNestedParameterPath("epicBoard")
                                                 .setGraphQlName("id")
                                                 .setNonNull()
                                                 .setParameterType("{ModelPackageName}.BoardsEpicBoardID") //

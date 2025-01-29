@@ -95,7 +95,7 @@ public interface WorkitemClientApi {
     GroupContainingSingleIssueBoard getIssueBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") @NonNull BoardID boardId);
 
     @Query("group")
-    GroupContainingSingleEpicBoard getEpicBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("board") @Name("id") @NonNull BoardsEpicBoardID boardId);
+    GroupContainingSingleEpicBoard getEpicBoardInGroup(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("epicBoard") @Name("id") @NonNull BoardsEpicBoardID boardId);
 
     @Query("group")
     GroupContainingIssueBoards getIssueBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
