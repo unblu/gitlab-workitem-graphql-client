@@ -26,7 +26,7 @@ public class WorkItemCreatePayload implements GitLabPayloadResponse {
     /**
      * Created work item.
      */
-    private WorkItem workItem;
+    private WorkItemRef workItem;
 
     public String getClientMutationId() {
         return clientMutationId;
@@ -46,11 +46,11 @@ public class WorkItemCreatePayload implements GitLabPayloadResponse {
         return this;
     }
 
-    public WorkItem getWorkItem() {
+    public WorkItemRef getWorkItem() {
         return workItem;
     }
 
-    public WorkItemCreatePayload setWorkItem(WorkItem workItem) {
+    public WorkItemCreatePayload setWorkItem(WorkItemRef workItem) {
         this.workItem = workItem;
         return this;
     }

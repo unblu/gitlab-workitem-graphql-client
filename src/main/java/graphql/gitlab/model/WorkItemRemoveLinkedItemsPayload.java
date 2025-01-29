@@ -31,7 +31,7 @@ public class WorkItemRemoveLinkedItemsPayload implements GitLabPayloadResponse {
     /**
      * Updated work item.
      */
-    private WorkItem workItem;
+    private WorkItemRef workItem;
 
     public String getClientMutationId() {
         return clientMutationId;
@@ -60,11 +60,11 @@ public class WorkItemRemoveLinkedItemsPayload implements GitLabPayloadResponse {
         return this;
     }
 
-    public WorkItem getWorkItem() {
+    public WorkItemRef getWorkItem() {
         return workItem;
     }
 
-    public WorkItemRemoveLinkedItemsPayload setWorkItem(WorkItem workItem) {
+    public WorkItemRemoveLinkedItemsPayload setWorkItem(WorkItemRef workItem) {
         this.workItem = workItem;
         return this;
     }
