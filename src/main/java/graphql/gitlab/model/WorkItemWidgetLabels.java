@@ -15,11 +15,6 @@ public class WorkItemWidgetLabels implements WorkItemWidget {
      */
     private LabelConnection labels;
 
-    /**
-     * Widget type.
-     */
-    private WorkItemWidgetType type;
-
     public LabelConnection getLabels() {
         return labels;
     }
@@ -29,18 +24,9 @@ public class WorkItemWidgetLabels implements WorkItemWidget {
         return this;
     }
 
-    public WorkItemWidgetType getType() {
-        return type;
-    }
-
-    public WorkItemWidgetLabels setType(WorkItemWidgetType type) {
-        this.type = type;
-        return this;
-    }
-
     @Override
     public int hashCode() {
-        return Objects.hash(labels, type);
+        return Objects.hash(labels);
     }
 
     @Override
@@ -52,12 +38,12 @@ public class WorkItemWidgetLabels implements WorkItemWidget {
         if (getClass() != obj.getClass())
             return false;
         WorkItemWidgetLabels other = (WorkItemWidgetLabels) obj;
-        return Objects.equals(labels, other.labels) && Objects.equals(type, other.type);
+        return Objects.equals(labels, other.labels);
     }
 
     @Override
     public String toString() {
-        return "WorkItemWidgetLabels [labels=" + labels + ", type=" + type + "]";
+        return "WorkItemWidgetLabels [labels=" + labels + "]";
     }
 
 }

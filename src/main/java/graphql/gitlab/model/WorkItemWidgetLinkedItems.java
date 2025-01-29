@@ -15,11 +15,6 @@ public class WorkItemWidgetLinkedItems implements WorkItemWidget {
      */
     private LinkedWorkItemTypeConnection linkedItems;
 
-    /**
-     * Widget type.
-     */
-    private WorkItemWidgetType type;
-
     public LinkedWorkItemTypeConnection getLinkedItems() {
         return linkedItems;
     }
@@ -29,18 +24,9 @@ public class WorkItemWidgetLinkedItems implements WorkItemWidget {
         return this;
     }
 
-    public WorkItemWidgetType getType() {
-        return type;
-    }
-
-    public WorkItemWidgetLinkedItems setType(WorkItemWidgetType type) {
-        this.type = type;
-        return this;
-    }
-
     @Override
     public int hashCode() {
-        return Objects.hash(linkedItems, type);
+        return Objects.hash(linkedItems);
     }
 
     @Override
@@ -52,12 +38,12 @@ public class WorkItemWidgetLinkedItems implements WorkItemWidget {
         if (getClass() != obj.getClass())
             return false;
         WorkItemWidgetLinkedItems other = (WorkItemWidgetLinkedItems) obj;
-        return Objects.equals(linkedItems, other.linkedItems) && Objects.equals(type, other.type);
+        return Objects.equals(linkedItems, other.linkedItems);
     }
 
     @Override
     public String toString() {
-        return "WorkItemWidgetLinkedItems [linkedItems=" + linkedItems + ", type=" + type + "]";
+        return "WorkItemWidgetLinkedItems [linkedItems=" + linkedItems + "]";
     }
 
 }

@@ -20,11 +20,6 @@ public class WorkItemWidgetStartAndDueDate implements WorkItemWidget {
      */
     private Date startDate;
 
-    /**
-     * Widget type.
-     */
-    private WorkItemWidgetType type;
-
     public Date getDueDate() {
         return dueDate;
     }
@@ -43,18 +38,9 @@ public class WorkItemWidgetStartAndDueDate implements WorkItemWidget {
         return this;
     }
 
-    public WorkItemWidgetType getType() {
-        return type;
-    }
-
-    public WorkItemWidgetStartAndDueDate setType(WorkItemWidgetType type) {
-        this.type = type;
-        return this;
-    }
-
     @Override
     public int hashCode() {
-        return Objects.hash(dueDate, startDate, type);
+        return Objects.hash(dueDate, startDate);
     }
 
     @Override
@@ -66,12 +52,12 @@ public class WorkItemWidgetStartAndDueDate implements WorkItemWidget {
         if (getClass() != obj.getClass())
             return false;
         WorkItemWidgetStartAndDueDate other = (WorkItemWidgetStartAndDueDate) obj;
-        return Objects.equals(dueDate, other.dueDate) && Objects.equals(startDate, other.startDate) && Objects.equals(type, other.type);
+        return Objects.equals(dueDate, other.dueDate) && Objects.equals(startDate, other.startDate);
     }
 
     @Override
     public String toString() {
-        return "WorkItemWidgetStartAndDueDate [dueDate=" + dueDate + ", startDate=" + startDate + ", type=" + type + "]";
+        return "WorkItemWidgetStartAndDueDate [dueDate=" + dueDate + ", startDate=" + startDate + "]";
     }
 
 }

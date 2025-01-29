@@ -15,11 +15,6 @@ public class WorkItemWidgetAssignees implements WorkItemWidget {
      */
     private UserCoreConnection assignees;
 
-    /**
-     * Widget type.
-     */
-    private WorkItemWidgetType type;
-
     public UserCoreConnection getAssignees() {
         return assignees;
     }
@@ -29,18 +24,9 @@ public class WorkItemWidgetAssignees implements WorkItemWidget {
         return this;
     }
 
-    public WorkItemWidgetType getType() {
-        return type;
-    }
-
-    public WorkItemWidgetAssignees setType(WorkItemWidgetType type) {
-        this.type = type;
-        return this;
-    }
-
     @Override
     public int hashCode() {
-        return Objects.hash(assignees, type);
+        return Objects.hash(assignees);
     }
 
     @Override
@@ -52,12 +38,12 @@ public class WorkItemWidgetAssignees implements WorkItemWidget {
         if (getClass() != obj.getClass())
             return false;
         WorkItemWidgetAssignees other = (WorkItemWidgetAssignees) obj;
-        return Objects.equals(assignees, other.assignees) && Objects.equals(type, other.type);
+        return Objects.equals(assignees, other.assignees);
     }
 
     @Override
     public String toString() {
-        return "WorkItemWidgetAssignees [assignees=" + assignees + ", type=" + type + "]";
+        return "WorkItemWidgetAssignees [assignees=" + assignees + "]";
     }
 
 }
