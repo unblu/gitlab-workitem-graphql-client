@@ -668,38 +668,38 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetAssignees")
                                 .addIncludeName("assignees") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetAwardEmoji")
-                                // .addIncludeName("awardEmoji") //
-                                // .addIncludeName("downvotes") //
-                                // .addIncludeName("upvotes") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("awardEmoji") //
+                        // .addIncludeName("downvotes") //
+                        // .addIncludeName("upvotes") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetColor")
-                                // .addIncludeName("color") //
-                                // .addIncludeName("textColor") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("color") //
+                        // .addIncludeName("textColor") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetCrmContacts")
-                                .addIncludeName("type") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetCurrentUserTodos")
-                                // .addIncludeName("currentUserTodos") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("currentUserTodos") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetDescription")
-                                // .addIncludeName("type") //
+                                // // .addIncludeName("type") //
                                 // .addIncludeName("edited") //
                                 // .addIncludeName("lastEditedAt") //
                                 // .addIncludeName("lastEditedBy") //
@@ -709,27 +709,27 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetDesigns")
-                                // .addIncludeName("designCollection") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("designCollection") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetDevelopment")
-                                // .addIncludeName("closingMergeRequests") //
-                                // .addIncludeName("featureFlags") //
-                                // .addIncludeName("willAutoCloseByMergeRequest") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("closingMergeRequests") //
+                        // .addIncludeName("featureFlags") //
+                        // .addIncludeName("willAutoCloseByMergeRequest") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetHealthStatus")
-                                //.addIncludeName("healthStatus") //
-                                .addIncludeName("type") //
+                        //.addIncludeName("healthStatus") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetHierarchy")
-                                // .addIncludeName("type") //
+                                // // .addIncludeName("type") //
                                 .addIncludeName("ancestors") //
                                 .addIncludeName("children") //
                                 // .addIncludeName("depthLimitReachedByType") //
@@ -741,7 +741,7 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetIteration")
-                                .addIncludeName("type") //
+                        // .addIncludeName("type") //
                         // .addIncludeName("iteration") //
                         ) //
                         .addFilter(new FieldsFilter()
@@ -749,7 +749,7 @@ class GenerateGitlabClient {
                                 .setTypeName("WorkItemWidgetLabels")
                                 // .addIncludeName("allowsScopedLabels") //
                                 .addIncludeName("labels") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -758,47 +758,47 @@ class GenerateGitlabClient {
                                 // .addIncludeName("blockedByCount") //
                                 // .addIncludeName("blockingCount") //
                                 .addIncludeName("linkedItems") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetMilestone")
-                                // .addIncludeName("milestone") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("milestone") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetNotes")
                                 // .addIncludeName("discussionLocked") //
                                 .addIncludeName("discussions") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetNotifications")
-                                // .addIncludeName("subscribed") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("subscribed") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetParticipants")
-                                .addIncludeName("type") //
+                        // .addIncludeName("type") //
                         // .addIncludeName("participants")
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetRolledupDates")
-                                // .addIncludeName("dueDate") //
-                                // .addIncludeName("dueDateFixed") //
-                                // .addIncludeName("dueDateIsFixed") //
-                                // .addIncludeName("dueDateSourcingMilestone") //
-                                // .addIncludeName("dueDateSourcingWorkItem") //
-                                // .addIncludeName("startDate") //
-                                // .addIncludeName("startDateFixed") //
-                                // .addIncludeName("startDateIsFixed") //
-                                // .addIncludeName("startDateSourcingMilestone") //
-                                // .addIncludeName("startDateSourcingWorkItem") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("dueDate") //
+                        // .addIncludeName("dueDateFixed") //
+                        // .addIncludeName("dueDateIsFixed") //
+                        // .addIncludeName("dueDateSourcingMilestone") //
+                        // .addIncludeName("dueDateSourcingWorkItem") //
+                        // .addIncludeName("startDate") //
+                        // .addIncludeName("startDateFixed") //
+                        // .addIncludeName("startDateIsFixed") //
+                        // .addIncludeName("startDateSourcingMilestone") //
+                        // .addIncludeName("startDateSourcingWorkItem") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -809,9 +809,9 @@ class GenerateGitlabClient {
                                 // .addIncludeName("isFixed") //not available in 17.3
                                 // .addIncludeName("rollUp") //not available in 17.3
                                 .addIncludeName("startDate") //
-                                // .addIncludeName("startDateSourcingMilestone") //
-                                // .addIncludeName("startDateSourcingWorkItem") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("startDateSourcingMilestone") //
+                        // .addIncludeName("startDateSourcingWorkItem") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -821,24 +821,24 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetTimeTracking")
-                                // .addIncludeName("timeEstimate") //
-                                // .addIncludeName("timelogs") //
-                                // .addIncludeName("totalTimeSpent") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("timeEstimate") //
+                        // .addIncludeName("timelogs") //
+                        // .addIncludeName("totalTimeSpent") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetWeight")
-                                // .addIncludeName("rolledUpCompletedWeight") //
-                                // .addIncludeName("rolledUpWeight") //
-                                // .addIncludeName("weight") //
-                                // .addIncludeName("widgetDefinition") //
-                                .addIncludeName("type") //
+                        // .addIncludeName("rolledUpCompletedWeight") //
+                        // .addIncludeName("rolledUpWeight") //
+                        // .addIncludeName("weight") //
+                        // .addIncludeName("widgetDefinition") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetEmailParticipants")
-                                .addIncludeName("type") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -964,7 +964,7 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetDefinitionWeight")
-                                .addIncludeName("type") //
+                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)

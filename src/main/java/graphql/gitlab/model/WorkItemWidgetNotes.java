@@ -15,11 +15,6 @@ public class WorkItemWidgetNotes implements WorkItemWidget {
      */
     private DiscussionConnection discussions;
 
-    /**
-     * Widget type.
-     */
-    private WorkItemWidgetType type;
-
     public DiscussionConnection getDiscussions() {
         return discussions;
     }
@@ -29,18 +24,9 @@ public class WorkItemWidgetNotes implements WorkItemWidget {
         return this;
     }
 
-    public WorkItemWidgetType getType() {
-        return type;
-    }
-
-    public WorkItemWidgetNotes setType(WorkItemWidgetType type) {
-        this.type = type;
-        return this;
-    }
-
     @Override
     public int hashCode() {
-        return Objects.hash(discussions, type);
+        return Objects.hash(discussions);
     }
 
     @Override
@@ -52,12 +38,12 @@ public class WorkItemWidgetNotes implements WorkItemWidget {
         if (getClass() != obj.getClass())
             return false;
         WorkItemWidgetNotes other = (WorkItemWidgetNotes) obj;
-        return Objects.equals(discussions, other.discussions) && Objects.equals(type, other.type);
+        return Objects.equals(discussions, other.discussions);
     }
 
     @Override
     public String toString() {
-        return "WorkItemWidgetNotes [discussions=" + discussions + ", type=" + type + "]";
+        return "WorkItemWidgetNotes [discussions=" + discussions + "]";
     }
 
 }
