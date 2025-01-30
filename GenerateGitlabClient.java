@@ -91,17 +91,6 @@ class GenerateGitlabClient {
                 .getOfType()
                 .setName("EpicBoardRef");
 
-        Type workItemUpdateInput = SchemaUtil.getTypeByKindAndName(schema, Kind.INPUT_OBJECT, "WorkItemUpdateInput");
-        Type workItemWidgetRolledupDatesInput = SchemaUtil.getTypeByKindAndName(schema, Kind.INPUT_OBJECT, "WorkItemWidgetRolledupDatesInput");
-        TypeRef workItemWidgetRolledupDatesInputTypeRef = new TypeRef();
-        workItemWidgetRolledupDatesInputTypeRef.setKind(workItemWidgetRolledupDatesInput.getKind());
-        workItemWidgetRolledupDatesInputTypeRef.setName(workItemWidgetRolledupDatesInput.getName());
-        InputValue rolledupDatesWidget = new InputValue();
-        rolledupDatesWidget.setName("rolledupDatesWidget");
-        rolledupDatesWidget.setType(workItemWidgetRolledupDatesInputTypeRef);
-        workItemUpdateInput.getInputFields()
-                .add(rolledupDatesWidget);
-
         Type boardList = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "BoardList");
         Type group = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Group");
         Type project = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Project");
@@ -158,18 +147,6 @@ class GenerateGitlabClient {
                 .setDefaultCustomScalarMapping(CustomScalarMappingStrategy.CREATE_CUSTOM_SCALAR_CLASS)
                 .setScope(new Scope()
                         .setDefaultStrategy(IncludeStrategy.INCLUDE_NONE)
-                        .addHint(new InputValueHint()
-                                .setTypeKind(Kind.INPUT_OBJECT)
-                                .setTypeName("WorkItemWidgetRolledupDatesInput")
-                                .setInputValueName("startDateFixed")
-                                .setNullable() //
-                        )
-                        .addHint(new InputValueHint()
-                                .setTypeKind(Kind.INPUT_OBJECT)
-                                .setTypeName("WorkItemWidgetRolledupDatesInput")
-                                .setInputValueName("dueDateFixed")
-                                .setNullable() //
-                        )
                         .addHint(new InputValueHint()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .setTypeName("WorkItemWidgetStartAndDueDateUpdateInput")
@@ -407,7 +384,6 @@ class GenerateGitlabClient {
                                 .addIncludeName("WorkItemWidgetNotes")
                                 .addIncludeName("WorkItemWidgetNotifications")
                                 .addIncludeName("WorkItemWidgetParticipants")
-                                .addIncludeName("WorkItemWidgetRolledupDates")
                                 .addIncludeName("WorkItemWidgetStartAndDueDate")
                                 .addIncludeName("WorkItemWidgetStatus")
                                 .addIncludeName("WorkItemWidgetTimeTracking")
@@ -784,21 +760,6 @@ class GenerateGitlabClient {
                                 .setTypeName("WorkItemWidgetParticipants")
                         // .addIncludeName("type") //
                         // .addIncludeName("participants")
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetRolledupDates")
-                        // .addIncludeName("dueDate") //
-                        // .addIncludeName("dueDateFixed") //
-                        // .addIncludeName("dueDateIsFixed") //
-                        // .addIncludeName("dueDateSourcingMilestone") //
-                        // .addIncludeName("dueDateSourcingWorkItem") //
-                        // .addIncludeName("startDate") //
-                        // .addIncludeName("startDateFixed") //
-                        // .addIncludeName("startDateIsFixed") //
-                        // .addIncludeName("startDateSourcingMilestone") //
-                        // .addIncludeName("startDateSourcingWorkItem") //
-                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1551,7 +1512,6 @@ class GenerateGitlabClient {
                                 .addIncludeName("WorkItemWidgetStartAndDueDateUpdateInput") //
                                 .addIncludeName("WorkItemAddLinkedItemsInput") //
                                 .addIncludeName("WorkItemRemoveLinkedItemsInput") //
-                                .addIncludeName("WorkItemWidgetRolledupDatesInput") //
                                 .addIncludeName("WorkItemWidgetHierarchyCreateInput") //
                                 .addIncludeName("WorkItemWidgetLabelsCreateInput") //
                                 .addIncludeName("CreateNoteInput") //
@@ -1599,7 +1559,6 @@ class GenerateGitlabClient {
                                 .addIncludeName("labelsWidget") //
                                 .addIncludeName("hierarchyWidget") //
                                 .addIncludeName("startAndDueDateWidget") //
-                                .addIncludeName("rolledupDatesWidget") //
                                 .addIncludeName("title") //
                                 .addIncludeName("id") //
                                 .addIncludeName("stateEvent") //
@@ -1797,14 +1756,6 @@ class GenerateGitlabClient {
                                 .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
                                 .addIncludeName("workItemsIds") //
-                        ) //
-                        .addFilter(new InputFieldsFilter()
-                                .setTypeKind(Kind.INPUT_OBJECT)
-                                .setTypeName("WorkItemWidgetRolledupDatesInput")
-                                .addIncludeName("dueDateIsFixed") //
-                                .addIncludeName("startDateIsFixed") //
-                                .addIncludeName("dueDateFixed") //
-                                .addIncludeName("startDateFixed") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)

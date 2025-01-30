@@ -57,8 +57,6 @@ public class WorkItemUpdateInput implements GitLabInputRequest {
      */
     private String title;
 
-    private WorkItemWidgetRolledupDatesInput rolledupDatesWidget;
-
     public String getClientMutationId() {
         return clientMutationId;
     }
@@ -140,18 +138,9 @@ public class WorkItemUpdateInput implements GitLabInputRequest {
         return this;
     }
 
-    public WorkItemWidgetRolledupDatesInput getRolledupDatesWidget() {
-        return rolledupDatesWidget;
-    }
-
-    public WorkItemUpdateInput setRolledupDatesWidget(WorkItemWidgetRolledupDatesInput rolledupDatesWidget) {
-        this.rolledupDatesWidget = rolledupDatesWidget;
-        return this;
-    }
-
     @Override
     public int hashCode() {
-        return Objects.hash(clientMutationId, assigneesWidget, descriptionWidget, hierarchyWidget, id, labelsWidget, startAndDueDateWidget, stateEvent, title, rolledupDatesWidget);
+        return Objects.hash(clientMutationId, assigneesWidget, descriptionWidget, hierarchyWidget, id, labelsWidget, startAndDueDateWidget, stateEvent, title);
     }
 
     @Override
@@ -163,12 +152,12 @@ public class WorkItemUpdateInput implements GitLabInputRequest {
         if (getClass() != obj.getClass())
             return false;
         WorkItemUpdateInput other = (WorkItemUpdateInput) obj;
-        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(assigneesWidget, other.assigneesWidget) && Objects.equals(descriptionWidget, other.descriptionWidget) && Objects.equals(hierarchyWidget, other.hierarchyWidget) && Objects.equals(id, other.id) && Objects.equals(labelsWidget, other.labelsWidget) && Objects.equals(startAndDueDateWidget, other.startAndDueDateWidget) && Objects.equals(stateEvent, other.stateEvent) && Objects.equals(title, other.title) && Objects.equals(rolledupDatesWidget, other.rolledupDatesWidget);
+        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(assigneesWidget, other.assigneesWidget) && Objects.equals(descriptionWidget, other.descriptionWidget) && Objects.equals(hierarchyWidget, other.hierarchyWidget) && Objects.equals(id, other.id) && Objects.equals(labelsWidget, other.labelsWidget) && Objects.equals(startAndDueDateWidget, other.startAndDueDateWidget) && Objects.equals(stateEvent, other.stateEvent) && Objects.equals(title, other.title);
     }
 
     @Override
     public String toString() {
-        return "WorkItemUpdateInput [clientMutationId=" + clientMutationId + ", assigneesWidget=" + assigneesWidget + ", descriptionWidget=" + descriptionWidget + ", hierarchyWidget=" + hierarchyWidget + ", id=" + id + ", labelsWidget=" + labelsWidget + ", startAndDueDateWidget=" + startAndDueDateWidget + ", stateEvent=" + stateEvent + ", title=" + title + ", rolledupDatesWidget=" + rolledupDatesWidget + "]";
+        return "WorkItemUpdateInput [clientMutationId=" + clientMutationId + ", assigneesWidget=" + assigneesWidget + ", descriptionWidget=" + descriptionWidget + ", hierarchyWidget=" + hierarchyWidget + ", id=" + id + ", labelsWidget=" + labelsWidget + ", startAndDueDateWidget=" + startAndDueDateWidget + ", stateEvent=" + stateEvent + ", title=" + title + "]";
     }
 
 }
