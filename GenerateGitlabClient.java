@@ -142,6 +142,91 @@ class GenerateGitlabClient {
                 .getOfType()
                 .setName("UserID");
 
+        TypesFilter typesFilter = new TypesFilter()
+                .setTypeKind(Kind.OBJECT)
+                .addIncludeName("WorkItem")
+                .addIncludeName("WorkItemConnection")
+                .addIncludeName("UserCore")
+                .addIncludeName("WorkItemType")
+                .addIncludeName("UserCoreConnection")
+                .addIncludeName("LabelConnection")
+                .addIncludeName("PageInfo")
+                .addIncludeName("Label")
+                .addIncludeName("Namespace") //
+                .addIncludeName("WorkItemTypeConnection") //
+                .addIncludeName("AwardEmojiConnection") //
+                .addIncludeName("TodoConnection") //
+                // .addIncludeName("DesignCollection") //
+                .addIncludeName("TaskCompletionStatus") //
+                .addIncludeName("WorkItemClosingMergeRequestConnection") //
+                .addIncludeName("FeatureFlagConnection") //
+                .addIncludeName("Iteration") //
+                .addIncludeName("LinkedWorkItemTypeConnection") //
+                .addIncludeName("Milestone") //
+                .addIncludeName("DiscussionConnection") //
+                .addIncludeName("WorkItemTimelogConnection") //
+                .addIncludeName("WorkItemWidgetDefinitionWeight") //
+                .addIncludeName("AwardEmoji") //
+                // .addIncludeName("Design") //
+                // .addIncludeName("DesignAtVersion") //
+                // .addIncludeName("DesignConnection") //
+                // .addIncludeName("DesignVersion") //
+                // .addIncludeName("DesignVersionConnection") //
+                .addIncludeName("Discussion") //
+                .addIncludeName("FeatureFlag") //
+                .addIncludeName("IterationCadence") //
+                .addIncludeName("TimeboxReport") //
+                .addIncludeName("Group") //
+                .addIncludeName("GroupContainingSingleEpicBoard") //
+                .addIncludeName("GroupContainingSingleIssueBoard") //
+                .addIncludeName("GroupContainingEpicBoards") //
+                .addIncludeName("GroupContainingIssueBoards") //
+                .addIncludeName("Project") //
+                .addIncludeName("ProjectContainingSingleIssueBoard") //
+                .addIncludeName("ProjectContainingIssueBoards") //
+                .addIncludeName("ReleaseConnection") //
+                .addIncludeName("Todo") //
+                .addIncludeName("WorkItemClosingMergeRequest") //
+                .addIncludeName("WorkItemTimelog") //
+                .addIncludeName("LinkedWorkItemType") //
+                // .addIncludeName("NoteableType") //
+                .addIncludeName("NoteConnection") //
+                .addIncludeName("Note") //
+                .addIncludeName("BoardConnection") //
+                .addIncludeName("Board") //
+                .addIncludeName("BoardRef") //
+                .addIncludeName("BoardListConnection") //
+                .addIncludeName("BoardList") //
+                .addIncludeName("EpicBoardConnection") //
+                .addIncludeName("EpicBoard") //
+                .addIncludeName("EpicBoardRef") //
+                .addIncludeName("EpicListConnection") //
+                .addIncludeName("EpicList") //
+                // --- ADDITIONAL TYPES ---
+                .addIncludeName("WorkItemRef") //
+                .addIncludeName("WorkItemConnectionRef") //
+                // ---- MUTATION objects ----
+                .addIncludeName("WorkItemCreatePayload") //
+                .addIncludeName("WorkItemUpdatePayload") //
+                .addIncludeName("WorkItemDeletePayload") //
+                .addIncludeName("WorkItemAddLinkedItemsPayload") //
+                .addIncludeName("WorkItemRemoveLinkedItemsPayload") //
+                .addIncludeName("CreateNotePayload") //
+                .addIncludeName("UpdateNotePayload") //
+                .addIncludeName("DestroyNotePayload") //
+                .addIncludeName("AwardEmojiAddPayload") //
+                .addIncludeName("CreateBoardPayload") //
+                .addIncludeName("EpicBoardCreatePayload") //
+                .addIncludeName("UpdateBoardPayload") //
+                .addIncludeName("EpicBoardUpdatePayload") //
+                .addIncludeName("DestroyBoardPayload") //
+                .addIncludeName("DestroyEpicBoardPayload") //
+                .addIncludeName("BoardListCreatePayload") //
+                .addIncludeName("EpicBoardListCreatePayload") //
+                .addIncludeName("UpdateBoardListPayload") //
+                .addIncludeName("UpdateEpicBoardListPayload") //
+                .addIncludeName("DestroyBoardListPayload") //
+                .addIncludeName("EpicBoardListDestroyPayload");
         Config config = new Config()
                 .setSchema(schema)
                 .setDefaultCustomScalarMapping(CustomScalarMappingStrategy.CREATE_CUSTOM_SCALAR_CLASS)
@@ -361,114 +446,7 @@ class GenerateGitlabClient {
                                 .setFieldName("epicBoardListDestroy")
                                 .setJavaMethodName("deleteEpicBoardList") //
                         )
-                        .addFilter(new TypesFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .addIncludeName("WorkItem")
-                                .addIncludeName("WorkItemConnection")
-                                .addIncludeName("UserCore")
-                                .addIncludeName("WorkItemType")
-                                .addIncludeName("WorkItemWidgetAssignees")
-                                .addIncludeName("WorkItemWidgetAwardEmoji")
-                                .addIncludeName("WorkItemWidgetColor")
-                                .addIncludeName("WorkItemWidgetCrmContacts")
-                                .addIncludeName("WorkItemWidgetCurrentUserTodos")
-                                .addIncludeName("WorkItemWidgetDescription")
-                                .addIncludeName("WorkItemWidgetDesigns")
-                                .addIncludeName("WorkItemWidgetDevelopment")
-                                .addIncludeName("WorkItemWidgetHealthStatus")
-                                .addIncludeName("WorkItemWidgetHierarchy")
-                                .addIncludeName("WorkItemWidgetIteration")
-                                .addIncludeName("WorkItemWidgetLabels")
-                                .addIncludeName("WorkItemWidgetLinkedItems")
-                                .addIncludeName("WorkItemWidgetMilestone")
-                                .addIncludeName("WorkItemWidgetNotes")
-                                .addIncludeName("WorkItemWidgetNotifications")
-                                .addIncludeName("WorkItemWidgetParticipants")
-                                .addIncludeName("WorkItemWidgetStartAndDueDate")
-                                .addIncludeName("WorkItemWidgetStatus")
-                                .addIncludeName("WorkItemWidgetTimeTracking")
-                                .addIncludeName("WorkItemWidgetWeight")
-                                .addIncludeName("WorkItemWidgetEmailParticipants")
-                                .addIncludeName("UserCoreConnection")
-                                .addIncludeName("LabelConnection")
-                                .addIncludeName("PageInfo")
-                                .addIncludeName("Label")
-                                .addIncludeName("Namespace") //
-                                .addIncludeName("WorkItemTypeConnection") //
-                                .addIncludeName("AwardEmojiConnection") //
-                                .addIncludeName("TodoConnection") //
-                                // .addIncludeName("DesignCollection") //
-                                .addIncludeName("TaskCompletionStatus") //
-                                .addIncludeName("WorkItemClosingMergeRequestConnection") //
-                                .addIncludeName("FeatureFlagConnection") //
-                                .addIncludeName("Iteration") //
-                                .addIncludeName("LinkedWorkItemTypeConnection") //
-                                .addIncludeName("Milestone") //
-                                .addIncludeName("DiscussionConnection") //
-                                .addIncludeName("WorkItemTimelogConnection") //
-                                .addIncludeName("WorkItemWidgetDefinitionWeight") //
-                                .addIncludeName("AwardEmoji") //
-                                // .addIncludeName("Design") //
-                                // .addIncludeName("DesignAtVersion") //
-                                // .addIncludeName("DesignConnection") //
-                                // .addIncludeName("DesignVersion") //
-                                // .addIncludeName("DesignVersionConnection") //
-                                .addIncludeName("Discussion") //
-                                .addIncludeName("FeatureFlag") //
-                                .addIncludeName("IterationCadence") //
-                                .addIncludeName("TimeboxReport") //
-                                .addIncludeName("Group") //
-                                .addIncludeName("GroupContainingSingleEpicBoard") //
-                                .addIncludeName("GroupContainingSingleIssueBoard") //
-                                .addIncludeName("GroupContainingEpicBoards") //
-                                .addIncludeName("GroupContainingIssueBoards") //
-                                .addIncludeName("Project") //
-                                .addIncludeName("ProjectContainingSingleIssueBoard") //
-                                .addIncludeName("ProjectContainingIssueBoards") //
-                                .addIncludeName("ReleaseConnection") //
-                                .addIncludeName("Todo") //
-                                .addIncludeName("WorkItemClosingMergeRequest") //
-                                .addIncludeName("WorkItemTimelog") //
-                                .addIncludeName("LinkedWorkItemType") //
-                                // .addIncludeName("NoteableType") //
-                                .addIncludeName("NoteConnection") //
-                                .addIncludeName("Note") //
-                                .addIncludeName("BoardConnection") //
-                                .addIncludeName("Board") //
-                                .addIncludeName("BoardRef") //
-                                .addIncludeName("BoardListConnection") //
-                                .addIncludeName("BoardList") //
-                                .addIncludeName("EpicBoardConnection") //
-                                .addIncludeName("EpicBoard") //
-                                .addIncludeName("EpicBoardRef") //
-                                .addIncludeName("EpicListConnection") //
-                                .addIncludeName("EpicList") //
-                                // --- ADDITIONAL TYPES ---
-                                .addIncludeName("WorkItemRef") //
-                                .addIncludeName("WorkItemConnectionRef") //
-                                // ---- MUTATION objects ----
-                                .addIncludeName("WorkItemCreatePayload") //
-                                .addIncludeName("WorkItemUpdatePayload") //
-                                .addIncludeName("WorkItemDeletePayload") //
-                                .addIncludeName("WorkItemAddLinkedItemsPayload") //
-                                .addIncludeName("WorkItemRemoveLinkedItemsPayload") //
-                                .addIncludeName("CreateNotePayload") //
-                                .addIncludeName("UpdateNotePayload") //
-                                .addIncludeName("DestroyNotePayload") //
-                                .addIncludeName("AwardEmojiAddPayload") //
-                                .addIncludeName("CreateBoardPayload") //
-                                .addIncludeName("EpicBoardCreatePayload") //
-                                .addIncludeName("UpdateBoardPayload") //
-                                .addIncludeName("EpicBoardUpdatePayload") //
-                                .addIncludeName("DestroyBoardPayload") //
-                                .addIncludeName("DestroyEpicBoardPayload") //
-                                .addIncludeName("BoardListCreatePayload") //
-                                .addIncludeName("EpicBoardListCreatePayload") //
-                                .addIncludeName("UpdateBoardListPayload") //
-                                .addIncludeName("UpdateEpicBoardListPayload") //
-                                .addIncludeName("DestroyBoardListPayload") //
-                                .addIncludeName("EpicBoardListDestroyPayload") //
-                        )//
+                        .addFilter(typesFilter)//
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.SCALAR)
                                 .addIncludeName("AwardableID") //
@@ -648,32 +626,6 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetAwardEmoji")
-                        // .addIncludeName("awardEmoji") //
-                        // .addIncludeName("downvotes") //
-                        // .addIncludeName("upvotes") //
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetColor")
-                        // .addIncludeName("color") //
-                        // .addIncludeName("textColor") //
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetCrmContacts")
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetCurrentUserTodos")
-                        // .addIncludeName("currentUserTodos") //
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetDescription")
                                 // // .addIncludeName("type") //
                                 // .addIncludeName("edited") //
@@ -681,26 +633,6 @@ class GenerateGitlabClient {
                                 // .addIncludeName("lastEditedBy") //
                                 // .addIncludeName("taskCompletionStatus") //
                                 .addIncludeName("description") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetDesigns")
-                        // .addIncludeName("designCollection") //
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetDevelopment")
-                        // .addIncludeName("closingMergeRequests") //
-                        // .addIncludeName("featureFlags") //
-                        // .addIncludeName("willAutoCloseByMergeRequest") //
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetHealthStatus")
-                        //.addIncludeName("healthStatus") //
-                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -713,12 +645,6 @@ class GenerateGitlabClient {
                                 // .addIncludeName("hasParent") //
                                 .addIncludeName("parent") //
                         //.addIncludeName("rolledUpCountsByType") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetIteration")
-                        // .addIncludeName("type") //
-                        // .addIncludeName("iteration") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -738,28 +664,10 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetMilestone")
-                        // .addIncludeName("milestone") //
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetNotes")
                                 // .addIncludeName("discussionLocked") //
                                 .addIncludeName("discussions") //
                         // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetNotifications")
-                        // .addIncludeName("subscribed") //
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetParticipants")
-                        // .addIncludeName("type") //
-                        // .addIncludeName("participants")
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -778,28 +686,6 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetStatus")
                                 .addIncludeName("status") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetTimeTracking")
-                        // .addIncludeName("timeEstimate") //
-                        // .addIncludeName("timelogs") //
-                        // .addIncludeName("totalTimeSpent") //
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetWeight")
-                        // .addIncludeName("rolledUpCompletedWeight") //
-                        // .addIncludeName("rolledUpWeight") //
-                        // .addIncludeName("weight") //
-                        // .addIncludeName("widgetDefinition") //
-                        // .addIncludeName("type") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetEmailParticipants")
-                        // .addIncludeName("type") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1918,6 +1804,7 @@ class GenerateGitlabClient {
                         .setConfigKey("gitlab")//
                         .setEndpoint("https://gitlab.com/api/graphql") //
                 );
+
         List<Filter> filters = config.getScope()
                 .getFilters();
         for (Filter f : filters) {
@@ -1964,6 +1851,28 @@ class GenerateGitlabClient {
                 }
             }
         }
+        schema.getTypes()
+                .stream()
+                .filter(t -> t.getKind() == Kind.OBJECT)
+                .filter(t -> t.getInterfaces()
+                        .stream()
+                        .filter(i -> i.getKind() == Kind.INTERFACE && "WorkItemWidget".equals(i.getName()))
+                        .findAny()
+                        .isPresent())
+                .forEach(t -> {
+                    typesFilter.addIncludeName(t.getName());
+                    if (filters.stream()
+                            .noneMatch(f -> f instanceof FieldsFilter
+                                    && ((FieldsFilter) f).getTypeKind() == Kind.OBJECT
+                                    && Objects.equals( //
+                                            ((FieldsFilter) f).getTypeName(), t.getName())) //
+                    ) {
+                        config.getScope()
+                                .addFilter(new FieldsFilter()
+                                        .setTypeKind(Kind.OBJECT)
+                                        .setTypeName(t.getName()));
+                    }
+                });
         return config;
     }
 
