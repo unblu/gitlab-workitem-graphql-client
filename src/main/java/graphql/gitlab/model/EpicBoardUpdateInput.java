@@ -19,7 +19,7 @@ public class EpicBoardUpdateInput implements GitLabInputRequest {
     private String clientMutationId;
 
     /**
-     * Whether or not display epic colors. Ignored unless `epic_color_highlight` flag is enabled.
+     * Whether or not display epic colors.
      */
     private Boolean displayColors;
 
