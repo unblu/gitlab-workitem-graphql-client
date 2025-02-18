@@ -16,6 +16,11 @@ public class ReleaseRef {
     private ReleaseID id;
 
     /**
+     * Links of the release.
+     */
+    private ReleaseLinks links;
+
+    /**
      * Name of the release.
      */
     private String name;
@@ -31,6 +36,15 @@ public class ReleaseRef {
 
     public ReleaseRef setId(ReleaseID id) {
         this.id = id;
+        return this;
+    }
+
+    public ReleaseLinks getLinks() {
+        return links;
+    }
+
+    public ReleaseRef setLinks(ReleaseLinks links) {
+        this.links = links;
         return this;
     }
 
@@ -54,7 +68,7 @@ public class ReleaseRef {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, tagName);
+        return Objects.hash(id, links, name, tagName);
     }
 
     @Override
@@ -66,12 +80,12 @@ public class ReleaseRef {
         if (getClass() != obj.getClass())
             return false;
         ReleaseRef other = (ReleaseRef) obj;
-        return Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(tagName, other.tagName);
+        return Objects.equals(id, other.id) && Objects.equals(links, other.links) && Objects.equals(name, other.name) && Objects.equals(tagName, other.tagName);
     }
 
     @Override
     public String toString() {
-        return "ReleaseRef [id=" + id + ", name=" + name + ", tagName=" + tagName + "]";
+        return "ReleaseRef [id=" + id + ", links=" + links + ", name=" + name + ", tagName=" + tagName + "]";
     }
 
 }

@@ -26,6 +26,11 @@ public class Release {
     private ReleaseID id;
 
     /**
+     * Links of the release.
+     */
+    private ReleaseLinks links;
+
+    /**
      * Milestones associated to the release.
      */
     private MilestoneConnectionRef milestones;
@@ -72,6 +77,15 @@ public class Release {
         return this;
     }
 
+    public ReleaseLinks getLinks() {
+        return links;
+    }
+
+    public Release setLinks(ReleaseLinks links) {
+        this.links = links;
+        return this;
+    }
+
     public MilestoneConnectionRef getMilestones() {
         return milestones;
     }
@@ -110,7 +124,7 @@ public class Release {
 
     @Override
     public int hashCode() {
-        return Objects.hash(createdAt, description, id, milestones, name, tagName, upcomingRelease);
+        return Objects.hash(createdAt, description, id, links, milestones, name, tagName, upcomingRelease);
     }
 
     @Override
@@ -122,12 +136,12 @@ public class Release {
         if (getClass() != obj.getClass())
             return false;
         Release other = (Release) obj;
-        return Objects.equals(createdAt, other.createdAt) && Objects.equals(description, other.description) && Objects.equals(id, other.id) && Objects.equals(milestones, other.milestones) && Objects.equals(name, other.name) && Objects.equals(tagName, other.tagName) && Objects.equals(upcomingRelease, other.upcomingRelease);
+        return Objects.equals(createdAt, other.createdAt) && Objects.equals(description, other.description) && Objects.equals(id, other.id) && Objects.equals(links, other.links) && Objects.equals(milestones, other.milestones) && Objects.equals(name, other.name) && Objects.equals(tagName, other.tagName) && Objects.equals(upcomingRelease, other.upcomingRelease);
     }
 
     @Override
     public String toString() {
-        return "Release [createdAt=" + createdAt + ", description=" + description + ", id=" + id + ", milestones=" + milestones + ", name=" + name + ", tagName=" + tagName + ", upcomingRelease=" + upcomingRelease + "]";
+        return "Release [createdAt=" + createdAt + ", description=" + description + ", id=" + id + ", links=" + links + ", milestones=" + milestones + ", name=" + name + ", tagName=" + tagName + ", upcomingRelease=" + upcomingRelease + "]";
     }
 
 }

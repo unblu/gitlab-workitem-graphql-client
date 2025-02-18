@@ -212,6 +212,7 @@ class GenerateGitlabClient {
                 .addIncludeName("Release") //
                 .addIncludeName("ReleaseConnectionRef") //
                 .addIncludeName("ReleaseRef") //
+                .addIncludeName("ReleaseLinks") //
                 .addIncludeName("MilestoneConnection") //
                 .addIncludeName("MilestoneConnectionRef") //
                 .addIncludeName("Todo") //
@@ -1119,6 +1120,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("createdAt") //
                                 .addIncludeName("upcomingRelease") //
                                 .addIncludeName("milestones") //
+                                .addIncludeName("links") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1126,6 +1128,12 @@ class GenerateGitlabClient {
                                 .addIncludeName("id")
                                 .addIncludeName("name")
                                 .addIncludeName("tagName") //
+                                .addIncludeName("links") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("ReleaseLinks")
+                                .addIncludeName("selfUrl") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
