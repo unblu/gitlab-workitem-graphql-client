@@ -48,6 +48,8 @@ import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
 import graphql.gitlab.model.ProjectContainingIssueBoards;
+import graphql.gitlab.model.ProjectContainingMilestones;
+import graphql.gitlab.model.ProjectContainingReleases;
 import graphql.gitlab.model.ProjectContainingSingleIssueBoard;
 import graphql.gitlab.model.UpdateBoardInput;
 import graphql.gitlab.model.UpdateBoardListInput;
@@ -120,6 +122,12 @@ public interface WorkitemClientApi {
 
     @Query("project")
     ProjectContainingIssueBoards getIssueBoardsInProject(@Name("fullPath") @NonNull @Id String fullPath);
+
+    @Query("project")
+    ProjectContainingReleases getReleasesInProject(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("releases") @Name("after") String releasesAfter);
+
+    @Query("project")
+    ProjectContainingMilestones getMilestonesInProject(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("milestones") @Name("after") String milestonesAfter);
 
     /**
      * Find a work item. Introduced in GitLab 15.1: **Status**: Experiment.

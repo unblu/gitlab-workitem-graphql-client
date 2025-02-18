@@ -36,6 +36,11 @@ public class Milestone {
     private String id;
 
     /**
+     * Releases associated with this milestone.
+     */
+    private ReleaseConnection releases;
+
+    /**
      * Timestamp of the milestone start date.
      */
     private Time startDate;
@@ -110,6 +115,15 @@ public class Milestone {
         return this;
     }
 
+    public ReleaseConnection getReleases() {
+        return releases;
+    }
+
+    public Milestone setReleases(ReleaseConnection releases) {
+        this.releases = releases;
+        return this;
+    }
+
     public Time getStartDate() {
         return startDate;
     }
@@ -166,7 +180,7 @@ public class Milestone {
 
     @Override
     public int hashCode() {
-        return Objects.hash(createdAt, description, dueDate, expired, id, startDate, state, title, upcoming, updatedAt, webPath);
+        return Objects.hash(createdAt, description, dueDate, expired, id, releases, startDate, state, title, upcoming, updatedAt, webPath);
     }
 
     @Override
@@ -178,12 +192,12 @@ public class Milestone {
         if (getClass() != obj.getClass())
             return false;
         Milestone other = (Milestone) obj;
-        return Objects.equals(createdAt, other.createdAt) && Objects.equals(description, other.description) && Objects.equals(dueDate, other.dueDate) && Objects.equals(expired, other.expired) && Objects.equals(id, other.id) && Objects.equals(startDate, other.startDate) && Objects.equals(state, other.state) && Objects.equals(title, other.title) && Objects.equals(upcoming, other.upcoming) && Objects.equals(updatedAt, other.updatedAt) && Objects.equals(webPath, other.webPath);
+        return Objects.equals(createdAt, other.createdAt) && Objects.equals(description, other.description) && Objects.equals(dueDate, other.dueDate) && Objects.equals(expired, other.expired) && Objects.equals(id, other.id) && Objects.equals(releases, other.releases) && Objects.equals(startDate, other.startDate) && Objects.equals(state, other.state) && Objects.equals(title, other.title) && Objects.equals(upcoming, other.upcoming) && Objects.equals(updatedAt, other.updatedAt) && Objects.equals(webPath, other.webPath);
     }
 
     @Override
     public String toString() {
-        return "Milestone [createdAt=" + createdAt + ", description=" + description + ", dueDate=" + dueDate + ", expired=" + expired + ", id=" + id + ", startDate=" + startDate + ", state=" + state + ", title=" + title + ", upcoming=" + upcoming + ", updatedAt=" + updatedAt + ", webPath=" + webPath + "]";
+        return "Milestone [createdAt=" + createdAt + ", description=" + description + ", dueDate=" + dueDate + ", expired=" + expired + ", id=" + id + ", releases=" + releases + ", startDate=" + startDate + ", state=" + state + ", title=" + title + ", upcoming=" + upcoming + ", updatedAt=" + updatedAt + ", webPath=" + webPath + "]";
     }
 
 }

@@ -129,6 +129,10 @@ class GenerateGitlabClient {
                 .add(createGroupContainingEpicBoards(mapper, group));
         schema.getTypes()
                 .add(createProjectContainingIssueBoards(mapper, project));
+        schema.getTypes()
+                .add(createProjectContainingReleases(mapper, project));
+        schema.getTypes()
+                .add(createProjectContainingMilestones(mapper, project));
 
         //See: https://gitlab.com/gitlab-org/gitlab/-/issues/499834
         Type label = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Label");
@@ -184,7 +188,11 @@ class GenerateGitlabClient {
                 .addIncludeName("Project") //
                 .addIncludeName("ProjectContainingSingleIssueBoard") //
                 .addIncludeName("ProjectContainingIssueBoards") //
+                .addIncludeName("ProjectContainingReleases") //
+                .addIncludeName("ProjectContainingMilestones") //
                 .addIncludeName("ReleaseConnection") //
+                .addIncludeName("Release") //
+                .addIncludeName("MilestoneConnection") //
                 .addIncludeName("Todo") //
                 .addIncludeName("WorkItemClosingMergeRequest") //
                 .addIncludeName("WorkItemTimelog") //
@@ -342,6 +350,26 @@ class GenerateGitlabClient {
                                         .setJavaMethodName("getIssueBoardsInProject")
                                         .setReturnType("{ModelPackageName}.ProjectContainingIssueBoards") //
                                 ) //
+                                .addAdditionalMethod(new AdditionalMethod()
+                                        .setJavaMethodName("getReleasesInProject")
+                                        .setReturnType("{ModelPackageName}.ProjectContainingReleases") //
+                                        .addNestedParameter(new NestedParameter()
+                                                .setGraphQlNestedParameterPath("releases")
+                                                .setGraphQlName("after")
+                                                .setParameterType("String") //
+                                                .setParameterName("releasesAfter") //
+                                        ) //
+                                ) //
+                                .addAdditionalMethod(new AdditionalMethod()
+                                        .setJavaMethodName("getMilestonesInProject")
+                                        .setReturnType("{ModelPackageName}.ProjectContainingMilestones") //
+                                        .addNestedParameter(new NestedParameter()
+                                                .setGraphQlNestedParameterPath("milestones")
+                                                .setGraphQlName("after")
+                                                .setParameterType("String") //
+                                                .setParameterName("milestonesAfter") //
+                                        ) //
+                                ) //
                         )
                         .addHint(new FieldHint()
                                 .setTypeKind(Kind.OBJECT)
@@ -464,6 +492,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("NoteableID") //
                                 .addIncludeName("MilestoneID") //
                                 .addIncludeName("NoteID") //
+                                .addIncludeName("ReleaseID") //
                                 .addIncludeName("WorkItemID") //
                                 .addIncludeName("WorkItemsTypeID") //
                                 .addIncludeName("WorkItemsRelatedWorkItemLinkID") //
@@ -776,7 +805,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("id") //
                                 //.addIncludeName("iid") //
                                 //.addIncludeName("project") //
-                                //.addIncludeName("releases") //
+                                .addIncludeName("releases") //
                                 //.addIncludeName("report") //
                                 .addIncludeName("startDate") //
                                 .addIncludeName("state") //
@@ -1022,7 +1051,45 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("ProjectContainingReleases")
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("nameWithNamespace") //
+                                .addIncludeName("releases") // --> in ProjectContainingReleases
+                                .addIncludeName("path") //
+                                .addIncludeName("webUrl") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("ProjectContainingMilestones")
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("nameWithNamespace") //
+                                .addIncludeName("milestones") // --> in ProjectContainingMilestones
+                                .addIncludeName("path") //
+                                .addIncludeName("webUrl") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("ReleaseConnection")
+                                .addIncludeName("pageInfo")
+                                .addIncludeName("nodes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("Release")
+                                .addIncludeName("id")
+                                .addIncludeName("name")
+                                .addIncludeName("tagName") //
+                                .addIncludeName("description") //
+                                .addIncludeName("createdAt") //
+                                .addIncludeName("upcomingRelease") //
+                                .addIncludeName("milestones") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MilestoneConnection")
+                                .addIncludeName("pageInfo")
                                 .addIncludeName("nodes") //
                         ) //
                         .addFilter(new FieldsFilter()
@@ -1906,6 +1973,14 @@ class GenerateGitlabClient {
 
     private static Type createProjectContainingIssueBoards(ObjectMapper mapper, Type project) {
         return duplicateType(mapper, project, "ProjectContainingIssueBoards");
+    }
+
+    private static Type createProjectContainingReleases(ObjectMapper mapper, Type project) {
+        return duplicateType(mapper, project, "ProjectContainingReleases");
+    }
+
+    private static Type createProjectContainingMilestones(ObjectMapper mapper, Type project) {
+        return duplicateType(mapper, project, "ProjectContainingMilestones");
     }
 
     private static Type duplicateType(ObjectMapper mapper, Type type, String newName) {
