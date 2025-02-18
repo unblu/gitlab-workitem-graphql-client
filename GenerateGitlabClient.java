@@ -1118,6 +1118,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("tagName") //
                                 .addIncludeName("description") //
                                 .addIncludeName("createdAt") //
+                                .addIncludeName("releasedAt") //
                                 .addIncludeName("upcomingRelease") //
                                 .addIncludeName("milestones") //
                                 .addIncludeName("links") //
