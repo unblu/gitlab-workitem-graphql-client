@@ -27,6 +27,10 @@ public class WorkItemsRelatedWorkItemLinkID {
         return value;
     }
 
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(value);
