@@ -28,7 +28,7 @@ public class Release {
     /**
      * Milestones associated to the release.
      */
-    private MilestoneConnection milestones;
+    private MilestoneConnectionRef milestones;
 
     /**
      * Name of the release.
@@ -72,11 +72,11 @@ public class Release {
         return this;
     }
 
-    public MilestoneConnection getMilestones() {
+    public MilestoneConnectionRef getMilestones() {
         return milestones;
     }
 
-    public Release setMilestones(MilestoneConnection milestones) {
+    public Release setMilestones(MilestoneConnectionRef milestones) {
         this.milestones = milestones;
         return this;
     }

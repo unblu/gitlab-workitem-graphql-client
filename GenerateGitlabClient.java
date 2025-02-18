@@ -11,6 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
@@ -96,6 +98,10 @@ class GenerateGitlabClient {
         Type project = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Project");
         Type board = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Board");
         Type epicBoard = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicBoard");
+        Type milestoneConnection = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "MilestoneConnection");
+        Type milestone = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Milestone");
+        Type releaseConnection = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "ReleaseConnection");
+        Type release = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Release");
 
         SchemaUtil.getFieldByName(schema, boardList, "id")
                 .getType()
@@ -112,9 +118,9 @@ class GenerateGitlabClient {
         schema.getTypes()
                 .add(createWorkItemRef());
         schema.getTypes()
-                .add(createBoardRef(mapper, board));
+                .add(createDuplicatedRefType(mapper, board));
         schema.getTypes()
-                .add(createEpicBoardRef(mapper, epicBoard));
+                .add(createDuplicatedRefType(mapper, epicBoard));
         schema.getTypes()
                 .add(createProjectContainingSingleIssueBoard(mapper, project));
         schema.getTypes()
@@ -132,7 +138,18 @@ class GenerateGitlabClient {
         schema.getTypes()
                 .add(createProjectContainingReleases(mapper, project));
         schema.getTypes()
+                .add(createDuplicatedRefType(mapper, releaseConnection, Map.of("Release", "ReleaseRef")));
+        schema.getTypes()
+                .add(createDuplicatedRefType(mapper, release));
+        schema.getTypes()
                 .add(createProjectContainingMilestones(mapper, project));
+        schema.getTypes()
+                .add(createDuplicatedRefType(mapper, milestoneConnection, Map.of("Milestone", "MilestoneRef")));
+        schema.getTypes()
+                .add(createDuplicatedRefType(mapper, milestone));
+
+        applyRenamingsOnFields(release, Map.of("MilestoneConnection", "MilestoneConnectionRef"));
+        applyRenamingsOnFields(milestone, Map.of("ReleaseConnection", "ReleaseConnectionRef"));
 
         //See: https://gitlab.com/gitlab-org/gitlab/-/issues/499834
         Type label = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Label");
@@ -167,6 +184,7 @@ class GenerateGitlabClient {
                 .addIncludeName("Iteration") //
                 .addIncludeName("LinkedWorkItemTypeConnection") //
                 .addIncludeName("Milestone") //
+                .addIncludeName("MilestoneRef") //
                 .addIncludeName("DiscussionConnection") //
                 .addIncludeName("WorkItemTimelogConnection") //
                 .addIncludeName("WorkItemWidgetDefinitionWeight") //
@@ -192,7 +210,10 @@ class GenerateGitlabClient {
                 .addIncludeName("ProjectContainingMilestones") //
                 .addIncludeName("ReleaseConnection") //
                 .addIncludeName("Release") //
+                .addIncludeName("ReleaseConnectionRef") //
+                .addIncludeName("ReleaseRef") //
                 .addIncludeName("MilestoneConnection") //
+                .addIncludeName("MilestoneConnectionRef") //
                 .addIncludeName("Todo") //
                 .addIncludeName("WorkItemClosingMergeRequest") //
                 .addIncludeName("WorkItemTimelog") //
@@ -817,6 +838,13 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MilestoneRef")
+                                .addIncludeName("id") //
+                                .addIncludeName("title") //
+                                .addIncludeName("webPath") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("TaskCompletionStatus")
                                 .addIncludeName("completedCount") //
                                 .addIncludeName("count") //
@@ -1077,6 +1105,12 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("ReleaseConnectionRef")
+                                .addIncludeName("pageInfo")
+                                .addIncludeName("nodes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("Release")
                                 .addIncludeName("id")
                                 .addIncludeName("name")
@@ -1088,7 +1122,20 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("ReleaseRef")
+                                .addIncludeName("id")
+                                .addIncludeName("name")
+                                .addIncludeName("tagName") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("MilestoneConnection")
+                                .addIncludeName("pageInfo")
+                                .addIncludeName("nodes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MilestoneConnectionRef")
                                 .addIncludeName("pageInfo")
                                 .addIncludeName("nodes") //
                         ) //
@@ -1943,12 +1990,34 @@ class GenerateGitlabClient {
         return config;
     }
 
-    private static Type createBoardRef(ObjectMapper mapper, Type board) {
-        return duplicateType(mapper, board, "BoardRef");
+    private static Type createDuplicatedRefType(ObjectMapper mapper, Type type) {
+        return createDuplicatedRefType(mapper, type, Map.of());
     }
 
-    private static Type createEpicBoardRef(ObjectMapper mapper, Type epicBoard) {
-        return duplicateType(mapper, epicBoard, "EpicBoardRef");
+    private static Type createDuplicatedRefType(ObjectMapper mapper, Type type, Map<String, String> rename) {
+        Type newType = duplicateType(mapper, type, type.getName() + "Ref");
+        applyRenamingsOnFields(newType, rename);
+        return newType;
+    }
+
+    private static void applyRenamingsOnFields(Type type, Map<String, String> rename) {
+        for (Field f : type.getFields()) {
+            TypeRef t = f.getType();
+            applyRenamingsOnType(t, rename);
+        }
+    }
+
+    private static void applyRenamingsOnType(TypeRef type, Map<String, String> rename) {
+        if (type.getOfType() != null) {
+            applyRenamingsOnType(type.getOfType(), rename);
+        }
+        if (type.getKind() == Kind.OBJECT) {
+            for (Entry<String, String> e : rename.entrySet()) {
+                if (Objects.equals(e.getKey(), type.getName())) {
+                    type.setName(e.getValue());
+                }
+            }
+        }
     }
 
     private static Type createGroupContainingSingleIssueBoard(ObjectMapper mapper, Type group) {

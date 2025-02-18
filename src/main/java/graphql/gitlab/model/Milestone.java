@@ -38,7 +38,7 @@ public class Milestone {
     /**
      * Releases associated with this milestone.
      */
-    private ReleaseConnection releases;
+    private ReleaseConnectionRef releases;
 
     /**
      * Timestamp of the milestone start date.
@@ -115,11 +115,11 @@ public class Milestone {
         return this;
     }
 
-    public ReleaseConnection getReleases() {
+    public ReleaseConnectionRef getReleases() {
         return releases;
     }
 
-    public Milestone setReleases(ReleaseConnection releases) {
+    public Milestone setReleases(ReleaseConnectionRef releases) {
         this.releases = releases;
         return this;
     }
