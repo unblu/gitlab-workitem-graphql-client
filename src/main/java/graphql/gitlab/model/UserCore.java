@@ -11,7 +11,7 @@ import org.eclipse.microprofile.graphql.Name;
 public class UserCore {
 
     /**
-     * ID of the user.
+     * Global ID of the user.
      */
     private UserID id;
 

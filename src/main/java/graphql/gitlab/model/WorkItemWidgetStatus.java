@@ -11,7 +11,7 @@ import org.eclipse.microprofile.graphql.Name;
 public class WorkItemWidgetStatus implements WorkItemWidget {
 
     /**
-     * Status of the work item.
+     * Status of the work item. Introduced in GitLab 15.5: **Status**: Experiment.
      */
     private String status;
 

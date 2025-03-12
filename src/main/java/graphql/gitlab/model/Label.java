@@ -18,7 +18,7 @@ public class Label {
     private String description;
 
     /**
-     * Label ID.
+     * Global ID of the label.
      */
     private LabelID id;
 
