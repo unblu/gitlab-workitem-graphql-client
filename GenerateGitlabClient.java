@@ -673,11 +673,6 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
-                                .setTypeName("WorkItemWidgetStatus")
-                                .addIncludeName("status") //
-                        ) //
-                        .addFilter(new FieldsFilter()
-                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("LabelConnection")
                                 .addIncludeName("count") //
                                 .addIncludeName("nodes") //

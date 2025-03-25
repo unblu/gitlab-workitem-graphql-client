@@ -11,7 +11,7 @@ import org.eclipse.microprofile.graphql.Name;
 public class EpicList {
 
     /**
-     * Indicates if this list is collapsed for this user.
+     * Indicates if the list is collapsed for the user.
      */
     private Boolean collapsed;
 

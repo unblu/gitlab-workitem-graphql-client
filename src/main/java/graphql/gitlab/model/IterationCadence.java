@@ -26,7 +26,7 @@ public class IterationCadence {
     private String description;
 
     /**
-     * Duration in weeks of the iterations within this cadence.
+     * Duration in weeks of the iterations within the cadence.
      */
     private Integer durationInWeeks;
 

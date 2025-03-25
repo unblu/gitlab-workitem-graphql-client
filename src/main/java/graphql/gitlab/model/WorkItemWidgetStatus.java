@@ -1,49 +1,12 @@
 package graphql.gitlab.model;
 
-import java.util.Objects;
-
 import org.eclipse.microprofile.graphql.Name;
 
 /**
- * Represents a status widget
+ * Represents status widget
  */
 @Name("WorkItemWidgetStatus")
 public class WorkItemWidgetStatus implements WorkItemWidget {
 
-    /**
-     * Status of the work item. Introduced in GitLab 15.5: **Status**: Experiment.
-     */
-    private String status;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public WorkItemWidgetStatus setStatus(String status) {
-        this.status = status;
-        return this;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(status);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        WorkItemWidgetStatus other = (WorkItemWidgetStatus) obj;
-        return Objects.equals(status, other.status);
-    }
-
-    @Override
-    public String toString() {
-        return "WorkItemWidgetStatus [status=" + status + "]";
-    }
 
 }

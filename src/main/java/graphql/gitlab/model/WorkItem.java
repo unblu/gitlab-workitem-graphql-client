@@ -69,7 +69,7 @@ public class WorkItem {
     private Time updatedAt;
 
     /**
-     * URL of this object.
+     * URL of the object.
      */
     private String webUrl;
 

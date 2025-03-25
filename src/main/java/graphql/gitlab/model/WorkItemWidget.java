@@ -14,7 +14,6 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
         @JsonbSubtype(alias = "WorkItemWidgetCrmContacts", type = WorkItemWidgetCrmContacts.class),
         @JsonbSubtype(alias = "WorkItemWidgetCurrentUserTodos", type = WorkItemWidgetCurrentUserTodos.class),
         @JsonbSubtype(alias = "WorkItemWidgetCustomFields", type = WorkItemWidgetCustomFields.class),
-        @JsonbSubtype(alias = "WorkItemWidgetCustomStatus", type = WorkItemWidgetCustomStatus.class),
         @JsonbSubtype(alias = "WorkItemWidgetDescription", type = WorkItemWidgetDescription.class),
         @JsonbSubtype(alias = "WorkItemWidgetDesigns", type = WorkItemWidgetDesigns.class),
         @JsonbSubtype(alias = "WorkItemWidgetDevelopment", type = WorkItemWidgetDevelopment.class),
@@ -36,6 +35,8 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
         @JsonbSubtype(alias = "WorkItemWidgetStatus", type = WorkItemWidgetStatus.class),
         @JsonbSubtype(alias = "WorkItemWidgetTestReports", type = WorkItemWidgetTestReports.class),
         @JsonbSubtype(alias = "WorkItemWidgetTimeTracking", type = WorkItemWidgetTimeTracking.class),
+        @JsonbSubtype(alias = "WorkItemWidgetVerificationStatus", type = WorkItemWidgetVerificationStatus.class),
+        @JsonbSubtype(alias = "WorkItemWidgetVulnerabilities", type = WorkItemWidgetVulnerabilities.class),
         @JsonbSubtype(alias = "WorkItemWidgetWeight", type = WorkItemWidgetWeight.class)
 })
 @Name("WorkItemWidget")
