@@ -97,6 +97,7 @@ class GenerateGitlabClient {
         Type board = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Board");
         Type epicBoard = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicBoard");
 
+        // Those fixes (wrong ID type, same as issue https://gitlab.com/gitlab-org/gitlab/-/issues/499834) have to be done at server side:
         SchemaUtil.getFieldByName(schema, boardList, "id")
                 .getType()
                 .getOfType()
@@ -129,18 +130,6 @@ class GenerateGitlabClient {
                 .add(createGroupContainingEpicBoards(mapper, group));
         schema.getTypes()
                 .add(createProjectContainingIssueBoards(mapper, project));
-
-        //See: https://gitlab.com/gitlab-org/gitlab/-/issues/499834
-        Type label = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Label");
-        SchemaUtil.getFieldByName(schema, label, "id")
-                .getType()
-                .getOfType()
-                .setName("LabelID");
-        Type userCore = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "UserCore");
-        SchemaUtil.getFieldByName(schema, userCore, "id")
-                .getType()
-                .getOfType()
-                .setName("UserID");
 
         TypesFilter typesFilter = new TypesFilter()
                 .setTypeKind(Kind.OBJECT)
