@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.eclipse.microprofile.graphql.Name;
 
 @Name("ProjectContainingSingleIssueBoard")
-public class ProjectContainingSingleIssueBoard {
+public class ProjectContainingSingleIssueBoard implements Todoable {
 
     /**
      * A single board of the project.

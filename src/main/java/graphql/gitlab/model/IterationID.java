@@ -7,7 +7,7 @@ import org.eclipse.microprofile.graphql.Name;
 /**
  * A `IterationID` is a global ID. It is encoded as a string.
  *
- * An example `IterationID` is: `"gid://gitlab/Iteration/1"`.
+ * An example `IterationID` is: `"gid://gitlab/Iteration/1"`.<br>
  * The older format `"gid://gitlab/EEIteration/1"` was deprecated in 13.3.
  */
 @Name("IterationID")

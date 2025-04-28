@@ -9,7 +9,7 @@ import org.eclipse.microprofile.graphql.Name;
  *
  * An example `WorkItemID` is: `"gid://gitlab/WorkItem/1"`.
  *
- * While we transition from Issues into Work Items this type will temporarily support
+ * While we transition from Issues into Work Items this type will temporarily support<br>
  * `IssueID` like: `"gid://gitlab/Issue/1"`. This behavior will be removed without notice in the future.
  */
 @Name("WorkItemID")

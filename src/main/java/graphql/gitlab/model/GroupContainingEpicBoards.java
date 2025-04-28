@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.eclipse.microprofile.graphql.Name;
 
 @Name("GroupContainingEpicBoards")
-public class GroupContainingEpicBoards {
+public class GroupContainingEpicBoards implements Todoable {
 
     /**
      * Find epic boards. Deprecated in GitLab 17.5: Replaced by WorkItem type.

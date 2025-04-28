@@ -6,7 +6,7 @@ import java.util.Objects;
 import org.eclipse.microprofile.graphql.Name;
 
 @Name("WorkItem")
-public class WorkItem {
+public class WorkItem implements Todoable {
 
     /**
      * Whether the work item belongs to an archived project. Always false for group level work items. Introduced in GitLab 16.5: **Status**: Experiment.

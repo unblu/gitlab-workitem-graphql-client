@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.eclipse.microprofile.graphql.Name;
 
 @Name("Group")
-public class Group {
+public class Group implements Todoable {
 
     /**
      * Full name of the namespace.

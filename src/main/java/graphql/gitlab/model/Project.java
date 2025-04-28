@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.eclipse.microprofile.graphql.Name;
 
 @Name("Project")
-public class Project {
+public class Project implements Todoable {
 
     /**
      * ID of the project.

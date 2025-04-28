@@ -5,15 +5,20 @@ import java.util.Objects;
 import org.eclipse.microprofile.graphql.Name;
 
 /**
- * Core representation of a GitLab user.
+ * The currently authenticated GitLab user.
  */
-@Name("UserCore")
-public class UserCore implements Todoable {
+@Name("CurrentUser")
+public class CurrentUser implements Todoable {
 
     /**
      * Global ID of the user.
      */
     private UserID id;
+
+    /**
+     * To-do items of the user.
+     */
+    private TodoConnection todos;
 
     /**
      * Username of the user. Unique within the instance of GitLab.
@@ -24,8 +29,17 @@ public class UserCore implements Todoable {
         return id;
     }
 
-    public UserCore setId(UserID id) {
+    public CurrentUser setId(UserID id) {
         this.id = id;
+        return this;
+    }
+
+    public TodoConnection getTodos() {
+        return todos;
+    }
+
+    public CurrentUser setTodos(TodoConnection todos) {
+        this.todos = todos;
         return this;
     }
 
@@ -33,14 +47,14 @@ public class UserCore implements Todoable {
         return username;
     }
 
-    public UserCore setUsername(String username) {
+    public CurrentUser setUsername(String username) {
         this.username = username;
         return this;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username);
+        return Objects.hash(id, todos, username);
     }
 
     @Override
@@ -51,13 +65,13 @@ public class UserCore implements Todoable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        UserCore other = (UserCore) obj;
-        return Objects.equals(id, other.id) && Objects.equals(username, other.username);
+        CurrentUser other = (CurrentUser) obj;
+        return Objects.equals(id, other.id) && Objects.equals(todos, other.todos) && Objects.equals(username, other.username);
     }
 
     @Override
     public String toString() {
-        return "UserCore [id=" + id + ", username=" + username + "]";
+        return "CurrentUser [id=" + id + ", todos=" + todos + ", username=" + username + "]";
     }
 
 }
