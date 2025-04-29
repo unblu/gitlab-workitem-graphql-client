@@ -50,6 +50,7 @@ import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
 import graphql.gitlab.model.ProjectContainingIssueBoards;
 import graphql.gitlab.model.ProjectContainingSingleIssueBoard;
+import graphql.gitlab.model.TodoStateEnum;
 import graphql.gitlab.model.UpdateBoardInput;
 import graphql.gitlab.model.UpdateBoardListInput;
 import graphql.gitlab.model.UpdateBoardListPayload;
@@ -87,7 +88,7 @@ public interface WorkitemClientApi {
      * Get information about current user.
      */
     @Query("currentUser")
-    CurrentUser getCurrentUserTodos(@NestedParameter("todos") @Name("after") String todosAfter);
+    CurrentUser getCurrentUserTodos(@NestedParameter("todos") @Name("state") TodoStateEnum todosState, @NestedParameter("todos") @Name("after") String todosAfter);
 
     @Query("epicBoardList")
     EpicList getEpicBoardList(@Name("id") @NonNull BoardsEpicListID id);

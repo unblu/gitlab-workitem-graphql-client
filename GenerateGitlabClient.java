@@ -444,6 +444,12 @@ class GenerateGitlabClient {
                                 .setJavaMethodName("getCurrentUserTodos") //
                                 .addNestedParameter(new NestedParameter()
                                         .setGraphQlNestedParameterPath("todos")
+                                        .setGraphQlName("state")
+                                        .setParameterType("graphql.gitlab.model.TodoStateEnum") //
+                                        .setParameterName("todosState") //
+                                ) //
+                                .addNestedParameter(new NestedParameter()
+                                        .setGraphQlNestedParameterPath("todos")
                                         .setGraphQlName("after")
                                         .setParameterType("String") //
                                         .setParameterName("todosAfter") //
