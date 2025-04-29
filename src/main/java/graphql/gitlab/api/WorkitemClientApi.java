@@ -87,7 +87,7 @@ public interface WorkitemClientApi {
      * Get information about current user.
      */
     @Query("currentUser")
-    CurrentUser getCurrentUserTodos();
+    CurrentUser getCurrentUserTodos(@NestedParameter("todos") @Name("after") String todosAfter);
 
     @Query("epicBoardList")
     EpicList getEpicBoardList(@Name("id") @NonNull BoardsEpicListID id);

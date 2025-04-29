@@ -442,6 +442,12 @@ class GenerateGitlabClient {
                                         .getName())
                                 .setFieldName("currentUser")
                                 .setJavaMethodName("getCurrentUserTodos") //
+                                .addNestedParameter(new NestedParameter()
+                                        .setGraphQlNestedParameterPath("todos")
+                                        .setGraphQlName("after")
+                                        .setParameterType("String") //
+                                        .setParameterName("todosAfter") //
+                                ) //
                         )
                         .addFilter(typesFilter)//
                         .addFilter(new TypesFilter()
