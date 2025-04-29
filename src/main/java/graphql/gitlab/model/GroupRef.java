@@ -4,13 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
-@Name("GroupContainingEpicBoards")
-public class GroupContainingEpicBoards implements Todoable {
-
-    /**
-     * Find epic boards. Deprecated in GitLab 17.5: Replaced by WorkItem type.
-     */
-    private EpicBoardConnection epicBoards;
+@Name("GroupRef")
+public class GroupRef implements Todoable {
 
     /**
      * Full name of the namespace.
@@ -37,20 +32,11 @@ public class GroupContainingEpicBoards implements Todoable {
      */
     private String webUrl;
 
-    public EpicBoardConnection getEpicBoards() {
-        return epicBoards;
-    }
-
-    public GroupContainingEpicBoards setEpicBoards(EpicBoardConnection epicBoards) {
-        this.epicBoards = epicBoards;
-        return this;
-    }
-
     public String getFullName() {
         return fullName;
     }
 
-    public GroupContainingEpicBoards setFullName(String fullName) {
+    public GroupRef setFullName(String fullName) {
         this.fullName = fullName;
         return this;
     }
@@ -59,7 +45,7 @@ public class GroupContainingEpicBoards implements Todoable {
         return fullPath;
     }
 
-    public GroupContainingEpicBoards setFullPath(String fullPath) {
+    public GroupRef setFullPath(String fullPath) {
         this.fullPath = fullPath;
         return this;
     }
@@ -68,7 +54,7 @@ public class GroupContainingEpicBoards implements Todoable {
         return id;
     }
 
-    public GroupContainingEpicBoards setId(String id) {
+    public GroupRef setId(String id) {
         this.id = id;
         return this;
     }
@@ -77,7 +63,7 @@ public class GroupContainingEpicBoards implements Todoable {
         return name;
     }
 
-    public GroupContainingEpicBoards setName(String name) {
+    public GroupRef setName(String name) {
         this.name = name;
         return this;
     }
@@ -86,14 +72,14 @@ public class GroupContainingEpicBoards implements Todoable {
         return webUrl;
     }
 
-    public GroupContainingEpicBoards setWebUrl(String webUrl) {
+    public GroupRef setWebUrl(String webUrl) {
         this.webUrl = webUrl;
         return this;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(epicBoards, fullName, fullPath, id, name, webUrl);
+        return Objects.hash(fullName, fullPath, id, name, webUrl);
     }
 
     @Override
@@ -104,13 +90,13 @@ public class GroupContainingEpicBoards implements Todoable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        GroupContainingEpicBoards other = (GroupContainingEpicBoards) obj;
-        return Objects.equals(epicBoards, other.epicBoards) && Objects.equals(fullName, other.fullName) && Objects.equals(fullPath, other.fullPath) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(webUrl, other.webUrl);
+        GroupRef other = (GroupRef) obj;
+        return Objects.equals(fullName, other.fullName) && Objects.equals(fullPath, other.fullPath) && Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(webUrl, other.webUrl);
     }
 
     @Override
     public String toString() {
-        return "GroupContainingEpicBoards [epicBoards=" + epicBoards + ", fullName=" + fullName + ", fullPath=" + fullPath + ", id=" + id + ", name=" + name + ", webUrl=" + webUrl + "]";
+        return "GroupRef [fullName=" + fullName + ", fullPath=" + fullPath + ", id=" + id + ", name=" + name + ", webUrl=" + webUrl + "]";
     }
 
 }

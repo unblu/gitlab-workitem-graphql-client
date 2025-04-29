@@ -96,6 +96,14 @@ class GenerateGitlabClient {
         Type project = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Project");
         Type board = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Board");
         Type epicBoard = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "EpicBoard");
+        Type todo = SchemaUtil.getTypeByKindAndName(schema, Kind.OBJECT, "Todo");
+
+        Field projectField = SchemaUtil.getFieldByName(schema, todo, "project");
+        projectField.getType()
+                .setName("ProjectRef");
+        Field groupField = SchemaUtil.getFieldByName(schema, todo, "group");
+        groupField.getType()
+                .setName("GroupRef");
 
         // Those fixes (wrong ID type, same as issue https://gitlab.com/gitlab-org/gitlab/-/issues/499834) have to be done at server side:
         SchemaUtil.getFieldByName(schema, boardList, "id")
@@ -108,14 +116,23 @@ class GenerateGitlabClient {
                 .getOfType()
                 .setName("BoardID");
 
+        SchemaUtil.getFieldByName(schema, todo, "id")
+                .getType()
+                .getOfType()
+                .setName("TodoID");
+
         schema.getTypes()
                 .add(createWorkItemConnectionRef());
         schema.getTypes()
                 .add(createWorkItemRef());
         schema.getTypes()
-                .add(createBoardRef(mapper, board));
+                .add(createRefType(mapper, board));
         schema.getTypes()
-                .add(createEpicBoardRef(mapper, epicBoard));
+                .add(createRefType(mapper, epicBoard));
+        schema.getTypes()
+                .add(createRefType(mapper, project));
+        schema.getTypes()
+                .add(createRefType(mapper, group));
         schema.getTypes()
                 .add(createProjectContainingSingleIssueBoard(mapper, project));
         schema.getTypes()
@@ -166,11 +183,13 @@ class GenerateGitlabClient {
                 .addIncludeName("IterationCadence") //
                 .addIncludeName("TimeboxReport") //
                 .addIncludeName("Group") //
+                .addIncludeName("GroupRef") //
                 .addIncludeName("GroupContainingSingleEpicBoard") //
                 .addIncludeName("GroupContainingSingleIssueBoard") //
                 .addIncludeName("GroupContainingEpicBoards") //
                 .addIncludeName("GroupContainingIssueBoards") //
                 .addIncludeName("Project") //
+                .addIncludeName("ProjectRef") //
                 .addIncludeName("ProjectContainingSingleIssueBoard") //
                 .addIncludeName("ProjectContainingIssueBoards") //
                 .addIncludeName("ReleaseConnection") //
@@ -191,6 +210,7 @@ class GenerateGitlabClient {
                 .addIncludeName("EpicBoardRef") //
                 .addIncludeName("EpicListConnection") //
                 .addIncludeName("EpicList") //
+                .addIncludeName("CurrentUser") //
                 // --- ADDITIONAL TYPES ---
                 .addIncludeName("WorkItemRef") //
                 .addIncludeName("WorkItemConnectionRef") //
@@ -215,7 +235,9 @@ class GenerateGitlabClient {
                 .addIncludeName("UpdateBoardListPayload") //
                 .addIncludeName("UpdateEpicBoardListPayload") //
                 .addIncludeName("DestroyBoardListPayload") //
-                .addIncludeName("EpicBoardListDestroyPayload");
+                .addIncludeName("EpicBoardListDestroyPayload") //
+                .addIncludeName("TodoMarkDonePayload") //
+        ;
         Config config = new Config()
                 .setSchema(schema)
                 .setDefaultCustomScalarMapping(CustomScalarMappingStrategy.CREATE_CUSTOM_SCALAR_CLASS)
@@ -435,6 +457,26 @@ class GenerateGitlabClient {
                                 .setFieldName("epicBoardListDestroy")
                                 .setJavaMethodName("deleteEpicBoardList") //
                         )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getQueryType(schema)
+                                        .getName())
+                                .setFieldName("currentUser")
+                                .setJavaMethodName("getCurrentUserTodos") //
+                                .addNestedParameter(new NestedParameter()
+                                        .setGraphQlNestedParameterPath("todos")
+                                        .setGraphQlName("after")
+                                        .setParameterType("String") //
+                                        .setParameterName("todosAfter") //
+                                ) //
+                        )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getMutationType(schema)
+                                        .getName())
+                                .setFieldName("todoMarkDone")
+                                .setJavaMethodName("todoMarkDone") //
+                        )
                         .addFilter(typesFilter)//
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.SCALAR)
@@ -453,6 +495,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("NoteableID") //
                                 .addIncludeName("MilestoneID") //
                                 .addIncludeName("NoteID") //
+                                .addIncludeName("TodoID") //
                                 .addIncludeName("WorkItemID") //
                                 .addIncludeName("WorkItemsTypeID") //
                                 .addIncludeName("WorkItemsRelatedWorkItemLinkID") //
@@ -460,7 +503,7 @@ class GenerateGitlabClient {
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.INTERFACE)
                                 // .addIncludeName("User") //
-                                // .addIncludeName("Todoable") //
+                                .addIncludeName("Todoable") //
                                 // .addIncludeName("TimeboxReportInterface") //
                                 // .addIncludeName("CurrentUserTodos") //
                                 // .addIncludeName("WorkItemWidgetDefinition") //
@@ -478,6 +521,9 @@ class GenerateGitlabClient {
                                 .addIncludeName("NotesFilterType") //
                                 .addIncludeName("ListLimitMetric") //
                                 .addIncludeName("IterationState") //
+                                .addIncludeName("TodoActionEnum") //
+                                .addIncludeName("TodoStateEnum") //
+                                .addIncludeName("TodoTargetEnum") //
                                 // ---- MUTATION objects ----
                                 .addIncludeName("WorkItemStateEvent") //
                                 .addIncludeName("RelativePositionType") //
@@ -494,6 +540,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("project") //
                                 .addIncludeName("boardList") //
                                 .addIncludeName("epicBoardList") //
+                                .addIncludeName("currentUser") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -553,6 +600,13 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("CurrentUser")
+                                .addIncludeName("id") //
+                                .addIncludeName("username") //
+                                .addIncludeName("todos") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItem")
                                 .addIncludeName("archived") //
                                 // .addIncludeName("author") //
@@ -607,6 +661,9 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.INTERFACE)
                                 .setTypeName("WorkItemWidget")) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.INTERFACE)
+                                .setTypeName("Todoable")) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItemWidgetAssignees")
@@ -780,6 +837,7 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("TodoConnection")
                                 .addIncludeName("nodes") //
+                                .addIncludeName("pageInfo") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -909,6 +967,16 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("GroupRef")
+                                .addIncludeName("fullName") //
+                                .addIncludeName("fullPath") //
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("webUrl") //
+                        //XXX .addIncludeName("workItem") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("GroupContainingSingleIssueBoard")
                                 .addIncludeName("board") // --> in GroupContainingSingleIssueBoard
                                 .addIncludeName("fullName") //
@@ -978,9 +1046,21 @@ class GenerateGitlabClient {
                                 .addIncludeName("nameWithNamespace") //
                                 .addIncludeName("namespace") //
                                 .addIncludeName("path") //
+                                .addIncludeName("fullPath") //
                                 .addIncludeName("webUrl") //
                                 .addIncludeName("workItemTypes") //
                                 .addIncludeName("labels") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("ProjectRef")
+                                // .addIncludeName("group") //
+                                .addIncludeName("id") //
+                                .addIncludeName("name") //
+                                .addIncludeName("nameWithNamespace") //
+                                .addIncludeName("path") //
+                                .addIncludeName("fullPath") //
+                                .addIncludeName("webUrl") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1020,7 +1100,7 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("Todo")
                                 .addIncludeName("action") //
-                                .addIncludeName("author") //
+                                // .addIncludeName("author") //
                                 .addIncludeName("body") //
                                 .addIncludeName("createdAt") //
                                 .addIncludeName("group") //
@@ -1030,10 +1110,10 @@ class GenerateGitlabClient {
                                 .addIncludeName("project") //
                                 .addIncludeName("snoozedUntil") //
                                 .addIncludeName("state") //
-                                .addIncludeName("target") //
-                                .addIncludeName("targetEntity") //
-                                .addIncludeName("targetType") //
-                                .addIncludeName("targetUrl") //
+                        // .addIncludeName("target") //
+                        // .addIncludeName("targetEntity") //
+                        // .addIncludeName("targetType") //
+                        // .addIncludeName("targetUrl") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1219,6 +1299,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("updateEpicBoardList") //
                                 .addIncludeName("destroyBoardList") //
                                 .addIncludeName("epicBoardListDestroy") //
+                                .addIncludeName("todoMarkDone") //
 
                         ) //
                         .addFilter(new ArgsFilter()
@@ -1368,6 +1449,13 @@ class GenerateGitlabClient {
                                 .setFieldName("epicBoardListDestroy") //
                                 .addIncludeName("input") //
                         ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getMutationType()
+                                        .getName())
+                                .setFieldName("todoMarkDone") //
+                                .addIncludeName("input") //
+                        ) //
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .addIncludeName("WorkItemCreateInput") //
@@ -1400,6 +1488,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("UpdateEpicBoardListInput") //
                                 .addIncludeName("DestroyBoardListInput") //
                                 .addIncludeName("EpicBoardListDestroyInput") //
+                                .addIncludeName("TodoMarkDoneInput") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
@@ -1408,6 +1497,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("assigneesWidget") //
                                 .addIncludeName("descriptionWidget") //
                                 .addIncludeName("namespacePath") //
+                                .addIncludeName("createdAt") //
                                 .addIncludeName("title") //
                                 .addIncludeName("workItemTypeId") //
                                 .addIncludeName("labelsWidget") //
@@ -1580,6 +1670,13 @@ class GenerateGitlabClient {
                                 .addIncludeName("errors") //
                                 .addIncludeName("clientMutationId") //
                                 .addIncludeName("list") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("TodoMarkDonePayload")
+                                .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
+                                .addIncludeName("todo") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
@@ -1780,6 +1877,12 @@ class GenerateGitlabClient {
                                 .addIncludeName("clientMutationId") //
                                 .addIncludeName("listId") //
                         ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("TodoMarkDoneInput")
+                                .addIncludeName("clientMutationId") //
+                                .addIncludeName("id") //
+                        ) //
                 )
                 .setModelPackageName("gitlab.model")
                 .setClientApiPackageName("gitlab.api")
@@ -1860,12 +1963,8 @@ class GenerateGitlabClient {
         return config;
     }
 
-    private static Type createBoardRef(ObjectMapper mapper, Type board) {
-        return duplicateType(mapper, board, "BoardRef");
-    }
-
-    private static Type createEpicBoardRef(ObjectMapper mapper, Type epicBoard) {
-        return duplicateType(mapper, epicBoard, "EpicBoardRef");
+    private static Type createRefType(ObjectMapper mapper, Type type) {
+        return duplicateType(mapper, type, type.getName() + "Ref");
     }
 
     private static Type createGroupContainingSingleIssueBoard(ObjectMapper mapper, Type group) {

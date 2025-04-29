@@ -5,7 +5,12 @@ import java.util.Objects;
 import org.eclipse.microprofile.graphql.Name;
 
 @Name("Project")
-public class Project {
+public class Project implements Todoable {
+
+    /**
+     * Full path of the project.
+     */
+    private String fullPath;
 
     /**
      * ID of the project.
@@ -46,6 +51,15 @@ public class Project {
      * Work item types available to the project.
      */
     private WorkItemTypeConnection workItemTypes;
+
+    public String getFullPath() {
+        return fullPath;
+    }
+
+    public Project setFullPath(String fullPath) {
+        this.fullPath = fullPath;
+        return this;
+    }
 
     public String getId() {
         return id;
@@ -121,7 +135,7 @@ public class Project {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, labels, name, nameWithNamespace, namespace, path, webUrl, workItemTypes);
+        return Objects.hash(fullPath, id, labels, name, nameWithNamespace, namespace, path, webUrl, workItemTypes);
     }
 
     @Override
@@ -133,12 +147,12 @@ public class Project {
         if (getClass() != obj.getClass())
             return false;
         Project other = (Project) obj;
-        return Objects.equals(id, other.id) && Objects.equals(labels, other.labels) && Objects.equals(name, other.name) && Objects.equals(nameWithNamespace, other.nameWithNamespace) && Objects.equals(namespace, other.namespace) && Objects.equals(path, other.path) && Objects.equals(webUrl, other.webUrl) && Objects.equals(workItemTypes, other.workItemTypes);
+        return Objects.equals(fullPath, other.fullPath) && Objects.equals(id, other.id) && Objects.equals(labels, other.labels) && Objects.equals(name, other.name) && Objects.equals(nameWithNamespace, other.nameWithNamespace) && Objects.equals(namespace, other.namespace) && Objects.equals(path, other.path) && Objects.equals(webUrl, other.webUrl) && Objects.equals(workItemTypes, other.workItemTypes);
     }
 
     @Override
     public String toString() {
-        return "Project [id=" + id + ", labels=" + labels + ", name=" + name + ", nameWithNamespace=" + nameWithNamespace + ", namespace=" + namespace + ", path=" + path + ", webUrl=" + webUrl + ", workItemTypes=" + workItemTypes + "]";
+        return "Project [fullPath=" + fullPath + ", id=" + id + ", labels=" + labels + ", name=" + name + ", nameWithNamespace=" + nameWithNamespace + ", namespace=" + namespace + ", path=" + path + ", webUrl=" + webUrl + ", workItemTypes=" + workItemTypes + "]";
     }
 
 }

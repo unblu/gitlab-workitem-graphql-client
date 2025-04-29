@@ -5,24 +5,21 @@ import java.util.Objects;
 import org.eclipse.microprofile.graphql.Name;
 
 /**
- * A `WorkItemID` is a global ID. It is encoded as a string.
+ * A `TodoID` is a global ID. It is encoded as a string.
  *
- * An example `WorkItemID` is: `"gid://gitlab/WorkItem/1"`.
- *
- * While we transition from Issues into Work Items this type will temporarily support<br>
- * `IssueID` like: `"gid://gitlab/Issue/1"`. This behavior will be removed without notice in the future.
+ * An example `TodoID` is: `"gid://gitlab/Todo/1"`.
  */
-@Name("WorkItemID")
-public class WorkItemID {
+@Name("TodoID")
+public class TodoID {
 
     private String value;
 
-    public WorkItemID(String value) {
+    public TodoID(String value) {
         this.value = value;
     }
 
-    public static WorkItemID valueOf(String value) {
-        return new WorkItemID(value);
+    public static TodoID valueOf(String value) {
+        return new TodoID(value);
     }
 
     @Override
@@ -47,7 +44,7 @@ public class WorkItemID {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        WorkItemID other = (WorkItemID) obj;
+        TodoID other = (TodoID) obj;
         return Objects.equals(value, other.value);
     }
 }

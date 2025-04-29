@@ -28,6 +28,11 @@ public class WorkItemCreateInput implements GitLabInputRequest {
     private WorkItemWidgetDescriptionInput descriptionWidget;
 
     /**
+     * Timestamp when the work item was created. Available only for admins and project owners.
+     */
+    private Time createdAt;
+
+    /**
      * Input for hierarchy widget.
      */
     private WorkItemWidgetHierarchyCreateInput hierarchyWidget;
@@ -79,6 +84,15 @@ public class WorkItemCreateInput implements GitLabInputRequest {
         return this;
     }
 
+    public Time getCreatedAt() {
+        return createdAt;
+    }
+
+    public WorkItemCreateInput setCreatedAt(Time createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
     public WorkItemWidgetHierarchyCreateInput getHierarchyWidget() {
         return hierarchyWidget;
     }
@@ -126,7 +140,7 @@ public class WorkItemCreateInput implements GitLabInputRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientMutationId, assigneesWidget, descriptionWidget, hierarchyWidget, labelsWidget, namespacePath, title, workItemTypeId);
+        return Objects.hash(clientMutationId, assigneesWidget, descriptionWidget, createdAt, hierarchyWidget, labelsWidget, namespacePath, title, workItemTypeId);
     }
 
     @Override
@@ -138,12 +152,12 @@ public class WorkItemCreateInput implements GitLabInputRequest {
         if (getClass() != obj.getClass())
             return false;
         WorkItemCreateInput other = (WorkItemCreateInput) obj;
-        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(assigneesWidget, other.assigneesWidget) && Objects.equals(descriptionWidget, other.descriptionWidget) && Objects.equals(hierarchyWidget, other.hierarchyWidget) && Objects.equals(labelsWidget, other.labelsWidget) && Objects.equals(namespacePath, other.namespacePath) && Objects.equals(title, other.title) && Objects.equals(workItemTypeId, other.workItemTypeId);
+        return Objects.equals(clientMutationId, other.clientMutationId) && Objects.equals(assigneesWidget, other.assigneesWidget) && Objects.equals(descriptionWidget, other.descriptionWidget) && Objects.equals(createdAt, other.createdAt) && Objects.equals(hierarchyWidget, other.hierarchyWidget) && Objects.equals(labelsWidget, other.labelsWidget) && Objects.equals(namespacePath, other.namespacePath) && Objects.equals(title, other.title) && Objects.equals(workItemTypeId, other.workItemTypeId);
     }
 
     @Override
     public String toString() {
-        return "WorkItemCreateInput [clientMutationId=" + clientMutationId + ", assigneesWidget=" + assigneesWidget + ", descriptionWidget=" + descriptionWidget + ", hierarchyWidget=" + hierarchyWidget + ", labelsWidget=" + labelsWidget + ", namespacePath=" + namespacePath + ", title=" + title + ", workItemTypeId=" + workItemTypeId + "]";
+        return "WorkItemCreateInput [clientMutationId=" + clientMutationId + ", assigneesWidget=" + assigneesWidget + ", descriptionWidget=" + descriptionWidget + ", createdAt=" + createdAt + ", hierarchyWidget=" + hierarchyWidget + ", labelsWidget=" + labelsWidget + ", namespacePath=" + namespacePath + ", title=" + title + ", workItemTypeId=" + workItemTypeId + "]";
     }
 
 }

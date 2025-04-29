@@ -21,6 +21,7 @@ import graphql.gitlab.model.CreateBoardInput;
 import graphql.gitlab.model.CreateBoardPayload;
 import graphql.gitlab.model.CreateNoteInput;
 import graphql.gitlab.model.CreateNotePayload;
+import graphql.gitlab.model.CurrentUser;
 import graphql.gitlab.model.DestroyBoardInput;
 import graphql.gitlab.model.DestroyBoardListInput;
 import graphql.gitlab.model.DestroyBoardListPayload;
@@ -49,6 +50,8 @@ import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
 import graphql.gitlab.model.ProjectContainingIssueBoards;
 import graphql.gitlab.model.ProjectContainingSingleIssueBoard;
+import graphql.gitlab.model.TodoMarkDoneInput;
+import graphql.gitlab.model.TodoMarkDonePayload;
 import graphql.gitlab.model.UpdateBoardInput;
 import graphql.gitlab.model.UpdateBoardListInput;
 import graphql.gitlab.model.UpdateBoardListPayload;
@@ -81,6 +84,12 @@ public interface WorkitemClientApi {
      */
     @Query("boardList")
     BoardList getIssueBoardList(@Name("id") @NonNull ListID id);
+
+    /**
+     * Get information about current user.
+     */
+    @Query("currentUser")
+    CurrentUser getCurrentUserTodos(@NestedParameter("todos") @Name("after") String todosAfter);
 
     @Query("epicBoardList")
     EpicList getEpicBoardList(@Name("id") @NonNull BoardsEpicListID id);
@@ -143,9 +152,9 @@ public interface WorkitemClientApi {
     CreateBoardPayload createIssueBoard(@Name("input") @NonNull @Source CreateBoardInput input);
 
     /**
-     * Creates a Note.
-     * If the body of the Note contains only quick actions,
-     * the Note will be destroyed during an update, and no Note will be
+     * Creates a Note.<br>
+     * If the body of the Note contains only quick actions,<br>
+     * the Note will be destroyed during an update, and no Note will be<br>
      * returned.
      */
     @Mutation("createNote")
@@ -178,6 +187,9 @@ public interface WorkitemClientApi {
     @Mutation("epicBoardUpdate")
     EpicBoardUpdatePayload updateEpicBoard(@Name("input") @NonNull @Source EpicBoardUpdateInput input);
 
+    @Mutation("todoMarkDone")
+    TodoMarkDonePayload todoMarkDone(@Name("input") @NonNull @Source TodoMarkDoneInput input);
+
     @Mutation("updateBoard")
     UpdateBoardPayload updateIssueBoard(@Name("input") @NonNull @Source UpdateBoardInput input);
 
@@ -188,9 +200,9 @@ public interface WorkitemClientApi {
     UpdateEpicBoardListPayload updateEpicBoardList(@Name("input") @NonNull @Source UpdateEpicBoardListInput input);
 
     /**
-     * Updates a Note.
-     * If the body of the Note contains only quick actions,
-     * the Note will be destroyed during an update, and no Note will be
+     * Updates a Note.<br>
+     * If the body of the Note contains only quick actions,<br>
+     * the Note will be destroyed during an update, and no Note will be<br>
      * returned.
      */
     @Mutation("updateNote")

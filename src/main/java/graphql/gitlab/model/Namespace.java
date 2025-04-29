@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.eclipse.microprofile.graphql.Name;
 
 @Name("Namespace")
-public class Namespace {
+public class Namespace implements Todoable {
 
     /**
      * Full path of the namespace.

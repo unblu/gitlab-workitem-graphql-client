@@ -8,7 +8,7 @@ import org.eclipse.microprofile.graphql.Name;
  * Duplicate of `WorkItem` to avoid SRGQLDC035008: Field recursion found
  */
 @Name("WorkItemRef")
-public class WorkItemRef {
+public class WorkItemRef implements Todoable {
 
     /**
      * Whether the work item belongs to an archived project. Always false for group level work items. Introduced in GitLab 16.5: **Status**: Experiment.
