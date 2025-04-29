@@ -445,6 +445,7 @@ class GenerateGitlabClient {
                                 .addNestedParameter(new NestedParameter()
                                         .setGraphQlNestedParameterPath("todos")
                                         .setGraphQlName("state")
+                                        .setNonNull()
                                         .setParameterType("graphql.gitlab.model.TodoStateEnum") //
                                         .setParameterName("todosState") //
                                 ) //
