@@ -608,6 +608,8 @@ class GenerateGitlabClient {
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
                                 .setTypeName("WorkItem")
+                                .addIncludeName("duplicatedToWorkItemUrl") //
+                                .addIncludeName("movedToWorkItemUrl") //
                                 .addIncludeName("archived") //
                                 // .addIncludeName("author") //
                                 .addIncludeName("closedAt") //

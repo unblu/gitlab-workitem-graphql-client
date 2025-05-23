@@ -29,6 +29,11 @@ public class WorkItem implements Todoable {
     private Time createdAt;
 
     /**
+     * URL of the work item that the work item is marked as a duplicate of.
+     */
+    private String duplicatedToWorkItemUrl;
+
+    /**
      * Global ID of the work item.
      */
     private WorkItemID id;
@@ -42,6 +47,11 @@ public class WorkItem implements Todoable {
      * Lock version of the work item. Incremented each time the work item is updated.
      */
     private Integer lockVersion;
+
+    /**
+     * URL of the work item that the work item was moved to.
+     */
+    private String movedToWorkItemUrl;
 
     /**
      * Namespace the work item belongs to. Introduced in GitLab 15.10: **Status**: Experiment.
@@ -119,6 +129,15 @@ public class WorkItem implements Todoable {
         return this;
     }
 
+    public String getDuplicatedToWorkItemUrl() {
+        return duplicatedToWorkItemUrl;
+    }
+
+    public WorkItem setDuplicatedToWorkItemUrl(String duplicatedToWorkItemUrl) {
+        this.duplicatedToWorkItemUrl = duplicatedToWorkItemUrl;
+        return this;
+    }
+
     public WorkItemID getId() {
         return id;
     }
@@ -143,6 +162,15 @@ public class WorkItem implements Todoable {
 
     public WorkItem setLockVersion(Integer lockVersion) {
         this.lockVersion = lockVersion;
+        return this;
+    }
+
+    public String getMovedToWorkItemUrl() {
+        return movedToWorkItemUrl;
+    }
+
+    public WorkItem setMovedToWorkItemUrl(String movedToWorkItemUrl) {
+        this.movedToWorkItemUrl = movedToWorkItemUrl;
         return this;
     }
 
@@ -220,7 +248,7 @@ public class WorkItem implements Todoable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(archived, closedAt, confidential, createdAt, id, iid, lockVersion, namespace, reference, state, title, updatedAt, webUrl, widgets, workItemType);
+        return Objects.hash(archived, closedAt, confidential, createdAt, duplicatedToWorkItemUrl, id, iid, lockVersion, movedToWorkItemUrl, namespace, reference, state, title, updatedAt, webUrl, widgets, workItemType);
     }
 
     @Override
@@ -232,12 +260,12 @@ public class WorkItem implements Todoable {
         if (getClass() != obj.getClass())
             return false;
         WorkItem other = (WorkItem) obj;
-        return Objects.equals(archived, other.archived) && Objects.equals(closedAt, other.closedAt) && Objects.equals(confidential, other.confidential) && Objects.equals(createdAt, other.createdAt) && Objects.equals(id, other.id) && Objects.equals(iid, other.iid) && Objects.equals(lockVersion, other.lockVersion) && Objects.equals(namespace, other.namespace) && Objects.equals(reference, other.reference) && Objects.equals(state, other.state) && Objects.equals(title, other.title) && Objects.equals(updatedAt, other.updatedAt) && Objects.equals(webUrl, other.webUrl) && Objects.equals(widgets, other.widgets) && Objects.equals(workItemType, other.workItemType);
+        return Objects.equals(archived, other.archived) && Objects.equals(closedAt, other.closedAt) && Objects.equals(confidential, other.confidential) && Objects.equals(createdAt, other.createdAt) && Objects.equals(duplicatedToWorkItemUrl, other.duplicatedToWorkItemUrl) && Objects.equals(id, other.id) && Objects.equals(iid, other.iid) && Objects.equals(lockVersion, other.lockVersion) && Objects.equals(movedToWorkItemUrl, other.movedToWorkItemUrl) && Objects.equals(namespace, other.namespace) && Objects.equals(reference, other.reference) && Objects.equals(state, other.state) && Objects.equals(title, other.title) && Objects.equals(updatedAt, other.updatedAt) && Objects.equals(webUrl, other.webUrl) && Objects.equals(widgets, other.widgets) && Objects.equals(workItemType, other.workItemType);
     }
 
     @Override
     public String toString() {
-        return "WorkItem [archived=" + archived + ", closedAt=" + closedAt + ", confidential=" + confidential + ", createdAt=" + createdAt + ", id=" + id + ", iid=" + iid + ", lockVersion=" + lockVersion + ", namespace=" + namespace + ", reference=" + reference + ", state=" + state + ", title=" + title + ", updatedAt=" + updatedAt + ", webUrl=" + webUrl + ", widgets=" + widgets + ", workItemType=" + workItemType + "]";
+        return "WorkItem [archived=" + archived + ", closedAt=" + closedAt + ", confidential=" + confidential + ", createdAt=" + createdAt + ", duplicatedToWorkItemUrl=" + duplicatedToWorkItemUrl + ", id=" + id + ", iid=" + iid + ", lockVersion=" + lockVersion + ", movedToWorkItemUrl=" + movedToWorkItemUrl + ", namespace=" + namespace + ", reference=" + reference + ", state=" + state + ", title=" + title + ", updatedAt=" + updatedAt + ", webUrl=" + webUrl + ", widgets=" + widgets + ", workItemType=" + workItemType + "]";
     }
 
 }
