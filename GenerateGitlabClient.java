@@ -239,6 +239,7 @@ class GenerateGitlabClient {
                 .addIncludeName("TodoMarkDonePayload") //
         ;
         Config config = new Config()
+                .setUseJacksonAnnotation()
                 .setSchema(schema)
                 .setDefaultCustomScalarMapping(CustomScalarMappingStrategy.CREATE_CUSTOM_SCALAR_CLASS)
                 .setScope(new Scope()

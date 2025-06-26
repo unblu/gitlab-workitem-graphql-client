@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * An emoji awarded by a user
  */
@@ -50,6 +52,19 @@ public class AwardEmoji {
     public AwardEmoji setUnicodeVersion(String unicodeVersion) {
         this.unicodeVersion = unicodeVersion;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "AwardEmoji";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"AwardEmoji".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

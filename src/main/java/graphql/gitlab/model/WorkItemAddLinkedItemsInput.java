@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -67,6 +69,19 @@ public class WorkItemAddLinkedItemsInput implements GitLabInputRequest {
     public WorkItemAddLinkedItemsInput setWorkItemsIds(List<WorkItemID> workItemsIds) {
         this.workItemsIds = workItemsIds;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemAddLinkedItemsInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemAddLinkedItemsInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

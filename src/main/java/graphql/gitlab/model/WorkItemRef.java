@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Duplicate of `WorkItem` to avoid SRGQLDC035008: Field recursion found
  */
@@ -162,6 +164,19 @@ public class WorkItemRef implements Todoable {
     public WorkItemRef setWorkItemType(WorkItemType workItemType) {
         this.workItemType = workItemType;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemRef";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemRef".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

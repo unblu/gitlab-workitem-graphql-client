@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabPayloadResponse;
 
 /**
@@ -53,6 +55,19 @@ public class UpdateNotePayload implements GitLabPayloadResponse {
     public UpdateNotePayload setNote(Note note) {
         this.note = note;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "UpdateNotePayload";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"UpdateNotePayload".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

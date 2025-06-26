@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -38,6 +40,19 @@ public class TodoMarkDoneInput implements GitLabInputRequest {
     public TodoMarkDoneInput setId(TodoID id) {
         this.id = id;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "TodoMarkDoneInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"TodoMarkDoneInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("GroupRef")
 public class GroupRef implements Todoable {
 
@@ -75,6 +77,19 @@ public class GroupRef implements Todoable {
     public GroupRef setWebUrl(String webUrl) {
         this.webUrl = webUrl;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "GroupRef";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"GroupRef".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

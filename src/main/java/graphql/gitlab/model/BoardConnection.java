@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * The connection type for Board.
  */
@@ -23,6 +25,19 @@ public class BoardConnection {
     public BoardConnection setNodes(List<BoardRef> nodes) {
         this.nodes = nodes;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "BoardConnection";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"BoardConnection".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

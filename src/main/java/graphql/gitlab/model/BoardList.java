@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a list for an issue board
  */
@@ -176,6 +178,19 @@ public class BoardList {
     public BoardList setTitle(String title) {
         this.title = title;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "BoardList";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"BoardList".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

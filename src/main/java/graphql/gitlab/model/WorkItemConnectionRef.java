@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Duplicate of `WorkItemConnection` to avoid SRGQLDC035008: Field recursion found
  */
@@ -37,6 +39,19 @@ public class WorkItemConnectionRef {
     public WorkItemConnectionRef setNodes(List<WorkItemRef> nodes) {
         this.nodes = nodes;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemConnectionRef";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemConnectionRef".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

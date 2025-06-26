@@ -4,6 +4,10 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Date represented in ISO 8601
  */
@@ -12,7 +16,8 @@ public class Date {
 
     private String value;
 
-    public Date(String value) {
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public Date(@JsonProperty("value") String value) {
         this.value = value;
     }
 
@@ -21,6 +26,7 @@ public class Date {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return value;
     }

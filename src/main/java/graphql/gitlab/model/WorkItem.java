@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("WorkItem")
 public class WorkItem implements Todoable {
 
@@ -244,6 +246,19 @@ public class WorkItem implements Todoable {
     public WorkItem setWorkItemType(WorkItemType workItemType) {
         this.workItemType = workItemType;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItem";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItem".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

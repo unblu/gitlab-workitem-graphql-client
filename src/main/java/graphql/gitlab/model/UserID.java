@@ -4,6 +4,10 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * A `UserID` is a global ID. It is encoded as a string.
  *
@@ -14,7 +18,8 @@ public class UserID {
 
     private String value;
 
-    public UserID(String value) {
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public UserID(@JsonProperty("value") String value) {
         this.value = value;
     }
 
@@ -23,6 +28,7 @@ public class UserID {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return value;
     }

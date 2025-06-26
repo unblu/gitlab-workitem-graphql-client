@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("Discussion")
 public class Discussion {
 
@@ -33,6 +35,19 @@ public class Discussion {
     public Discussion setNotes(NoteConnection notes) {
         this.notes = notes;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "Discussion";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"Discussion".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

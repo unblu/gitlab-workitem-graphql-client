@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -52,6 +54,19 @@ public class UpdateNoteInput implements GitLabInputRequest {
     public UpdateNoteInput setBody(String body) {
         this.body = body;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "UpdateNoteInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"UpdateNoteInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

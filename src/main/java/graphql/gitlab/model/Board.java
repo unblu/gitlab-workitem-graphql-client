@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a project or group issue board
  */
@@ -204,6 +206,19 @@ public class Board {
     public Board setWeight(Integer weight) {
         this.weight = weight;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "Board";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"Board".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

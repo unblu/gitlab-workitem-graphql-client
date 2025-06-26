@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -53,6 +55,19 @@ public class WorkItemRemoveLinkedItemsInput implements GitLabInputRequest {
     public WorkItemRemoveLinkedItemsInput setWorkItemsIds(List<WorkItemID> workItemsIds) {
         this.workItemsIds = workItemsIds;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemRemoveLinkedItemsInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemRemoveLinkedItemsInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

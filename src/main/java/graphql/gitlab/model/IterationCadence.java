@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents an iteration cadence
  */
@@ -134,6 +136,19 @@ public class IterationCadence {
     public IterationCadence setTitle(String title) {
         this.title = title;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "IterationCadence";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"IterationCadence".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

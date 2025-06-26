@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabPayloadResponse;
 
 /**
@@ -53,6 +55,19 @@ public class EpicBoardUpdatePayload implements GitLabPayloadResponse {
     public EpicBoardUpdatePayload setErrors(List<String> errors) {
         this.errors = errors;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "EpicBoardUpdatePayload";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"EpicBoardUpdatePayload".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

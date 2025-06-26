@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents an epic board
  */
@@ -120,6 +122,19 @@ public class EpicBoard {
     public EpicBoard setWebUrl(String webUrl) {
         this.webUrl = webUrl;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "EpicBoard";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"EpicBoard".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

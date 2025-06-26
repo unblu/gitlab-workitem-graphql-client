@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Core representation of a GitLab user.
  */
@@ -36,6 +38,19 @@ public class UserCore implements Todoable {
     public UserCore setUsername(String username) {
         this.username = username;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "UserCore";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"UserCore".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

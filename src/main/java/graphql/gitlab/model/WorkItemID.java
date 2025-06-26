@@ -4,6 +4,10 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * A `WorkItemID` is a global ID. It is encoded as a string.
  *
@@ -17,7 +21,8 @@ public class WorkItemID {
 
     private String value;
 
-    public WorkItemID(String value) {
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public WorkItemID(@JsonProperty("value") String value) {
         this.value = value;
     }
 
@@ -26,6 +31,7 @@ public class WorkItemID {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return value;
     }

@@ -4,6 +4,10 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Time represented in ISO 8601.
  *
@@ -16,7 +20,8 @@ public class Time {
 
     private String value;
 
-    public Time(String value) {
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public Time(@JsonProperty("value") String value) {
         this.value = value;
     }
 
@@ -25,6 +30,7 @@ public class Time {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return value;
     }

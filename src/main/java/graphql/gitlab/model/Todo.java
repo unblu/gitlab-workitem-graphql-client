@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Representing a to-do entry
  */
@@ -148,6 +150,19 @@ public class Todo {
     public Todo setState(TodoStateEnum state) {
         this.state = state;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "Todo";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"Todo".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

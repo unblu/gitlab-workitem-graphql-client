@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * The connection type for UserCore.
  */
@@ -23,6 +25,19 @@ public class UserCoreConnection {
     public UserCoreConnection setNodes(List<UserCore> nodes) {
         this.nodes = nodes;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "UserCoreConnection";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"UserCoreConnection".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

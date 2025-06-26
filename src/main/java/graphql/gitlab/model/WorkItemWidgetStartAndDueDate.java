@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a start and due date widget
  */
@@ -36,6 +38,19 @@ public class WorkItemWidgetStartAndDueDate implements WorkItemWidget {
     public WorkItemWidgetStartAndDueDate setStartDate(Date startDate) {
         this.startDate = startDate;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemWidgetStartAndDueDate";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemWidgetStartAndDueDate".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

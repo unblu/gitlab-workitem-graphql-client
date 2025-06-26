@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -109,6 +111,19 @@ public class EpicBoardCreateInput implements GitLabInputRequest {
     public EpicBoardCreateInput setGroupPath(String groupPath) {
         this.groupPath = groupPath;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "EpicBoardCreateInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"EpicBoardCreateInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

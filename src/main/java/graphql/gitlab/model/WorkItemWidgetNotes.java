@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a notes widget
  */
@@ -22,6 +24,19 @@ public class WorkItemWidgetNotes implements WorkItemWidget {
     public WorkItemWidgetNotes setDiscussions(DiscussionConnection discussions) {
         this.discussions = discussions;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemWidgetNotes";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemWidgetNotes".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

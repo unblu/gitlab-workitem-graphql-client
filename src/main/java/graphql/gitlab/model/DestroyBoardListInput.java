@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -38,6 +40,19 @@ public class DestroyBoardListInput implements GitLabInputRequest {
     public DestroyBoardListInput setListId(ListID listId) {
         this.listId = listId;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "DestroyBoardListInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"DestroyBoardListInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

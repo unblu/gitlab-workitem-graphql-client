@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -52,6 +54,19 @@ public class AwardEmojiAddInput implements GitLabInputRequest {
     public AwardEmojiAddInput setName(String name) {
         this.name = name;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "AwardEmojiAddInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"AwardEmojiAddInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

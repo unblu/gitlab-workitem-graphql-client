@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("WorkItemWidgetHierarchyCreateInput")
 public class WorkItemWidgetHierarchyCreateInput {
 
@@ -19,6 +21,19 @@ public class WorkItemWidgetHierarchyCreateInput {
     public WorkItemWidgetHierarchyCreateInput setParentId(WorkItemID parentId) {
         this.parentId = parentId;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemWidgetHierarchyCreateInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemWidgetHierarchyCreateInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

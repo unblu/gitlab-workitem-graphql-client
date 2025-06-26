@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -66,6 +68,19 @@ public class UpdateEpicBoardListInput implements GitLabInputRequest {
     public UpdateEpicBoardListInput setListId(BoardsEpicListID listId) {
         this.listId = listId;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "UpdateEpicBoardListInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"UpdateEpicBoardListInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

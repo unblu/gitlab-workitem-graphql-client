@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("GroupContainingEpicBoards")
 public class GroupContainingEpicBoards implements Todoable {
 
@@ -89,6 +91,19 @@ public class GroupContainingEpicBoards implements Todoable {
     public GroupContainingEpicBoards setWebUrl(String webUrl) {
         this.webUrl = webUrl;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "GroupContainingEpicBoards";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"GroupContainingEpicBoards".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

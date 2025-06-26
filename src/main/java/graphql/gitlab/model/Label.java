@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("Label")
 public class Label {
 
@@ -75,6 +77,19 @@ public class Label {
     public Label setTitle(String title) {
         this.title = title;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "Label";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"Label".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

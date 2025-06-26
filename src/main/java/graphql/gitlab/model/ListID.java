@@ -4,6 +4,10 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * A `ListID` is a global ID. It is encoded as a string.
  *
@@ -14,7 +18,8 @@ public class ListID {
 
     private String value;
 
-    public ListID(String value) {
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public ListID(@JsonProperty("value") String value) {
         this.value = value;
     }
 
@@ -23,6 +28,7 @@ public class ListID {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return value;
     }

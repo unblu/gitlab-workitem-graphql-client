@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.16.2'
     implementation 'org.eclipse.microprofile.graphql:microprofile-graphql-api:2.0'
     implementation "io.smallrye:smallrye-graphql-api:$smallrye_graphql_version"
     implementation "io.smallrye:smallrye-graphql-client-api:$smallrye_graphql_version"

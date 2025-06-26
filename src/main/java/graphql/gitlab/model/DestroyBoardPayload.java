@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabPayloadResponse;
 
 /**
@@ -53,6 +55,19 @@ public class DestroyBoardPayload implements GitLabPayloadResponse {
     public DestroyBoardPayload setErrors(List<String> errors) {
         this.errors = errors;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "DestroyBoardPayload";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"DestroyBoardPayload".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

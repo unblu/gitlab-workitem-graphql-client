@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -38,6 +40,19 @@ public class DestroyNoteInput implements GitLabInputRequest {
     public DestroyNoteInput setId(NoteID id) {
         this.id = id;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "DestroyNoteInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"DestroyNoteInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

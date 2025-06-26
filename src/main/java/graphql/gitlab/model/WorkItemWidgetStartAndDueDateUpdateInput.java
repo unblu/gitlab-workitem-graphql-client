@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.json.bind.annotation.JsonbProperty;
 
 @Name("WorkItemWidgetStartAndDueDateUpdateInput")
@@ -51,6 +53,19 @@ public class WorkItemWidgetStartAndDueDateUpdateInput {
     public WorkItemWidgetStartAndDueDateUpdateInput setIsFixed(Boolean isFixed) {
         this.isFixed = isFixed;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemWidgetStartAndDueDateUpdateInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemWidgetStartAndDueDateUpdateInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

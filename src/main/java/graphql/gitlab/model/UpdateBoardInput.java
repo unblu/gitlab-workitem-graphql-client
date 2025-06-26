@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -165,6 +167,19 @@ public class UpdateBoardInput implements GitLabInputRequest {
     public UpdateBoardInput setLabelIds(List<LabelID> labelIds) {
         this.labelIds = labelIds;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "UpdateBoardInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"UpdateBoardInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("WorkItemWidgetLabelsUpdateInput")
 public class WorkItemWidgetLabelsUpdateInput {
 
@@ -34,6 +36,19 @@ public class WorkItemWidgetLabelsUpdateInput {
     public WorkItemWidgetLabelsUpdateInput setRemoveLabelIds(List<LabelID> removeLabelIds) {
         this.removeLabelIds = removeLabelIds;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemWidgetLabelsUpdateInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemWidgetLabelsUpdateInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

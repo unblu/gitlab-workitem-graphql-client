@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("WorkItemWidgetLabelsCreateInput")
 public class WorkItemWidgetLabelsCreateInput {
 
@@ -20,6 +22,19 @@ public class WorkItemWidgetLabelsCreateInput {
     public WorkItemWidgetLabelsCreateInput setLabelIds(List<LabelID> labelIds) {
         this.labelIds = labelIds;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemWidgetLabelsCreateInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemWidgetLabelsCreateInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

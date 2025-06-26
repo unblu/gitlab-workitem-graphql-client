@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * The currently authenticated GitLab user.
  */
@@ -50,6 +52,19 @@ public class CurrentUser implements Todoable {
     public CurrentUser setUsername(String username) {
         this.username = username;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "CurrentUser";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"CurrentUser".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

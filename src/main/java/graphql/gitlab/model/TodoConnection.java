@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * The connection type for Todo.
  */
@@ -37,6 +39,19 @@ public class TodoConnection {
     public TodoConnection setPageInfo(PageInfo pageInfo) {
         this.pageInfo = pageInfo;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "TodoConnection";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"TodoConnection".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

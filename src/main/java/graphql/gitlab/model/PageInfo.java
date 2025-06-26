@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Information about pagination in a connection.
  */
@@ -50,6 +52,19 @@ public class PageInfo {
     public PageInfo setStartCursor(String startCursor) {
         this.startCursor = startCursor;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "PageInfo";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"PageInfo".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents the linked items widget
  */
@@ -22,6 +24,19 @@ public class WorkItemWidgetLinkedItems implements WorkItemWidget {
     public WorkItemWidgetLinkedItems setLinkedItems(LinkedWorkItemTypeConnection linkedItems) {
         this.linkedItems = linkedItems;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "WorkItemWidgetLinkedItems";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"WorkItemWidgetLinkedItems".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

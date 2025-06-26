@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("Namespace")
 public class Namespace implements Todoable {
 
@@ -47,6 +49,19 @@ public class Namespace implements Todoable {
     public Namespace setVisibility(String visibility) {
         this.visibility = visibility;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "Namespace";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"Namespace".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

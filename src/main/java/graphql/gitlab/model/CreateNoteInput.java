@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import graphql.gitlab.GitLabInputRequest;
 
 /**
@@ -94,6 +96,19 @@ public class CreateNoteInput implements GitLabInputRequest {
     public CreateNoteInput setMergeRequestDiffHeadSha(String mergeRequestDiffHeadSha) {
         this.mergeRequestDiffHeadSha = mergeRequestDiffHeadSha;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "CreateNoteInput";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"CreateNoteInput".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Name("GroupContainingIssueBoards")
 public class GroupContainingIssueBoards implements Todoable {
 
@@ -89,6 +91,19 @@ public class GroupContainingIssueBoards implements Todoable {
     public GroupContainingIssueBoards setWebUrl(String webUrl) {
         this.webUrl = webUrl;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "GroupContainingIssueBoards";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"GroupContainingIssueBoards".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override

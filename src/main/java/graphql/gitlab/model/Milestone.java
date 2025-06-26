@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import org.eclipse.microprofile.graphql.Name;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a milestone
  */
@@ -162,6 +164,19 @@ public class Milestone {
     public Milestone setWebPath(String webPath) {
         this.webPath = webPath;
         return this;
+    }
+
+    @JsonProperty("__typename")
+    public String getTypename() {
+        return "Milestone";
+    }
+
+    @JsonProperty("__typename")
+    public void setTypename(String type) {
+        //Setter only for Jackson
+        if(!"Milestone".equals(type)) {
+            throw new IllegalArgumentException("Unexpected '__typename' value: " + type);
+        }
     }
 
     @Override
