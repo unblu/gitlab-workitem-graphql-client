@@ -13,7 +13,6 @@ repositories {
 }
 
 dependencies {
-    implementation 'jakarta.json.bind:jakarta.json.bind-api:3.0.1'
     implementation 'org.eclipse.microprofile.graphql:microprofile-graphql-api:2.0'
     implementation "io.smallrye:smallrye-graphql-api:$smallrye_graphql_version"
     implementation "io.smallrye:smallrye-graphql-client-api:$smallrye_graphql_version"
