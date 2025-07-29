@@ -13,7 +13,7 @@ public class GroupContainingIssueBoards implements Todoable {
     private BoardConnection boards;
 
     /**
-     * Full name of the namespace.
+     * Full name of the group.
      */
     private String fullName;
 
@@ -23,12 +23,12 @@ public class GroupContainingIssueBoards implements Todoable {
     private String fullPath;
 
     /**
-     * ID of the namespace.
+     * ID of the group.
      */
     private String id;
 
     /**
-     * Name of the namespace.
+     * Name of the group.
      */
     private String name;
 

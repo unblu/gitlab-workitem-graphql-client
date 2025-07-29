@@ -6,72 +6,76 @@ import org.eclipse.microprofile.graphql.Name;
 public enum TodoActionEnum {
 
     /**
-     * User was assigned.
+     * Todo action name for assigned.
      */
     assigned,
     /**
-     * User was mentioned.
-     */
-    mentioned,
-    /**
-     * Build triggered by the user failed.
-     */
-    build_failed,
-    /**
-     * User added a to-do item.
-     */
-    marked,
-    /**
-     * User was set as an approver.
-     */
-    approval_required,
-    /**
-     * Merge request authored by the user could not be merged.
-     */
-    unmergeable,
-    /**
-     * User was directly addressed.
-     */
-    directly_addressed,
-    /**
-     * Merge request authored by the user was removed from the merge train.
-     */
-    merge_train_removed,
-    /**
-     * Review was requested from the user.
+     * Todo action name for review_requested.
      */
     review_requested,
     /**
-     * Group or project access requested from the user.
+     * Todo action name for mentioned.
+     */
+    mentioned,
+    /**
+     * Todo action name for build_failed.
+     */
+    build_failed,
+    /**
+     * Todo action name for marked.
+     */
+    marked,
+    /**
+     * Todo action name for approval_required.
+     */
+    approval_required,
+    /**
+     * Todo action name for unmergeable.
+     */
+    unmergeable,
+    /**
+     * Todo action name for directly_addressed.
+     */
+    directly_addressed,
+    /**
+     * Todo action name for member_access_requested.
      */
     member_access_requested,
     /**
-     * Merge request authored by the user received a review.
+     * Todo action name for review_submitted.
      */
     review_submitted,
     /**
-     * An OKR assigned to the user requires an update.
-     */
-    okr_checkin_requested,
-    /**
-     * User was added as an approver.
-     */
-    added_approver,
-    /**
-     * SSH key of the user has expired.
+     * Todo action name for ssh_key_expired.
      */
     ssh_key_expired,
     /**
-     * SSH key of the user will expire soon.
+     * Todo action name for ssh_key_expiring_soon.
      */
     ssh_key_expiring_soon,
     /**
-     * Access to Duo Pro has been granted to the user.
+     * Todo action name for merge_train_removed.
+     */
+    merge_train_removed,
+    /**
+     * Todo action name for okr_checkin_requested.
+     */
+    okr_checkin_requested,
+    /**
+     * Todo action name for added_approver.
+     */
+    added_approver,
+    /**
+     * Todo action name for duo_pro_access_granted.
      */
     duo_pro_access_granted,
     /**
-     * Access to Duo Enterprise has been granted to the user.
+     * Todo action name for duo_enterprise_access_granted.
      */
-    duo_enterprise_access_granted;
+    duo_enterprise_access_granted,
+    /**
+     * Todo action name for duo_core_access_granted.
+     */
+    duo_core_access_granted;
 
 }

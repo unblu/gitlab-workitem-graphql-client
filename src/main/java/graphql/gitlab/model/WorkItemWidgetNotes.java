@@ -11,7 +11,7 @@ import org.eclipse.microprofile.graphql.Name;
 public class WorkItemWidgetNotes implements WorkItemWidget {
 
     /**
-     * Notes on this work item.
+     * Discussions on this work item.
      */
     private DiscussionConnection discussions;
 

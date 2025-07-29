@@ -8,7 +8,7 @@ import org.eclipse.microprofile.graphql.Name;
 public class GroupRef implements Todoable {
 
     /**
-     * Full name of the namespace.
+     * Full name of the group.
      */
     private String fullName;
 
@@ -18,12 +18,12 @@ public class GroupRef implements Todoable {
     private String fullPath;
 
     /**
-     * ID of the namespace.
+     * ID of the group.
      */
     private String id;
 
     /**
-     * Name of the namespace.
+     * Name of the group.
      */
     private String name;
 

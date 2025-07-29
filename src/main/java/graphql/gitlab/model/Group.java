@@ -8,7 +8,7 @@ import org.eclipse.microprofile.graphql.Name;
 public class Group implements Todoable {
 
     /**
-     * Full name of the namespace.
+     * Full name of the group.
      */
     private String fullName;
 
@@ -18,7 +18,7 @@ public class Group implements Todoable {
     private String fullPath;
 
     /**
-     * ID of the namespace.
+     * ID of the group.
      */
     private String id;
 
@@ -28,7 +28,7 @@ public class Group implements Todoable {
     private LabelConnection labels;
 
     /**
-     * Name of the namespace.
+     * Name of the group.
      */
     private String name;
 

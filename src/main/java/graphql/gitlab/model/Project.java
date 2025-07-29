@@ -23,12 +23,12 @@ public class Project implements Todoable {
     private LabelConnection labels;
 
     /**
-     * Name of the project (without namespace).
+     * Name of the project without the namespace.
      */
     private String name;
 
     /**
-     * Full name of the project with its namespace.
+     * Name of the project including the namespace.
      */
     private String nameWithNamespace;
 
