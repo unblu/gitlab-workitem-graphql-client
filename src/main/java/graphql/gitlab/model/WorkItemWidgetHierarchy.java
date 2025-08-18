@@ -15,10 +15,7 @@ public class WorkItemWidgetHierarchy implements WorkItemWidget {
      */
     private WorkItemConnectionRef ancestors;
 
-    /**
-     * Child work items.
-     */
-    private WorkItemConnectionRef children;
+
 
     /**
      * Parent work item.
@@ -34,15 +31,6 @@ public class WorkItemWidgetHierarchy implements WorkItemWidget {
         return this;
     }
 
-    public WorkItemConnectionRef getChildren() {
-        return children;
-    }
-
-    public WorkItemWidgetHierarchy setChildren(WorkItemConnectionRef children) {
-        this.children = children;
-        return this;
-    }
-
     public WorkItemRef getParent() {
         return parent;
     }
@@ -54,7 +42,7 @@ public class WorkItemWidgetHierarchy implements WorkItemWidget {
 
     @Override
     public int hashCode() {
-        return Objects.hash(ancestors, children, parent);
+        return Objects.hash(ancestors, parent);
     }
 
     @Override
@@ -66,12 +54,12 @@ public class WorkItemWidgetHierarchy implements WorkItemWidget {
         if (getClass() != obj.getClass())
             return false;
         WorkItemWidgetHierarchy other = (WorkItemWidgetHierarchy) obj;
-        return Objects.equals(ancestors, other.ancestors) && Objects.equals(children, other.children) && Objects.equals(parent, other.parent);
+        return Objects.equals(ancestors, other.ancestors) && Objects.equals(parent, other.parent);
     }
 
     @Override
     public String toString() {
-        return "WorkItemWidgetHierarchy [ancestors=" + ancestors + ", children=" + children + ", parent=" + parent + "]";
+        return "WorkItemWidgetHierarchy [ancestors=" + ancestors + ", parent=" + parent + "]";
     }
 
 }
