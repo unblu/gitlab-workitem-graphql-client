@@ -15,8 +15,6 @@ public class WorkItemWidgetHierarchy implements WorkItemWidget {
      */
     private WorkItemConnectionRef ancestors;
 
-
-
     /**
      * Parent work item.
      */
