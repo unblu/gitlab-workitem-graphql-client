@@ -687,7 +687,7 @@ class GenerateGitlabClient {
                                 .setTypeName("WorkItemWidgetHierarchy")
                                 // // .addIncludeName("type") //
                                 .addIncludeName("ancestors") //
-                                .addIncludeName("children") //
+                                // .addIncludeName("children") // seems to work only with "Ultimate" license
                                 // .addIncludeName("depthLimitReachedByType") //
                                 // .addIncludeName("hasChildren") //
                                 // .addIncludeName("hasParent") //
