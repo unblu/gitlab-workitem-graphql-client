@@ -9,19 +9,9 @@ import org.eclipse.microprofile.graphql.Name;
 public class WorkItem implements Todoable {
 
     /**
-     * Whether the work item belongs to an archived project. Always false for group level work items. Introduced in GitLab 16.5: **Status**: Experiment.
-     */
-    private Boolean archived;
-
-    /**
      * Timestamp of when the work item was closed.
      */
     private Time closedAt;
-
-    /**
-     * Indicates the work item is confidential.
-     */
-    private Boolean confidential;
 
     /**
      * Timestamp of when the work item was created.
@@ -42,11 +32,6 @@ public class WorkItem implements Todoable {
      * Internal ID of the work item.
      */
     private String iid;
-
-    /**
-     * Lock version of the work item. Incremented each time the work item is updated.
-     */
-    private Integer lockVersion;
 
     /**
      * URL of the work item that the work item was moved to.
@@ -93,30 +78,12 @@ public class WorkItem implements Todoable {
      */
     private WorkItemType workItemType;
 
-    public Boolean getArchived() {
-        return archived;
-    }
-
-    public WorkItem setArchived(Boolean archived) {
-        this.archived = archived;
-        return this;
-    }
-
     public Time getClosedAt() {
         return closedAt;
     }
 
     public WorkItem setClosedAt(Time closedAt) {
         this.closedAt = closedAt;
-        return this;
-    }
-
-    public Boolean getConfidential() {
-        return confidential;
-    }
-
-    public WorkItem setConfidential(Boolean confidential) {
-        this.confidential = confidential;
         return this;
     }
 
@@ -153,15 +120,6 @@ public class WorkItem implements Todoable {
 
     public WorkItem setIid(String iid) {
         this.iid = iid;
-        return this;
-    }
-
-    public Integer getLockVersion() {
-        return lockVersion;
-    }
-
-    public WorkItem setLockVersion(Integer lockVersion) {
-        this.lockVersion = lockVersion;
         return this;
     }
 
@@ -248,7 +206,7 @@ public class WorkItem implements Todoable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(archived, closedAt, confidential, createdAt, duplicatedToWorkItemUrl, id, iid, lockVersion, movedToWorkItemUrl, namespace, reference, state, title, updatedAt, webUrl, widgets, workItemType);
+        return Objects.hash(closedAt, createdAt, duplicatedToWorkItemUrl, id, iid, movedToWorkItemUrl, namespace, reference, state, title, updatedAt, webUrl, widgets, workItemType);
     }
 
     @Override
@@ -260,12 +218,12 @@ public class WorkItem implements Todoable {
         if (getClass() != obj.getClass())
             return false;
         WorkItem other = (WorkItem) obj;
-        return Objects.equals(archived, other.archived) && Objects.equals(closedAt, other.closedAt) && Objects.equals(confidential, other.confidential) && Objects.equals(createdAt, other.createdAt) && Objects.equals(duplicatedToWorkItemUrl, other.duplicatedToWorkItemUrl) && Objects.equals(id, other.id) && Objects.equals(iid, other.iid) && Objects.equals(lockVersion, other.lockVersion) && Objects.equals(movedToWorkItemUrl, other.movedToWorkItemUrl) && Objects.equals(namespace, other.namespace) && Objects.equals(reference, other.reference) && Objects.equals(state, other.state) && Objects.equals(title, other.title) && Objects.equals(updatedAt, other.updatedAt) && Objects.equals(webUrl, other.webUrl) && Objects.equals(widgets, other.widgets) && Objects.equals(workItemType, other.workItemType);
+        return Objects.equals(closedAt, other.closedAt) && Objects.equals(createdAt, other.createdAt) && Objects.equals(duplicatedToWorkItemUrl, other.duplicatedToWorkItemUrl) && Objects.equals(id, other.id) && Objects.equals(iid, other.iid) && Objects.equals(movedToWorkItemUrl, other.movedToWorkItemUrl) && Objects.equals(namespace, other.namespace) && Objects.equals(reference, other.reference) && Objects.equals(state, other.state) && Objects.equals(title, other.title) && Objects.equals(updatedAt, other.updatedAt) && Objects.equals(webUrl, other.webUrl) && Objects.equals(widgets, other.widgets) && Objects.equals(workItemType, other.workItemType);
     }
 
     @Override
     public String toString() {
-        return "WorkItem [archived=" + archived + ", closedAt=" + closedAt + ", confidential=" + confidential + ", createdAt=" + createdAt + ", duplicatedToWorkItemUrl=" + duplicatedToWorkItemUrl + ", id=" + id + ", iid=" + iid + ", lockVersion=" + lockVersion + ", movedToWorkItemUrl=" + movedToWorkItemUrl + ", namespace=" + namespace + ", reference=" + reference + ", state=" + state + ", title=" + title + ", updatedAt=" + updatedAt + ", webUrl=" + webUrl + ", widgets=" + widgets + ", workItemType=" + workItemType + "]";
+        return "WorkItem [closedAt=" + closedAt + ", createdAt=" + createdAt + ", duplicatedToWorkItemUrl=" + duplicatedToWorkItemUrl + ", id=" + id + ", iid=" + iid + ", movedToWorkItemUrl=" + movedToWorkItemUrl + ", namespace=" + namespace + ", reference=" + reference + ", state=" + state + ", title=" + title + ", updatedAt=" + updatedAt + ", webUrl=" + webUrl + ", widgets=" + widgets + ", workItemType=" + workItemType + "]";
     }
 
 }

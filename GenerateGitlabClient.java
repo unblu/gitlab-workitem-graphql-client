@@ -610,14 +610,14 @@ class GenerateGitlabClient {
                                 .setTypeName("WorkItem")
                                 .addIncludeName("duplicatedToWorkItemUrl") //
                                 .addIncludeName("movedToWorkItemUrl") //
-                                .addIncludeName("archived") //
+                                // .addIncludeName("archived") // not used (reduce complexity)
                                 // .addIncludeName("author") //
                                 .addIncludeName("closedAt") //
-                                .addIncludeName("confidential") //
+                                // .addIncludeName("confidential") // not used (reduce complexity)
                                 .addIncludeName("createdAt") //
                                 .addIncludeName("id") //
                                 .addIncludeName("iid") //
-                                .addIncludeName("lockVersion") //
+                                // .addIncludeName("lockVersion") // not used (reduce complexity)
                                 // .addIncludeName("name") // not present in 17.5.0
                                 .addIncludeName("namespace") //
                                 .addIncludeName("reference") //
