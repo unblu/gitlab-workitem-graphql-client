@@ -211,6 +211,10 @@ class GenerateGitlabClient {
                 .addIncludeName("EpicListConnection") //
                 .addIncludeName("EpicList") //
                 .addIncludeName("CurrentUser") //
+                .addIncludeName("MergeRequest") //
+                .addIncludeName("MergeRequestAuthor") //
+                .addIncludeName("MergeRequestReviewerConnection") //
+                .addIncludeName("MergeRequestReviewer") //
                 // --- ADDITIONAL TYPES ---
                 .addIncludeName("WorkItemRef") //
                 .addIncludeName("WorkItemConnectionRef") //
@@ -477,6 +481,19 @@ class GenerateGitlabClient {
                                 .setFieldName("todoMarkDone")
                                 .setJavaMethodName("todoMarkDone") //
                         )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getQueryType(schema)
+                                        .getName())
+                                .setFieldName("mergeRequest")
+                                .setJavaMethodName("getMergeRequest")
+                                .addNestedParameter(new NestedParameter()
+                                        .setGraphQlNestedParameterPath("notes")
+                                        .setGraphQlName("filter")
+                                        .setParameterType("{ModelPackageName}.NotesFilterType") //
+                                        .setParameterName("filter") //
+                                ) //
+                        )
                         .addFilter(typesFilter)//
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.SCALAR)
@@ -494,6 +511,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("DiscussionID") //
                                 .addIncludeName("NoteableID") //
                                 .addIncludeName("MilestoneID") //
+                                .addIncludeName("MergeRequestID") //
                                 .addIncludeName("NoteID") //
                                 .addIncludeName("TodoID") //
                                 .addIncludeName("WorkItemID") //
@@ -504,6 +522,7 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.INTERFACE)
                                 // .addIncludeName("User") //
                                 .addIncludeName("Todoable") //
+                                // .addIncludeName("NoteableInterface") //
                                 // .addIncludeName("TimeboxReportInterface") //
                                 // .addIncludeName("CurrentUserTodos") //
                                 // .addIncludeName("WorkItemWidgetDefinition") //
@@ -524,6 +543,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("TodoActionEnum") //
                                 .addIncludeName("TodoStateEnum") //
                                 .addIncludeName("TodoTargetEnum") //
+                                .addIncludeName("MergeRequestState") //
+                                .addIncludeName("UserType") //
                                 // ---- MUTATION objects ----
                                 .addIncludeName("WorkItemStateEvent") //
                                 .addIncludeName("RelativePositionType") //
@@ -541,6 +562,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("boardList") //
                                 .addIncludeName("epicBoardList") //
                                 .addIncludeName("currentUser") //
+                                .addIncludeName("mergeRequest") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -590,6 +612,13 @@ class GenerateGitlabClient {
                                 .setTypeName(schema.getQueryType()
                                         .getName())
                                 .setFieldName("epicBoardList") //
+                                .addIncludeName("id") //
+                        ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getQueryType()
+                                        .getName())
+                                .setFieldName("mergeRequest") //
                                 .addIncludeName("id") //
                         ) //
                         .addFilter(new FieldsFilter()
@@ -1679,6 +1708,42 @@ class GenerateGitlabClient {
                                 .addIncludeName("errors") //
                                 .addIncludeName("clientMutationId") //
                                 .addIncludeName("todo") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequest") //
+                                .addIncludeName("id") //
+                                .addIncludeName("title") //
+                                .addIncludeName("webUrl") //
+                                .addIncludeName("labels") //
+                                .addIncludeName("author") //
+                                .addIncludeName("description") //
+                                .addIncludeName("state") //
+                                .addIncludeName("sourceBranch") //
+                                .addIncludeName("targetBranch") //
+                                .addIncludeName("draft") //
+                                .addIncludeName("reviewers") //
+                                .addIncludeName("approvedBy") //
+                                .addIncludeName("notes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequestAuthor") //
+                                .addIncludeName("id") //
+                                .addIncludeName("username") //
+                                .addIncludeName("type") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequestReviewerConnection") //
+                                .addIncludeName("nodes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequestReviewer") //
+                                .addIncludeName("id") //
+                                .addIncludeName("username") //
+                                .addIncludeName("type") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
