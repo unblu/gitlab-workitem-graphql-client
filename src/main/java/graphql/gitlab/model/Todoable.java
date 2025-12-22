@@ -11,6 +11,8 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
         @JsonbSubtype(alias = "CurrentUser", type = CurrentUser.class),
         @JsonbSubtype(alias = "Group", type = Group.class),
         @JsonbSubtype(alias = "MergeRequest", type = MergeRequest.class),
+        @JsonbSubtype(alias = "MergeRequestAuthor", type = MergeRequestAuthor.class),
+        @JsonbSubtype(alias = "MergeRequestReviewer", type = MergeRequestReviewer.class),
         @JsonbSubtype(alias = "Namespace", type = Namespace.class),
         @JsonbSubtype(alias = "Project", type = Project.class),
         @JsonbSubtype(alias = "UserCore", type = UserCore.class),

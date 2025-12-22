@@ -1704,6 +1704,15 @@ class GenerateGitlabClient {
                                 .addIncludeName("id") //
                                 .addIncludeName("title") //
                                 .addIncludeName("webUrl") //
+                                .addIncludeName("labels") //
+                                .addIncludeName("author") //
+                                .addIncludeName("description") //
+                                .addIncludeName("state") //
+                                .addIncludeName("sourceBranch") //
+                                .addIncludeName("targetBranch") //
+                                .addIncludeName("draft") //
+                                .addIncludeName("reviewers") //
+                                .addIncludeName("approvedBy") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
