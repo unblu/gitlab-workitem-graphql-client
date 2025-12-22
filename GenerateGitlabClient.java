@@ -483,6 +483,7 @@ class GenerateGitlabClient {
                                 .setTypeName(SchemaUtil.getQueryType(schema)
                                         .getName())
                                 .setFieldName("mergeRequest")
+                                .setJavaMethodName("getMergeRequest")
                         )
                         .addFilter(typesFilter)//
                         .addFilter(new TypesFilter()
