@@ -45,6 +45,8 @@ import graphql.gitlab.model.GroupContainingIssueBoards;
 import graphql.gitlab.model.GroupContainingSingleEpicBoard;
 import graphql.gitlab.model.GroupContainingSingleIssueBoard;
 import graphql.gitlab.model.ListID;
+import graphql.gitlab.model.MergeRequest;
+import graphql.gitlab.model.MergeRequestID;
 import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
@@ -111,6 +113,12 @@ public interface WorkitemClientApi {
 
     @Query("group")
     GroupContainingEpicBoards getEpicBoardsInGroup(@Name("fullPath") @NonNull @Id String fullPath);
+
+    /**
+     * Find a merge request.
+     */
+    @Query("mergeRequest")
+    MergeRequest mergeRequest(@Name("id") @NonNull MergeRequestID id);
 
     /**
      * Find a namespace.

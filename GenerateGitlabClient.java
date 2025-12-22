@@ -211,6 +211,7 @@ class GenerateGitlabClient {
                 .addIncludeName("EpicListConnection") //
                 .addIncludeName("EpicList") //
                 .addIncludeName("CurrentUser") //
+                .addIncludeName("MergeRequest") //
                 // --- ADDITIONAL TYPES ---
                 .addIncludeName("WorkItemRef") //
                 .addIncludeName("WorkItemConnectionRef") //
@@ -477,6 +478,12 @@ class GenerateGitlabClient {
                                 .setFieldName("todoMarkDone")
                                 .setJavaMethodName("todoMarkDone") //
                         )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getQueryType(schema)
+                                        .getName())
+                                .setFieldName("mergeRequest")
+                        )
                         .addFilter(typesFilter)//
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.SCALAR)
@@ -494,6 +501,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("DiscussionID") //
                                 .addIncludeName("NoteableID") //
                                 .addIncludeName("MilestoneID") //
+                                .addIncludeName("MergeRequestID") //
                                 .addIncludeName("NoteID") //
                                 .addIncludeName("TodoID") //
                                 .addIncludeName("WorkItemID") //
@@ -504,6 +512,7 @@ class GenerateGitlabClient {
                                 .setTypeKind(Kind.INTERFACE)
                                 // .addIncludeName("User") //
                                 .addIncludeName("Todoable") //
+                                // .addIncludeName("NoteableInterface") //
                                 // .addIncludeName("TimeboxReportInterface") //
                                 // .addIncludeName("CurrentUserTodos") //
                                 // .addIncludeName("WorkItemWidgetDefinition") //
@@ -541,6 +550,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("boardList") //
                                 .addIncludeName("epicBoardList") //
                                 .addIncludeName("currentUser") //
+                                .addIncludeName("mergeRequest") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -590,6 +600,13 @@ class GenerateGitlabClient {
                                 .setTypeName(schema.getQueryType()
                                         .getName())
                                 .setFieldName("epicBoardList") //
+                                .addIncludeName("id") //
+                        ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getQueryType()
+                                        .getName())
+                                .setFieldName("mergeRequest") //
                                 .addIncludeName("id") //
                         ) //
                         .addFilter(new FieldsFilter()
@@ -1679,6 +1696,13 @@ class GenerateGitlabClient {
                                 .addIncludeName("errors") //
                                 .addIncludeName("clientMutationId") //
                                 .addIncludeName("todo") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequest") //
+                                .addIncludeName("id") //
+                                .addIncludeName("title") //
+                                .addIncludeName("webUrl") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
