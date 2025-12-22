@@ -38,6 +38,11 @@ public class MergeRequest implements Todoable {
     private LabelConnection labels;
 
     /**
+     * All notes on this noteable.
+     */
+    private NoteConnection notes;
+
+    /**
      * Users from whom a review has been requested.
      */
     private MergeRequestReviewerConnection reviewers;
@@ -121,6 +126,15 @@ public class MergeRequest implements Todoable {
         return this;
     }
 
+    public NoteConnection getNotes() {
+        return notes;
+    }
+
+    public MergeRequest setNotes(NoteConnection notes) {
+        this.notes = notes;
+        return this;
+    }
+
     public MergeRequestReviewerConnection getReviewers() {
         return reviewers;
     }
@@ -177,7 +191,7 @@ public class MergeRequest implements Todoable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(approvedBy, author, description, draft, id, labels, reviewers, sourceBranch, state, targetBranch, title, webUrl);
+        return Objects.hash(approvedBy, author, description, draft, id, labels, notes, reviewers, sourceBranch, state, targetBranch, title, webUrl);
     }
 
     @Override
@@ -189,12 +203,12 @@ public class MergeRequest implements Todoable {
         if (getClass() != obj.getClass())
             return false;
         MergeRequest other = (MergeRequest) obj;
-        return Objects.equals(approvedBy, other.approvedBy) && Objects.equals(author, other.author) && Objects.equals(description, other.description) && Objects.equals(draft, other.draft) && Objects.equals(id, other.id) && Objects.equals(labels, other.labels) && Objects.equals(reviewers, other.reviewers) && Objects.equals(sourceBranch, other.sourceBranch) && Objects.equals(state, other.state) && Objects.equals(targetBranch, other.targetBranch) && Objects.equals(title, other.title) && Objects.equals(webUrl, other.webUrl);
+        return Objects.equals(approvedBy, other.approvedBy) && Objects.equals(author, other.author) && Objects.equals(description, other.description) && Objects.equals(draft, other.draft) && Objects.equals(id, other.id) && Objects.equals(labels, other.labels) && Objects.equals(notes, other.notes) && Objects.equals(reviewers, other.reviewers) && Objects.equals(sourceBranch, other.sourceBranch) && Objects.equals(state, other.state) && Objects.equals(targetBranch, other.targetBranch) && Objects.equals(title, other.title) && Objects.equals(webUrl, other.webUrl);
     }
 
     @Override
     public String toString() {
-        return "MergeRequest [approvedBy=" + approvedBy + ", author=" + author + ", description=" + description + ", draft=" + draft + ", id=" + id + ", labels=" + labels + ", reviewers=" + reviewers + ", sourceBranch=" + sourceBranch + ", state=" + state + ", targetBranch=" + targetBranch + ", title=" + title + ", webUrl=" + webUrl + "]";
+        return "MergeRequest [approvedBy=" + approvedBy + ", author=" + author + ", description=" + description + ", draft=" + draft + ", id=" + id + ", labels=" + labels + ", notes=" + notes + ", reviewers=" + reviewers + ", sourceBranch=" + sourceBranch + ", state=" + state + ", targetBranch=" + targetBranch + ", title=" + title + ", webUrl=" + webUrl + "]";
     }
 
 }

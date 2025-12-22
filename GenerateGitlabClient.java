@@ -212,6 +212,9 @@ class GenerateGitlabClient {
                 .addIncludeName("EpicList") //
                 .addIncludeName("CurrentUser") //
                 .addIncludeName("MergeRequest") //
+                .addIncludeName("MergeRequestAuthor") //
+                .addIncludeName("MergeRequestReviewerConnection") //
+                .addIncludeName("MergeRequestReviewer") //
                 // --- ADDITIONAL TYPES ---
                 .addIncludeName("WorkItemRef") //
                 .addIncludeName("WorkItemConnectionRef") //
@@ -484,6 +487,12 @@ class GenerateGitlabClient {
                                         .getName())
                                 .setFieldName("mergeRequest")
                                 .setJavaMethodName("getMergeRequest")
+                                .addNestedParameter(new NestedParameter()
+                                        .setGraphQlNestedParameterPath("notes")
+                                        .setGraphQlName("filter")
+                                        .setParameterType("{ModelPackageName}.NotesFilterType") //
+                                        .setParameterName("filter") //
+                                ) //
                         )
                         .addFilter(typesFilter)//
                         .addFilter(new TypesFilter()
@@ -534,6 +543,8 @@ class GenerateGitlabClient {
                                 .addIncludeName("TodoActionEnum") //
                                 .addIncludeName("TodoStateEnum") //
                                 .addIncludeName("TodoTargetEnum") //
+                                .addIncludeName("MergeRequestState") //
+                                .addIncludeName("UserType") //
                                 // ---- MUTATION objects ----
                                 .addIncludeName("WorkItemStateEvent") //
                                 .addIncludeName("RelativePositionType") //
@@ -1713,6 +1724,26 @@ class GenerateGitlabClient {
                                 .addIncludeName("draft") //
                                 .addIncludeName("reviewers") //
                                 .addIncludeName("approvedBy") //
+                                .addIncludeName("notes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequestAuthor") //
+                                .addIncludeName("id") //
+                                .addIncludeName("username") //
+                                .addIncludeName("type") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequestReviewerConnection") //
+                                .addIncludeName("nodes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequestReviewer") //
+                                .addIncludeName("id") //
+                                .addIncludeName("username") //
+                                .addIncludeName("type") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)

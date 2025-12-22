@@ -118,7 +118,7 @@ public interface WorkitemClientApi {
      * Find a merge request.
      */
     @Query("mergeRequest")
-    MergeRequest getMergeRequest(@Name("id") @NonNull MergeRequestID id);
+    MergeRequest getMergeRequest(@Name("id") @NonNull MergeRequestID id, @NestedParameter("notes") @Name("filter") NotesFilterType filter);
 
     /**
      * Find a namespace.
