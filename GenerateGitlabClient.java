@@ -147,6 +147,8 @@ class GenerateGitlabClient {
                 .add(createGroupContainingEpicBoards(mapper, group));
         schema.getTypes()
                 .add(createProjectContainingIssueBoards(mapper, project));
+        schema.getTypes()
+                .add(createProjectContainingMergeRequests(mapper, project));
 
         TypesFilter typesFilter = new TypesFilter()
                 .setTypeKind(Kind.OBJECT)
@@ -192,6 +194,7 @@ class GenerateGitlabClient {
                 .addIncludeName("ProjectRef") //
                 .addIncludeName("ProjectContainingSingleIssueBoard") //
                 .addIncludeName("ProjectContainingIssueBoards") //
+                .addIncludeName("ProjectContainingMergeRequests") //
                 .addIncludeName("ReleaseConnection") //
                 .addIncludeName("Todo") //
                 .addIncludeName("WorkItemClosingMergeRequest") //
@@ -212,6 +215,7 @@ class GenerateGitlabClient {
                 .addIncludeName("EpicList") //
                 .addIncludeName("CurrentUser") //
                 .addIncludeName("MergeRequest") //
+                .addIncludeName("MergeRequestConnection") //
                 .addIncludeName("MergeRequestAuthor") //
                 .addIncludeName("MergeRequestReviewerConnection") //
                 .addIncludeName("MergeRequestReviewer") //
@@ -357,6 +361,23 @@ class GenerateGitlabClient {
                                         .setJavaMethodName("getIssueBoardsInProject")
                                         .setReturnType("{ModelPackageName}.ProjectContainingIssueBoards") //
                                 ) //
+                                .addAdditionalMethod(new AdditionalMethod()
+                                        .setJavaMethodName("getMergeRequestsInProject")
+                                        .setReturnType("{ModelPackageName}.ProjectContainingMergeRequests") //
+                                        .addNestedParameter(new NestedParameter()
+                                                .setGraphQlNestedParameterPath("mergeRequests")
+                                                .setGraphQlName("iids")
+                                                .setNonNull()
+                                                .setParameterType("List<@NonNull String>") //
+                                                .setParameterName("mergeRequestIids") //
+                                        ) //
+                                        .addNestedParameter(new NestedParameter()
+                                                .setGraphQlNestedParameterPath("mergeRequests.nodes.notes")
+                                                .setGraphQlName("filter")
+                                                .setParameterType("{ModelPackageName}.NotesFilterType") //
+                                                .setParameterName("notesFilter") //
+                                        ) //
+                                ) //
                         )
                         .addHint(new FieldHint()
                                 .setTypeKind(Kind.OBJECT)
@@ -367,7 +388,7 @@ class GenerateGitlabClient {
                                         .setGraphQlNestedParameterPath("nodes.widgets.discussions")
                                         .setGraphQlName("filter")
                                         .setParameterType("{ModelPackageName}.NotesFilterType") //
-                                        .setParameterName("filter") //
+                                        .setParameterName("notesFilter") //
                                 ) //
                         )
                         .addHint(new FieldHint()
@@ -491,7 +512,7 @@ class GenerateGitlabClient {
                                         .setGraphQlNestedParameterPath("notes")
                                         .setGraphQlName("filter")
                                         .setParameterType("{ModelPackageName}.NotesFilterType") //
-                                        .setParameterName("filter") //
+                                        .setParameterName("notesFilter") //
                                 ) //
                         )
                         .addFilter(typesFilter)//
@@ -1117,6 +1138,15 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("ProjectContainingMergeRequests")
+                                .addIncludeName("id") //
+                                .addIncludeName("mergeRequests")
+                                .addIncludeName("name") //
+                                .addIncludeName("nameWithNamespace") //
+                                .addIncludeName("webUrl") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("ReleaseConnection")
                                 .addIncludeName("nodes") //
                         ) //
@@ -1728,6 +1758,11 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequestConnection") //
+                                .addIncludeName("nodes") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("MergeRequestAuthor") //
                                 .addIncludeName("id") //
                                 .addIncludeName("username") //
@@ -2056,6 +2091,10 @@ class GenerateGitlabClient {
 
     private static Type createProjectContainingIssueBoards(ObjectMapper mapper, Type project) {
         return duplicateType(mapper, project, "ProjectContainingIssueBoards");
+    }
+
+    private static Type createProjectContainingMergeRequests(ObjectMapper mapper, Type project) {
+        return duplicateType(mapper, project, "ProjectContainingMergeRequests");
     }
 
     private static Type duplicateType(ObjectMapper mapper, Type type, String newName) {

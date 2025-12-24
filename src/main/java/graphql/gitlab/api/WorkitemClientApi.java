@@ -51,6 +51,7 @@ import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
 import graphql.gitlab.model.ProjectContainingIssueBoards;
+import graphql.gitlab.model.ProjectContainingMergeRequests;
 import graphql.gitlab.model.ProjectContainingSingleIssueBoard;
 import graphql.gitlab.model.TodoMarkDoneInput;
 import graphql.gitlab.model.TodoMarkDonePayload;
@@ -118,7 +119,7 @@ public interface WorkitemClientApi {
      * Find a merge request.
      */
     @Query("mergeRequest")
-    MergeRequest getMergeRequest(@Name("id") @NonNull MergeRequestID id, @NestedParameter("notes") @Name("filter") NotesFilterType filter);
+    MergeRequest getMergeRequest(@Name("id") @NonNull MergeRequestID id, @NestedParameter("notes") @Name("filter") NotesFilterType notesFilter);
 
     /**
      * Find a namespace.
@@ -138,6 +139,9 @@ public interface WorkitemClientApi {
     @Query("project")
     ProjectContainingIssueBoards getIssueBoardsInProject(@Name("fullPath") @NonNull @Id String fullPath);
 
+    @Query("project")
+    ProjectContainingMergeRequests getMergeRequestsInProject(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("mergeRequests") @Name("iids") @NonNull List<@NonNull String> mergeRequestIids, @NestedParameter("mergeRequests.nodes.notes") @Name("filter") NotesFilterType notesFilter);
+
     /**
      * Find a work item. Introduced in GitLab 15.1: **Status**: Experiment.
      */
@@ -148,7 +152,7 @@ public interface WorkitemClientApi {
      * Find work items by their reference. Introduced in GitLab 16.7: **Status**: Experiment.
      */
     @Query("workItemsByReference")
-    WorkItemConnection workItemsByReference(@Name("contextNamespacePath") @Id String contextNamespacePath, @Name("refs") @NonNull List<@NonNull String> refs, @NestedParameter("nodes.widgets.discussions") @Name("filter") NotesFilterType filter);
+    WorkItemConnection workItemsByReference(@Name("contextNamespacePath") @Id String contextNamespacePath, @Name("refs") @NonNull List<@NonNull String> refs, @NestedParameter("nodes.widgets.discussions") @Name("filter") NotesFilterType notesFilter);
 
     @Mutation("awardEmojiAdd")
     AwardEmojiAddPayload awardEmojiAdd(@Name("input") @NonNull @Source AwardEmojiAddInput input);
