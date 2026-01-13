@@ -245,6 +245,7 @@ class GenerateGitlabClient {
                 .addIncludeName("DestroyBoardListPayload") //
                 .addIncludeName("EpicBoardListDestroyPayload") //
                 .addIncludeName("TodoMarkDonePayload") //
+                .addIncludeName("MergeRequestSetLabelsPayload") //
         ;
         Config config = new Config()
                 .setSchema(schema)
@@ -515,6 +516,13 @@ class GenerateGitlabClient {
                                         .setParameterName("notesFilter") //
                                 ) //
                         )
+                        .addHint(new FieldHint()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(SchemaUtil.getMutationType(schema)
+                                        .getName())
+                                .setFieldName("mergeRequestSetLabels")
+                                .setJavaMethodName("mergeRequestSetLabels") //
+                        )
                         .addFilter(typesFilter)//
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.SCALAR)
@@ -570,6 +578,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("WorkItemStateEvent") //
                                 .addIncludeName("RelativePositionType") //
                                 .addIncludeName("WorkItemRelatedLinkType") //
+                                .addIncludeName("MutationOperationMode") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1361,7 +1370,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("destroyBoardList") //
                                 .addIncludeName("epicBoardListDestroy") //
                                 .addIncludeName("todoMarkDone") //
-
+                                .addIncludeName("mergeRequestSetLabels") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1517,6 +1526,13 @@ class GenerateGitlabClient {
                                 .setFieldName("todoMarkDone") //
                                 .addIncludeName("input") //
                         ) //
+                        .addFilter(new ArgsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName(schema.getMutationType()
+                                        .getName())
+                                .setFieldName("mergeRequestSetLabels") //
+                                .addIncludeName("input") //
+                        ) //
                         .addFilter(new TypesFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
                                 .addIncludeName("WorkItemCreateInput") //
@@ -1550,6 +1566,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("DestroyBoardListInput") //
                                 .addIncludeName("EpicBoardListDestroyInput") //
                                 .addIncludeName("TodoMarkDoneInput") //
+                                .addIncludeName("MergeRequestSetLabelsInput") //
                         ) //
                         .addFilter(new InputFieldsFilter()
                                 .setTypeKind(Kind.INPUT_OBJECT)
@@ -1738,6 +1755,13 @@ class GenerateGitlabClient {
                                 .addIncludeName("errors") //
                                 .addIncludeName("clientMutationId") //
                                 .addIncludeName("todo") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
+                                .setTypeName("MergeRequestSetLabelsPayload")
+                                .addIncludeName("errors") //
+                                .addIncludeName("clientMutationId") //
+                                .addIncludeName("mergeRequest") //
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
@@ -1984,6 +2008,15 @@ class GenerateGitlabClient {
                                 .setTypeName("TodoMarkDoneInput")
                                 .addIncludeName("clientMutationId") //
                                 .addIncludeName("id") //
+                        ) //
+                        .addFilter(new InputFieldsFilter()
+                                .setTypeKind(Kind.INPUT_OBJECT)
+                                .setTypeName("MergeRequestSetLabelsInput")
+                                .addIncludeName("clientMutationId") //
+                                .addIncludeName("projectPath") //
+                                .addIncludeName("iid") //
+                                .addIncludeName("labelIds") //
+                                .addIncludeName("operationMode") //
                         ) //
                 )
                 .setModelPackageName("gitlab.model")

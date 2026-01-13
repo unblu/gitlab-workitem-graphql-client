@@ -47,6 +47,8 @@ import graphql.gitlab.model.GroupContainingSingleIssueBoard;
 import graphql.gitlab.model.ListID;
 import graphql.gitlab.model.MergeRequest;
 import graphql.gitlab.model.MergeRequestID;
+import graphql.gitlab.model.MergeRequestSetLabelsInput;
+import graphql.gitlab.model.MergeRequestSetLabelsPayload;
 import graphql.gitlab.model.Namespace;
 import graphql.gitlab.model.NotesFilterType;
 import graphql.gitlab.model.Project;
@@ -198,6 +200,9 @@ public interface WorkitemClientApi {
 
     @Mutation("epicBoardUpdate")
     EpicBoardUpdatePayload updateEpicBoard(@Name("input") @NonNull @Source EpicBoardUpdateInput input);
+
+    @Mutation("mergeRequestSetLabels")
+    MergeRequestSetLabelsPayload mergeRequestSetLabels(@Name("input") @NonNull @Source MergeRequestSetLabelsInput input);
 
     @Mutation("todoMarkDone")
     TodoMarkDonePayload todoMarkDone(@Name("input") @NonNull @Source TodoMarkDoneInput input);
