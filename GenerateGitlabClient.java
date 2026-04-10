@@ -732,6 +732,12 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("WorkItemWidgetWeight")
+                                .addIncludeName("weight") //
+                                .addIncludeName("rolledUpWeight") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("LabelConnection")
                                 .addIncludeName("count") //
                                 .addIncludeName("nodes") //
