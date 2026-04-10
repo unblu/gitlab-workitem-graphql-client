@@ -19,7 +19,7 @@ public class WorkItemCreatePayload implements GitLabPayloadResponse {
     private String clientMutationId;
 
     /**
-     * Errors encountered during execution of the mutation.
+     * Errors encountered during the mutation.
      */
     private List<String> errors;
 

@@ -6,10 +6,6 @@ import org.eclipse.microprofile.graphql.Name;
 public enum TodoTargetEnum {
 
     /**
-     * User.
-     */
-    USER,
-    /**
      * Commit.
      */
     COMMIT,
@@ -54,8 +50,16 @@ public enum TodoTargetEnum {
      */
     EPIC,
     /**
+     * User.
+     */
+    USER,
+    /**
      * Vulnerability.
      */
-    VULNERABILITY;
+    VULNERABILITY,
+    /**
+     * Project Compliance Violation.
+     */
+    COMPLIANCE_VIOLATION;
 
 }
