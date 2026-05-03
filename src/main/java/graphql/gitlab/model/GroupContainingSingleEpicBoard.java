@@ -18,7 +18,7 @@ public class GroupContainingSingleEpicBoard implements Todoable {
     private String fullName;
 
     /**
-     * Full path of the namespace.
+     * Full path of the group.
      */
     private String fullPath;
 

@@ -36,7 +36,7 @@ public class IterationCadence {
     private IterationsCadenceID id;
 
     /**
-     * Upcoming iterations to be created when iteration cadence is set to automatic.
+     * Number of future iterations to schedule in addition to the current one.
      */
     private Integer iterationsInAdvance;
 

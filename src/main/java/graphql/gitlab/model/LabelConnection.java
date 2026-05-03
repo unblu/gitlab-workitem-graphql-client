@@ -12,7 +12,7 @@ import org.eclipse.microprofile.graphql.Name;
 public class LabelConnection {
 
     /**
-     * Total count of collection.
+     * Total count of collection. Returns limit + 1 for counts greater than the limit.
      */
     private Integer count;
 

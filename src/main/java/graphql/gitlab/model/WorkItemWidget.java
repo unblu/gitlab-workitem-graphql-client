@@ -8,6 +8,7 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
 
 @Union
 @JsonbTypeInfo(key = "__typename", value = {
+        @JsonbSubtype(alias = "WorkItemWidgetAiSession", type = WorkItemWidgetAiSession.class),
         @JsonbSubtype(alias = "WorkItemWidgetAssignees", type = WorkItemWidgetAssignees.class),
         @JsonbSubtype(alias = "WorkItemWidgetAwardEmoji", type = WorkItemWidgetAwardEmoji.class),
         @JsonbSubtype(alias = "WorkItemWidgetColor", type = WorkItemWidgetColor.class),

@@ -37,10 +37,6 @@ public enum UserType {
      */
     PROJECT_BOT,
     /**
-     * Migration bot
-     */
-    MIGRATION_BOT,
-    /**
      * Security bot
      */
     SECURITY_BOT,
@@ -57,17 +53,9 @@ public enum UserType {
      */
     ADMIN_BOT,
     /**
-     * Suggested reviewers bot
-     */
-    SUGGESTED_REVIEWERS_BOT,
-    /**
      * Service account
      */
     SERVICE_ACCOUNT,
-    /**
-     * Llm bot
-     */
-    LLM_BOT,
     /**
      * Placeholder
      */

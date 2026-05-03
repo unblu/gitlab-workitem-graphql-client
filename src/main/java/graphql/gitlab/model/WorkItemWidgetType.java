@@ -9,89 +9,33 @@ import org.eclipse.microprofile.graphql.Name;
 public enum WorkItemWidgetType {
 
     /**
+     * Ai Session widget.
+     */
+    AI_SESSION,
+    /**
      * Assignees widget.
      */
     ASSIGNEES,
-    /**
-     * Description widget.
-     */
-    DESCRIPTION,
-    /**
-     * Hierarchy widget.
-     */
-    HIERARCHY,
-    /**
-     * Labels widget.
-     */
-    LABELS,
-    /**
-     * Milestone widget.
-     */
-    MILESTONE,
-    /**
-     * Notes widget.
-     */
-    NOTES,
-    /**
-     * Start And Due Date widget.
-     */
-    START_AND_DUE_DATE,
-    /**
-     * Health Status widget.
-     */
-    HEALTH_STATUS,
-    /**
-     * Weight widget.
-     */
-    WEIGHT,
-    /**
-     * Iteration widget.
-     */
-    ITERATION,
-    /**
-     * Progress widget.
-     */
-    PROGRESS,
-    /**
-     * Verification Status widget.
-     */
-    VERIFICATION_STATUS,
-    /**
-     * Requirement Legacy widget.
-     */
-    REQUIREMENT_LEGACY,
-    /**
-     * Test Reports widget.
-     */
-    TEST_REPORTS,
-    /**
-     * Notifications widget.
-     */
-    NOTIFICATIONS,
-    /**
-     * Current User Todos widget.
-     */
-    CURRENT_USER_TODOS,
     /**
      * Award Emoji widget.
      */
     AWARD_EMOJI,
     /**
-     * Linked Items widget.
+     * Crm Contacts widget.
      */
-    LINKED_ITEMS,
+    CRM_CONTACTS,
     /**
-     * Color widget.
+     * Current User Todos widget.
      */
-    COLOR,
+    CURRENT_USER_TODOS,
     /**
-     * Participants widget.
+     * Custom Fields widget.
      */
-    PARTICIPANTS,
+    CUSTOM_FIELDS,
     /**
-     * Time Tracking widget.
+     * Description widget.
      */
-    TIME_TRACKING,
+    DESCRIPTION,
     /**
      * Designs widget.
      */
@@ -101,32 +45,92 @@ public enum WorkItemWidgetType {
      */
     DEVELOPMENT,
     /**
-     * Crm Contacts widget.
-     */
-    CRM_CONTACTS,
-    /**
      * Email Participants widget.
      */
     EMAIL_PARTICIPANTS,
-    /**
-     * Status widget.
-     */
-    STATUS,
-    /**
-     * Linked Resources widget.
-     */
-    LINKED_RESOURCES,
-    /**
-     * Custom Fields widget.
-     */
-    CUSTOM_FIELDS,
     /**
      * Error Tracking widget.
      */
     ERROR_TRACKING,
     /**
+     * Health Status widget.
+     */
+    HEALTH_STATUS,
+    /**
+     * Hierarchy widget.
+     */
+    HIERARCHY,
+    /**
+     * Iteration widget.
+     */
+    ITERATION,
+    /**
+     * Labels widget.
+     */
+    LABELS,
+    /**
+     * Linked Items widget.
+     */
+    LINKED_ITEMS,
+    /**
+     * Milestone widget.
+     */
+    MILESTONE,
+    /**
+     * Notes widget.
+     */
+    NOTES,
+    /**
+     * Notifications widget.
+     */
+    NOTIFICATIONS,
+    /**
+     * Participants widget.
+     */
+    PARTICIPANTS,
+    /**
+     * Start And Due Date widget.
+     */
+    START_AND_DUE_DATE,
+    /**
+     * Time Tracking widget.
+     */
+    TIME_TRACKING,
+    /**
      * Vulnerabilities widget.
      */
-    VULNERABILITIES;
+    VULNERABILITIES,
+    /**
+     * Linked Resources widget.
+     */
+    LINKED_RESOURCES,
+    /**
+     * Weight widget.
+     */
+    WEIGHT,
+    /**
+     * Status widget.
+     */
+    STATUS,
+    /**
+     * Requirement Legacy widget.
+     */
+    REQUIREMENT_LEGACY,
+    /**
+     * Verification Status widget.
+     */
+    VERIFICATION_STATUS,
+    /**
+     * Test Reports widget.
+     */
+    TEST_REPORTS,
+    /**
+     * Progress widget.
+     */
+    PROGRESS,
+    /**
+     * Color widget.
+     */
+    COLOR;
 
 }
