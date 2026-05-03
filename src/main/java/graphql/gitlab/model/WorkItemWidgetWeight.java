@@ -11,23 +11,14 @@ import org.eclipse.microprofile.graphql.Name;
 public class WorkItemWidgetWeight implements WorkItemWidget {
 
     /**
-     * Weight of the work item.
-     */
-    private Integer weight;
-
-    /**
-     * Total weight of the work item and its descendants.
+     * Rolled up weight from descendant work items. Introduced in GitLab 17.2: **Status**: Experiment.
      */
     private Integer rolledUpWeight;
 
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public WorkItemWidgetWeight setWeight(Integer weight) {
-        this.weight = weight;
-        return this;
-    }
+    /**
+     * Weight of the work item.
+     */
+    private Integer weight;
 
     public Integer getRolledUpWeight() {
         return rolledUpWeight;
@@ -38,9 +29,18 @@ public class WorkItemWidgetWeight implements WorkItemWidget {
         return this;
     }
 
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public WorkItemWidgetWeight setWeight(Integer weight) {
+        this.weight = weight;
+        return this;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(weight, rolledUpWeight);
+        return Objects.hash(rolledUpWeight, weight);
     }
 
     @Override
@@ -52,12 +52,12 @@ public class WorkItemWidgetWeight implements WorkItemWidget {
         if (getClass() != obj.getClass())
             return false;
         WorkItemWidgetWeight other = (WorkItemWidgetWeight) obj;
-        return Objects.equals(weight, other.weight) && Objects.equals(rolledUpWeight, other.rolledUpWeight);
+        return Objects.equals(rolledUpWeight, other.rolledUpWeight) && Objects.equals(weight, other.weight);
     }
 
     @Override
     public String toString() {
-        return "WorkItemWidgetWeight [weight=" + weight + ", rolledUpWeight=" + rolledUpWeight + "]";
+        return "WorkItemWidgetWeight [rolledUpWeight=" + rolledUpWeight + ", weight=" + weight + "]";
     }
 
 }

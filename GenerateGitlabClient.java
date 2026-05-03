@@ -1555,6 +1555,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("WorkItemRemoveLinkedItemsInput") //
                                 .addIncludeName("WorkItemWidgetHierarchyCreateInput") //
                                 .addIncludeName("WorkItemWidgetLabelsCreateInput") //
+                                .addIncludeName("WorkItemWidgetLabelsCreateInput") //
                                 .addIncludeName("CreateNoteInput") //
                                 .addIncludeName("UpdateNoteInput") //
                                 .addIncludeName("DestroyNoteInput") //
