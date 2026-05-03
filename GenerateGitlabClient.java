@@ -791,6 +791,12 @@ class GenerateGitlabClient {
                         ) //
                         .addFilter(new FieldsFilter()
                                 .setTypeKind(Kind.OBJECT)
+                                .setTypeName("WorkItemWidgetWeight")
+                                .addIncludeName("weight") //
+                                .addIncludeName("rolledUpWeight") //
+                        ) //
+                        .addFilter(new FieldsFilter()
+                                .setTypeKind(Kind.OBJECT)
                                 .setTypeName("LabelConnection")
                                 .addIncludeName("count") //
                                 .addIncludeName("nodes") //
@@ -1548,6 +1554,7 @@ class GenerateGitlabClient {
                                 .addIncludeName("WorkItemAddLinkedItemsInput") //
                                 .addIncludeName("WorkItemRemoveLinkedItemsInput") //
                                 .addIncludeName("WorkItemWidgetHierarchyCreateInput") //
+                                .addIncludeName("WorkItemWidgetLabelsCreateInput") //
                                 .addIncludeName("WorkItemWidgetLabelsCreateInput") //
                                 .addIncludeName("CreateNoteInput") //
                                 .addIncludeName("UpdateNoteInput") //
