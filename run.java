@@ -1,8 +1,8 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 
 //DEPS https://github.com/unblu/gitlab-workitem-graphql-client/commit/0dde568aa43f45079cc646b23fed8c807fe7fa1a
-//DEPS io.smallrye:smallrye-graphql-client-implementation-vertx:2.11.0
-//JAVA 11
+//DEPS io.smallrye:smallrye-graphql-client-implementation-vertx:2.18.5
+//JAVA 17
 
 import static java.lang.System.*;
 

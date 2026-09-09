@@ -1,11 +1,11 @@
 plugins {
     id 'java'
-    id 'org.kordamp.gradle.jandex' version '2.1.0'
+    id 'org.kordamp.gradle.jandex' version '2.3.0'
     id 'maven-publish'
 }
 
 wrapper {
-    gradleVersion = '8.10.1'
+    gradleVersion = '9.7.1'
 }
 
 repositories {
@@ -16,13 +16,14 @@ dependencies {
     implementation 'org.eclipse.microprofile.graphql:microprofile-graphql-api:2.0'
     implementation "io.smallrye:smallrye-graphql-api:$smallrye_graphql_version"
     implementation "io.smallrye:smallrye-graphql-client-api:$smallrye_graphql_version"
-    implementation 'jakarta.json.bind:jakarta.json.bind-api:3.0.1'
+    implementation 'jakarta.json.bind:jakarta.json.bind-api:3.0.3'
 
     testImplementation "io.smallrye:smallrye-graphql-client-implementation-vertx:$smallrye_graphql_version"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.10.4"
-    testImplementation "org.assertj:assertj-core:3.11.1"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.10.4"
-    testRuntimeOnly 'org.jboss.logmanager:jboss-logmanager:3.0.6.Final'
+    testImplementation platform("org.junit:junit-bom:6.1.3")
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testImplementation "org.assertj:assertj-core:3.27.7"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+    testRuntimeOnly 'org.jboss.logmanager:jboss-logmanager:3.2.2.Final'
 }
 
 group 'com.unblu.gitlab'

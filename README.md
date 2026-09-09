@@ -4,7 +4,7 @@ GraphQL typesafe client (relying on [Smallrye GraphQL](https://smallrye.io/small
 
 ## Usage:
 
-With this library and `io.smallrye:smallrye-graphql-client-implementation-vertx:2.11.0` on the classpath, the client can be instantiated with:
+With this library and `io.smallrye:smallrye-graphql-client-implementation-vertx:2.18.5` on the classpath, the client can be instantiated with:
 
 ```java
 WorkitemClientApi api =  TypesafeGraphQLClientBuilder.newBuilder()
