@@ -373,6 +373,12 @@ class GenerateGitlabClient {
                                                 .setParameterName("mergeRequestIids") //
                                         ) //
                                         .addNestedParameter(new NestedParameter()
+                                                .setGraphQlNestedParameterPath("mergeRequests")
+                                                .setGraphQlName("first")
+                                                .setParameterType("Integer") //
+                                                .setParameterName("mergeRequestFirst") //
+                                        ) //
+                                        .addNestedParameter(new NestedParameter()
                                                 .setGraphQlNestedParameterPath("mergeRequests.nodes.notes")
                                                 .setGraphQlName("filter")
                                                 .setParameterType("{ModelPackageName}.NotesFilterType") //

@@ -142,7 +142,7 @@ public interface WorkitemClientApi {
     ProjectContainingIssueBoards getIssueBoardsInProject(@Name("fullPath") @NonNull @Id String fullPath);
 
     @Query("project")
-    ProjectContainingMergeRequests getMergeRequestsInProject(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("mergeRequests") @Name("iids") @NonNull List<@NonNull String> mergeRequestIids, @NestedParameter("mergeRequests.nodes.notes") @Name("filter") NotesFilterType notesFilter);
+    ProjectContainingMergeRequests getMergeRequestsInProject(@Name("fullPath") @NonNull @Id String fullPath, @NestedParameter("mergeRequests") @Name("iids") @NonNull List<@NonNull String> mergeRequestIids, @NestedParameter("mergeRequests") @Name("first") Integer mergeRequestFirst, @NestedParameter("mergeRequests.nodes.notes") @Name("filter") NotesFilterType notesFilter);
 
     /**
      * Find a work item. Introduced in GitLab 15.1: **Status**: Experiment.
