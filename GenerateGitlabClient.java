@@ -614,6 +614,7 @@ class GenerateGitlabClient {
                                 .setFieldName("workItemsByReference") //
                                 .addIncludeName("contextNamespacePath") //
                                 .addIncludeName("refs") //
+                                .addIncludeName("first") //
                         ) //
                         .addFilter(new ArgsFilter()
                                 .setTypeKind(Kind.OBJECT)

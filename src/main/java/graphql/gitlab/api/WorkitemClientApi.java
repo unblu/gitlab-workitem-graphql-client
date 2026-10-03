@@ -154,7 +154,7 @@ public interface WorkitemClientApi {
      * Find work items by their reference. Introduced in GitLab 16.7: **Status**: Experiment.
      */
     @Query("workItemsByReference")
-    WorkItemConnection workItemsByReference(@Name("contextNamespacePath") @Id String contextNamespacePath, @Name("refs") @NonNull List<@NonNull String> refs, @NestedParameter("nodes.widgets.discussions") @Name("filter") NotesFilterType notesFilter);
+    WorkItemConnection workItemsByReference(@Name("contextNamespacePath") @Id String contextNamespacePath, @Name("refs") @NonNull List<@NonNull String> refs, @Name("first") Integer first, @NestedParameter("nodes.widgets.discussions") @Name("filter") NotesFilterType notesFilter);
 
     @Mutation("awardEmojiAdd")
     AwardEmojiAddPayload awardEmojiAdd(@Name("input") @NonNull @Source AwardEmojiAddInput input);
